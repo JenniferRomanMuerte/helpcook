@@ -6,5 +6,8 @@ import com.help.cook.helpcook.models.IngredientesResponse;
 public interface IIngredientesBusiness {
 
 	IngredientesResponse crear(IngredientesRequest request);
+	
+	
+
 
 }
