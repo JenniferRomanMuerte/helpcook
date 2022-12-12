@@ -1,5 +1,8 @@
 package com.help.cook.helpcook.business;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,29 +12,65 @@ import com.help.cook.helpcook.repository.IngredientesRepository;
 import com.help.cook.helpcook.repository.domain.Ingredientes;
 
 @Service
-public class IngredientesBusinessImpl implements  IIngredientesBusiness{
-	
+public class IngredientesBusinessImpl implements IIngredientesBusiness {
+
 	@Autowired
-	private  IngredientesRepository ingredientesRepository;
-	
+	private IngredientesRepository ingredientesRepository;
+
 	@Override
 	public IngredientesResponse crear(IngredientesRequest request) {
-		
+
 		Ingredientes ingredientes = new Ingredientes();
 		IngredientesResponse response = new IngredientesResponse();
-		
+
 		ingredientes.setCantidad(request.getCantidad());
 		ingredientes.setNombre(request.getNombre());
 		ingredientes.setTipo(request.getTipo());
-		
+
 		Ingredientes datoGuardado = ingredientesRepository.save(ingredientes);
-		
+
 		response.setIdIngredientes(datoGuardado.getIdIngredientes());
 		response.setCantidad(datoGuardado.getCantidad());
 		response.setNombre(datoGuardado.getNombre());
 		response.setTipo(datoGuardado.getTipo());
-		
+
 		return response;
 	}
 
+	@Override
+	public IngredientesResponse obtener(Integer id) {
+		IngredientesResponse response = new IngredientesResponse();
+
+		Ingredientes datoGuardado = ingredientesRepository.findById(id).get();
+
+		response.setCantidad(datoGuardado.getCantidad());
+		return response;
+	}
+
+	public void eliminar(Integer id) {
+		ingredientesRepository.deleteById(id);
+
+	}
+
+	public IngredientesResponse modificar(IngredientesRequest request, Integer id) {
+		IngredientesResponse response = new IngredientesResponse();
+		
+		Ingredientes datoGuardado = ingredientesRepository.findById(id).get();
+
+		datoGuardado.setCantidad(request.getCantidad());
+		Ingredientes datoModificado = ingredientesRepository.save(datoGuardado);
+		
+		response.setIdIngredientes(datoModificado.getIdIngredientes());
+		response.setCantidad(datoModificado.getCantidad());
+		response.setNombre(datoModificado.getNombre());
+		response.setTipo(datoModificado.getTipo());
+		return response;
+	}
+
+	
+	/*public List<IngredientesResponse> obtenerTodos() {
+		
+		return null;
+	}
+	*/
 }

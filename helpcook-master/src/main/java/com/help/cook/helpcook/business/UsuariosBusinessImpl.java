@@ -3,6 +3,7 @@ package com.help.cook.helpcook.business;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.help.cook.helpcook.models.IngredientesRequest;
 import com.help.cook.helpcook.models.IngredientesResponse;
 import com.help.cook.helpcook.models.UsuariosRequest;
 import com.help.cook.helpcook.models.UsuariosResponse;
@@ -44,5 +45,60 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
 		
 		return response;
 	}
+	
+	@Override
+	public UsuariosResponse obtener(Integer id) {
+		UsuariosResponse response = new UsuariosResponse();
 
+		Usuarios datoGuardado = usuariosRepository.findById(id).get();
+
+		response.setNick(datoGuardado.getNick());
+		response.setContraseña(datoGuardado.getContraseña());
+		response.setNombre(datoGuardado.getNombre());
+		response.setApellido(datoGuardado.getApellido());
+		response.setEmail(datoGuardado.getEmail());
+		response.setFoto(datoGuardado.getFoto());
+		
+		return response;
+	}
+	
+	
+	public void eliminar(Integer id) {
+		usuariosRepository.deleteById(id);
+
+	}
+	
+	
+	public UsuariosResponse modificar(UsuariosRequest request, Integer id) {
+		UsuariosResponse response = new UsuariosResponse();
+		
+		Usuarios usuario = usuariosRepository.findById(id).get();
+
+		usuario.setNick(request.getNick());
+		usuario.setContraseña(request.getContraseña());
+		usuario.setNombre(request.getNombre());
+		usuario.setApellido(request.getApellido());
+		usuario.setEmail(request.getEmail());
+		usuario.setFoto(request.getFoto());
+		
+		Usuarios datoModificado = usuariosRepository.save(usuario);
+		
+		response.setIdUsuarios(datoModificado.getIdUsuarios());
+		response.setNick(datoModificado.getNick());
+		response.setContraseña(datoModificado.getContraseña());
+		response.setNombre(datoModificado.getNombre());
+		response.setApellido(datoModificado.getApellido());
+		response.setEmail(datoModificado.getEmail());
+		response.setFoto(datoModificado.getFoto());
+		
+		return response;
+	}
+	
+
+	/*public List<UsuariosResponse> obtenerTodos() {
+	
+		return null;
+	}
+	*/
+	
 }

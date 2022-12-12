@@ -34,6 +34,8 @@ public class IngredientesController {
 	@GetMapping("/{id}")
 	public IngredientesResponse obtener(@PathParam(value = "id") String id) {
 		
+		
+		
 		return null;
 	}
 
