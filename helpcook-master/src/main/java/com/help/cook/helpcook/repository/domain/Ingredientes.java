@@ -3,8 +3,7 @@ package com.help.cook.helpcook.repository.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 import lombok.Data;
 
@@ -14,7 +13,7 @@ import lombok.Data;
 public class Ingredientes {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idIngredientes;
 	
 	private String nombre;

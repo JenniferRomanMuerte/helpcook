@@ -4,8 +4,8 @@ import java.sql.Time;
 
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
-import org.springframework.data.annotation.Id;
 
 
 import lombok.Data;
@@ -15,7 +15,7 @@ import lombok.Data;
 public class Recetas {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idRecetas;
 	
 	private Integer idUsuarios;
