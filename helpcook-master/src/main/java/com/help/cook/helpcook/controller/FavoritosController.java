@@ -1,7 +1,5 @@
 package com.help.cook.helpcook.controller;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,33 +8,35 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.help.cook.helpcook.business.IFavoritosBusiness;
 import com.help.cook.helpcook.business.IIngredientesBusiness;
+import com.help.cook.helpcook.models.FavoritosRequest;
+import com.help.cook.helpcook.models.FavoritosResponse;
 import com.help.cook.helpcook.models.IngredientesRequest;
 import com.help.cook.helpcook.models.IngredientesResponse;
 
 @RestController
-@RequestMapping("ingredientes")
-public class IngredientesController {
+@RequestMapping("favoritos")
+public class FavoritosController {
 	
 	@Autowired
-	IIngredientesBusiness ingredientesBusiness;
+	IFavoritosBusiness favoritosBusiness;
 	
 	
 	@PostMapping
-	public IngredientesResponse crear(@RequestBody  IngredientesRequest request) {
+	public FavoritosResponse crear(@RequestBody  FavoritosRequest request) {
 		
-		return ingredientesBusiness.crear(request);
+		return favoritosBusiness.crear(request);
 		
 	}
 	
 	@GetMapping("/{id}")
-	public IngredientesResponse obtener(@PathVariable Integer id) {
+	public FavoritosResponse obtener(@PathVariable Integer id) {
 		
 		
-		return ingredientesBusiness.obtener(id);
+		return favoritosBusiness.obtener(id);
 	}
 
 	
@@ -47,9 +47,10 @@ public class IngredientesController {
 
 	
 	@PutMapping("/{id}")
-	public IngredientesResponse modificar(@RequestBody  IngredientesRequest request, @PathVariable Integer id) {
+	public FavoritosResponse modificar(@RequestBody  FavoritosRequest request, @PathVariable Integer id) {
 		
-		return ingredientesBusiness.modificar(request,id);
+		return favoritosBusiness.modificar(request,id);
 		
 	}
+
 }

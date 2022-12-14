@@ -22,9 +22,10 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
 	public UsuariosResponse crear(UsuariosRequest request) {
 		
 		Usuarios usuarios = new Usuarios();
+		
 		UsuariosResponse response = new UsuariosResponse();
 		
-		usuarios.setIdUsuarios(request.getIdUsuarios());
+		
 		usuarios.setNick(request.getNick());
 		usuarios.setContraseña(request.getContraseña());
 		usuarios.setNombre(request.getNombre());
@@ -46,12 +47,14 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
 		return response;
 	}
 	
+	
 	@Override
 	public UsuariosResponse obtener(Integer id) {
+		
 		UsuariosResponse response = new UsuariosResponse();
 
 		Usuarios datoGuardado = usuariosRepository.findById(id).get();
-
+		response.setIdUsuarios(datoGuardado.getIdUsuarios());
 		response.setNick(datoGuardado.getNick());
 		response.setContraseña(datoGuardado.getContraseña());
 		response.setNombre(datoGuardado.getNombre());
@@ -70,6 +73,7 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
 	
 	
 	public UsuariosResponse modificar(UsuariosRequest request, Integer id) {
+		
 		UsuariosResponse response = new UsuariosResponse();
 		
 		Usuarios usuario = usuariosRepository.findById(id).get();

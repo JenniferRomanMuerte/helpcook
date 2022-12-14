@@ -5,6 +5,7 @@ import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,25 +37,24 @@ public class UsuariosController {
 	}
 	
 	@GetMapping("/{id}")
-	public UsuariosResponse obtener(@PathParam(value = "id") int id) {
+	public UsuariosResponse obtener(@PathVariable Integer id) {
 		
 		
 		
-		return null;
+		return usuariosBusiness.obtener(id);
 	}
 
 	
 	@DeleteMapping("/{id}")
-	public UsuariosResponse eliminar(@PathParam(value = "id") int id) {
+	public void eliminar(@PathVariable Integer id) {
 		
-		return null;
 	}
 
 	
 	@PutMapping("/{id}")
-	public UsuariosResponse modificar(@RequestBody  IngredientesRequest request, @PathParam(value = "id") int id) {
+	public UsuariosResponse modificar(@RequestBody  UsuariosRequest request, @PathVariable Integer id) {
 		
-		return null;
+		return usuariosBusiness.modificar(request,id);
 		
 	}
 

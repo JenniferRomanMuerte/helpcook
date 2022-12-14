@@ -21,6 +21,7 @@ public class IngredientesBusinessImpl implements IIngredientesBusiness {
 	public IngredientesResponse crear(IngredientesRequest request) {
 
 		Ingredientes ingredientes = new Ingredientes();
+		
 		IngredientesResponse response = new IngredientesResponse();
 
 		ingredientes.setCantidad(request.getCantidad());
@@ -39,31 +40,42 @@ public class IngredientesBusinessImpl implements IIngredientesBusiness {
 
 	@Override
 	public IngredientesResponse obtener(Integer id) {
-		IngredientesResponse response = new IngredientesResponse();
+		
+		IngredientesResponse response = new IngredientesResponse(); //Creamos el objeto que devolveremos al front
+		
+		Ingredientes datoGuardado = ingredientesRepository.findById(id).get(); //Recuperamos el objeto de la base de datos
 
-		Ingredientes datoGuardado = ingredientesRepository.findById(id).get();
-
+		response.setIdIngredientes(datoGuardado.getIdIngredientes());
 		response.setCantidad(datoGuardado.getCantidad());
+		response.setNombre(datoGuardado.getNombre());
+		response.setTipo(datoGuardado.getTipo());
+		
 		return response;
 	}
 
 	public void eliminar(Integer id) {
+		
 		ingredientesRepository.deleteById(id);
 
 	}
 
 	public IngredientesResponse modificar(IngredientesRequest request, Integer id) {
+		
 		IngredientesResponse response = new IngredientesResponse();
 		
 		Ingredientes datoGuardado = ingredientesRepository.findById(id).get();
 
 		datoGuardado.setCantidad(request.getCantidad());
+		datoGuardado.setNombre(request.getNombre());
+		datoGuardado.setTipo(request.getTipo());
+		
 		Ingredientes datoModificado = ingredientesRepository.save(datoGuardado);
 		
 		response.setIdIngredientes(datoModificado.getIdIngredientes());
 		response.setCantidad(datoModificado.getCantidad());
 		response.setNombre(datoModificado.getNombre());
 		response.setTipo(datoModificado.getTipo());
+		
 		return response;
 	}
 
