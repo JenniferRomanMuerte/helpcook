@@ -2,7 +2,8 @@ package com.help.cook.helpcook.models;
 
 import lombok.Data;
 
-@Data
+
+@Data 
 public class FavoritosRequest {
 	
 private Integer idFavoritos;
