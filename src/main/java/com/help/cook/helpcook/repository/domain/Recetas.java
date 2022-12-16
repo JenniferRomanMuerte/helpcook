@@ -1,11 +1,9 @@
 package com.help.cook.helpcook.repository.domain;
 
 import java.sql.Time;
+import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
 
 
 import lombok.Data;
@@ -35,4 +33,8 @@ public class Recetas {
 	private Float valoracionMedia;
 	
 	private Integer comensales;
+
+	@OneToMany(mappedBy = "recetas")
+	Set<RecetasIngredientes> ingredientes;
+
 }

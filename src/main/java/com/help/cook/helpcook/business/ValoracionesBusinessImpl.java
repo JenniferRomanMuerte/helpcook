@@ -1,5 +1,6 @@
 package com.help.cook.helpcook.business;
 
+import com.help.cook.helpcook.models.UsuariosResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,17 +21,22 @@ public class ValoracionesBusinessImpl implements IValoracionesBusiness {
 		Valoraciones valoraciones = new Valoraciones();
 		
 		ValoracionesResponse response = new ValoracionesResponse();
-		
+		UsuariosResponse usuariosResponse = new UsuariosResponse();
 		valoraciones.setIdRecetas(request.getIdRecetas());
-		valoraciones.setIdUsuarios(request.getIdUsuarios());
+		valoraciones.getUsuarios().setIdUsuarios(request.getIdUsuarios());
 		valoraciones.setValor(request.getValor());
-		
+
 		Valoraciones datoGuardado = valoracionesRepository.save(valoraciones);
 		
 		response.setIdValoraciones(datoGuardado.getIdValoraciones());
 		response.setIdRecetas(datoGuardado.getIdRecetas());
-		response.setIdUsuarios(datoGuardado.getIdUsuarios());
 		response.setValor(datoGuardado.getValor());
+
+		usuariosResponse.setApellido(valoraciones.getUsuarios().getApellido());
+		usuariosResponse.setNombre(valoraciones.getUsuarios().getNombre());
+		usuariosResponse.setNick(valoraciones.getUsuarios().getNick());
+
+		response.setUsuario(usuariosResponse);
 		
 		return response;
 		
@@ -45,9 +51,16 @@ public class ValoracionesBusinessImpl implements IValoracionesBusiness {
 		
 		response.setIdValoraciones(datoGuardado.getIdValoraciones());
 		response.setIdRecetas(datoGuardado.getIdRecetas());
-		response.setIdUsuarios(datoGuardado.getIdUsuarios());
 		response.setValor(datoGuardado.getValor());
-		
+
+		UsuariosResponse usuariosResponse = new UsuariosResponse();
+
+		usuariosResponse.setApellido(datoGuardado.getUsuarios().getApellido());
+		usuariosResponse.setNombre(datoGuardado.getUsuarios().getNombre());
+		usuariosResponse.setNick(datoGuardado.getUsuarios().getNick());
+
+		response.setUsuario(usuariosResponse);
+
 		return response;
 	}
 	
@@ -63,15 +76,22 @@ public class ValoracionesBusinessImpl implements IValoracionesBusiness {
 		Valoraciones datoGuardado = valoracionesRepository.findById(id).get();
 		
 		datoGuardado.setIdRecetas(request.getIdRecetas());
-		datoGuardado.setIdUsuarios(request.getIdUsuarios());
+		datoGuardado.getUsuarios().setIdUsuarios(request.getIdUsuarios());
 		datoGuardado.setValor(request.getValor());
 		
 		Valoraciones datoModificado = valoracionesRepository.save(datoGuardado);
 		
 		response.setIdValoraciones(datoModificado.getIdValoraciones());
 		response.setIdRecetas(datoModificado.getIdRecetas());
-		response.setIdUsuarios(datoModificado.getIdUsuarios());
 		response.setValor(datoModificado.getValor());
+
+		UsuariosResponse usuariosResponse = new UsuariosResponse();
+
+		usuariosResponse.setApellido(datoGuardado.getUsuarios().getApellido());
+		usuariosResponse.setNombre(datoGuardado.getUsuarios().getNombre());
+		usuariosResponse.setNick(datoGuardado.getUsuarios().getNick());
+
+		response.setUsuario(usuariosResponse);
 		
 		return response;
 	}

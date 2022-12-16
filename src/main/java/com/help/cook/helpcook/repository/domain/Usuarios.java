@@ -1,13 +1,15 @@
 package com.help.cook.helpcook.repository.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+import java.util.Set;
+
+@Getter
+@Setter
 @Entity
 public class Usuarios {
 
@@ -26,4 +28,11 @@ public class Usuarios {
 	private String email;
 
 	private String foto;
+
+	@OneToMany(mappedBy="usuarios")
+	private Set<Valoraciones> valoraciones;
+
+
+	@OneToMany(mappedBy = "usuarios")
+	private  Set<Favoritos> favoritos;
 }

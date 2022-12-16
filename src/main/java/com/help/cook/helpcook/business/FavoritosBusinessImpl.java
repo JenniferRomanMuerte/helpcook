@@ -25,14 +25,14 @@ public class FavoritosBusinessImpl implements IFavoritosBusiness {
 		FavoritosResponse response = new FavoritosResponse();
 
 		favoritos.setIdRecetas(request.getIdRecetas());
-		favoritos.setIdUsuarios(request.getIdUsuarios());
+		favoritos.getUsuarios().setIdUsuarios(request.getIdUsuarios());
 		favoritos.setDescripcion(request.getDescripcion());
 
 		Favoritos datoGuardado = favoritosRepository.save(favoritos);
 
 		response.setIdFavoritos(datoGuardado.getIdFavoritos());
 		response.setIdRecetas(datoGuardado.getIdRecetas());
-		response.setIdUsuarios(datoGuardado.getIdUsuarios());
+		response.setIdUsuarios(datoGuardado.getUsuarios().getIdUsuarios());
 		response.setDescripcion(datoGuardado.getDescripcion());
 
 		return response;
@@ -47,7 +47,7 @@ public class FavoritosBusinessImpl implements IFavoritosBusiness {
 
 		response.setIdFavoritos(datoGuardado.getIdFavoritos());
 		response.setIdRecetas(datoGuardado.getIdRecetas());
-		response.setIdUsuarios(datoGuardado.getIdUsuarios());
+		response.setIdUsuarios(datoGuardado.getUsuarios().getIdUsuarios());
 		response.setDescripcion(datoGuardado.getDescripcion());
 
 		return response;
@@ -68,14 +68,14 @@ public class FavoritosBusinessImpl implements IFavoritosBusiness {
 		Favoritos datoGuardado = favoritosRepository.findById(id).get();
 
 		datoGuardado.setIdRecetas(request.getIdRecetas());
-		datoGuardado.setIdUsuarios(request.getIdUsuarios());
+		datoGuardado.getUsuarios().setIdUsuarios(request.getIdUsuarios());
 		datoGuardado.setDescripcion(request.getDescripcion());
 
 		Favoritos datoModificado = favoritosRepository.save(datoGuardado);
 
 		response.setIdFavoritos(datoModificado.getIdFavoritos());
 		response.setIdRecetas(datoModificado.getIdRecetas());
-		response.setIdUsuarios(datoModificado.getIdUsuarios());
+		response.setIdUsuarios(datoModificado.getUsuarios().getIdUsuarios());
 		response.setDescripcion(datoModificado.getDescripcion());
 
 		return response;

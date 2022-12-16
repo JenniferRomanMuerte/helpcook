@@ -2,21 +2,28 @@ package com.help.cook.helpcook.models;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class UsuariosResponse {
-	
-	private Integer idUsuarios;
 
-	private String nick;
-	
-	private String contraseña;
+    private Integer idUsuarios;
 
-	private String nombre;
+    private String nick;
 
-	private String apellido;
+    private String contraseña;
 
-	private String email;
-	
-	private String foto;
+    private String nombre;
+
+    private String apellido;
+
+    private String email;
+
+    private String foto;
+
+    private List<FavoritosResponse> favoritos;
+
+    private List<ValoracionesResponse> valoraciones;
+
 
 }
