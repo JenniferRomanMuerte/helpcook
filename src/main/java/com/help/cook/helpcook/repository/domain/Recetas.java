@@ -45,9 +45,4 @@ public class Recetas {
 	@OneToMany(mappedBy = "recetas")
 	Set<Pasos> pasos;
 
-	
-	/*@OneToMany(mappedBy = "usuario")
-	Set<Usuarios> usuarios;*/
-	
-
 }

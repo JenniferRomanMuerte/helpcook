@@ -27,6 +27,6 @@ public class Pasos {
 	
 	@ManyToOne
 	@JoinColumn(name="ID_Recetas")
-	private Pasos pasos;
+	private Recetas recetas;
 
 }
