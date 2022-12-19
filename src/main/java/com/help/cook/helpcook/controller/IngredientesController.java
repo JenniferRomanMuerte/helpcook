@@ -3,14 +3,7 @@ package com.help.cook.helpcook.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.help.cook.helpcook.business.IIngredientesBusiness;
 import com.help.cook.helpcook.models.IngredientesRequest;
@@ -58,10 +51,10 @@ public class IngredientesController {
 	}
 	
 	@GetMapping // Para obtener todo el listado 
-	public List<IngredientesResponse> obtenerTodos() {
+	public List<IngredientesResponse> obtenerTodos(@RequestParam String tipo) {
 
 
-		return ingredientesBusiness.obtenerTodos();
+		return ingredientesBusiness.obtenerTodos(tipo);
 	}
 	
 }

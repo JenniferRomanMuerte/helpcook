@@ -86,7 +86,6 @@ public class PasosBusinessImpl implements IPasosBusiness{
 			PasosResponse pasosResponse = new PasosResponse();
 			
 			pasosResponse.setIdPasos(paso.getIdPasos());
-			pasosResponse.setIdRecetas(paso.getIdRecetas());
 			pasosResponse.setTipo(paso.getTipo());
 			pasosResponse.setDescripcion(paso.getDescripcion());
 			

@@ -1,5 +1,6 @@
 package com.help.cook.helpcook.business;
 
+import com.help.cook.helpcook.models.IngredientesRecetasResponse;
 import com.help.cook.helpcook.models.IngredientesResponse;
 import com.help.cook.helpcook.repository.domain.Ingredientes;
 import com.help.cook.helpcook.repository.domain.RecetasIngredientes;
@@ -11,8 +12,11 @@ import com.help.cook.helpcook.models.RecetasResponse;
 import com.help.cook.helpcook.repository.RecetasRepository;
 import com.help.cook.helpcook.repository.domain.Recetas;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class RecetasBusinessImpl implements IRecetasBusiness {
@@ -26,16 +30,37 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
         RecetasResponse response = new RecetasResponse();
 
 
-
         recetas.setDescripcion(request.getDescripcion());
         recetas.setTiempo(request.getTiempo());
         recetas.setFoto(request.getFoto());
         recetas.setTipo(request.getTipo());
+        recetas.setIdUsuarios(request.getIdUsuarios());
         recetas.setCategoria(request.getCategoria());
-        recetas.setFecha_alta(request.getFecha_alta());
-        recetas.setValoracionMedia(request.getValoracionMedia());
+        recetas.setValoracionMedia(0F);
+        recetas.setFechaAlta(Timestamp.valueOf(request.getFechaAlta().atStartOfDay()));
+        //    recetas.setValoracionMedia(request.getValoracionMedia());
         recetas.setComensales(request.getComensales());
+        Set<RecetasIngredientes> recetasIngredientesSet = new HashSet<>();
 
+        for (IngredientesRecetasResponse ingredientesRecetasResponse : request.getIngredientes()) {
+
+            Ingredientes ingredienteIntermedio = new Ingredientes();
+            Recetas recetasIntermedio = new Recetas();
+
+            RecetasIngredientes recetasIngredientes = new RecetasIngredientes();
+
+
+            ingredienteIntermedio.setIdIngredientes(ingredientesRecetasResponse.getId());
+            recetasIntermedio.setIdRecetas(request.getIdRecetas());
+
+            recetasIngredientes.setIngredientes(ingredienteIntermedio);
+            recetasIngredientes.setRecetas(recetasIntermedio);
+            recetasIngredientes.setCantidad(ingredientesRecetasResponse.getCantidad());
+
+            recetasIngredientesSet.add(recetasIngredientes);
+        }
+
+        recetas.setIngredientes(recetasIngredientesSet);
         Recetas datoGuardado = recetasRepository.save(recetas);
 
         response.setIdRecetas(datoGuardado.getIdRecetas());
@@ -44,10 +69,9 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
         response.setFoto(datoGuardado.getFoto());
         response.setTipo(datoGuardado.getTipo());
         response.setCategoria(datoGuardado.getCategoria());
-        response.setFecha_alta(datoGuardado.getFecha_alta());
+        response.setFechaAlta(datoGuardado.getFechaAlta().toLocalDateTime().toLocalDate());
         response.setValoracionMedia(datoGuardado.getValoracionMedia());
         response.setComensales(datoGuardado.getComensales());
-
 
 
         return response;
@@ -69,7 +93,7 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
         response.setFoto(datoGuardado.getFoto());
         response.setTipo(datoGuardado.getTipo());
         response.setCategoria(datoGuardado.getCategoria());
-        response.setFecha_alta(datoGuardado.getFecha_alta());
+        response.setFechaAlta(datoGuardado.getFechaAlta().toLocalDateTime().toLocalDate());
         response.setValoracionMedia(datoGuardado.getValoracionMedia());
         response.setComensales(datoGuardado.getComensales());
 
@@ -104,7 +128,7 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
         datoGuardado.setFoto(request.getFoto());
         datoGuardado.setTipo(request.getTipo());
         datoGuardado.setCategoria(request.getCategoria());
-        datoGuardado.setFecha_alta(request.getFecha_alta());
+        datoGuardado.setFechaAlta(Timestamp.valueOf(request.getFechaAlta().atStartOfDay()));
         datoGuardado.setValoracionMedia(request.getValoracionMedia());
         datoGuardado.setComensales(request.getComensales());
 
@@ -116,37 +140,37 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
         response.setFoto(datoModificado.getFoto());
         response.setTipo(datoModificado.getTipo());
         response.setCategoria(datoModificado.getCategoria());
-        response.setFecha_alta(datoModificado.getFecha_alta());
+        response.setFechaAlta(datoModificado.getFechaAlta().toLocalDateTime().toLocalDate());
         response.setValoracionMedia(datoModificado.getValoracionMedia());
         response.setComensales(datoModificado.getComensales());
 
         return response;
     }
-    
+
     @Override
     public List<RecetasResponse> obtenerTodos() {
-    	List <RecetasResponse> recetasResponseLista = new ArrayList();
-    	
-    	List <Recetas> recetasLista = recetasRepository.findAll();
-    	
-    	for (Recetas receta : recetasLista) {
-    		RecetasResponse recetasResponse = new RecetasResponse();
-    		
-    		recetasResponse.setIdRecetas(receta.getIdRecetas());
-    		recetasResponse.setIdUsuarios(receta.getIdUsuarios());
-    		recetasResponse.setDescripcion(receta.getDescripcion());
-    		recetasResponse.setTiempo(receta.getTiempo());
-    		recetasResponse.setFoto(receta.getFoto());
-    		recetasResponse.setTipo(receta.getTipo());
-    		recetasResponse.setCategoria(receta.getCategoria());
-    		recetasResponse.setFecha_alta(receta.getFecha_alta());
-    		recetasResponse.setValoracionMedia(receta.getValoracionMedia());
-    		recetasResponse.setComensales(receta.getComensales());
-    		
-    		recetasResponseLista.add(recetasResponse);
-    	}
-    	
-    	return recetasResponseLista;
+        List<RecetasResponse> recetasResponseLista = new ArrayList();
+
+        List<Recetas> recetasLista = recetasRepository.findAll();
+
+        for (Recetas receta : recetasLista) {
+            RecetasResponse recetasResponse = new RecetasResponse();
+
+            recetasResponse.setIdRecetas(receta.getIdRecetas());
+            recetasResponse.setIdUsuarios(receta.getIdUsuarios());
+            recetasResponse.setDescripcion(receta.getDescripcion());
+            recetasResponse.setTiempo(receta.getTiempo());
+            recetasResponse.setFoto(receta.getFoto());
+            recetasResponse.setTipo(receta.getTipo());
+            recetasResponse.setCategoria(receta.getCategoria());
+            recetasResponse.setFechaAlta(receta.getFechaAlta().toLocalDateTime().toLocalDate());
+            recetasResponse.setValoracionMedia(receta.getValoracionMedia());
+            recetasResponse.setComensales(receta.getComensales());
+
+            recetasResponseLista.add(recetasResponse);
+        }
+
+        return recetasResponseLista;
     }
 
 }

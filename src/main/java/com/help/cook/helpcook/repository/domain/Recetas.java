@@ -1,6 +1,6 @@
 package com.help.cook.helpcook.repository.domain;
 
-import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -28,8 +28,8 @@ public class Recetas {
 	
 	private String categoria;
 	
-	private Time fecha_alta;
-	
+	private Timestamp fechaAlta;
+
 	private Float valoracionMedia;
 	
 	private Integer comensales;
@@ -44,10 +44,5 @@ public class Recetas {
 	// Creamos la relación con la tabla Pasos
 	@OneToMany(mappedBy = "recetas")
 	Set<Pasos> pasos;
-
-	
-	/*@OneToMany(mappedBy = "usuario")
-	Set<Usuarios> usuarios;*/
-	
 
 }

@@ -84,11 +84,11 @@ public class IngredientesBusinessImpl implements IIngredientesBusiness {
 	}
 
 	@Override
-	public List<IngredientesResponse> obtenerTodos() {
+	public List<IngredientesResponse> obtenerTodos(String tipo) {
 		
 		List<IngredientesResponse> ingredientesResponseLista = new ArrayList<>(); //Creamos una lista que nos devolvera los objetos ingredientes a mostrar
 		
-		List<Ingredientes> ingredientesLista = ingredientesRepository.findAll(); //Creamos una lista que almacena todos los objetos de ingredientes de la BBDD
+		List<Ingredientes> ingredientesLista = ingredientesRepository.findByTipo(tipo); //Creamos una lista que almacena todos los objetos de ingredientes de la BBDD
 		
 		
 		//Recorremos la lista

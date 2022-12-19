@@ -1,8 +1,11 @@
 package com.help.cook.helpcook.models;
 
 import java.sql.Time;
+import java.time.LocalDate;
+import java.util.List;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 public class RecetasRequest {
@@ -20,11 +23,14 @@ public class RecetasRequest {
 	private String tipo;
 	
 	private String categoria;
-	
-	private Time fecha_alta;
+
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private LocalDate fechaAlta;
 	
 	private Float valoracionMedia;
 	
 	private Integer comensales;
+
+	private List<IngredientesRecetasResponse> ingredientes;
 
 }

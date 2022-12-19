@@ -22,7 +22,5 @@ public interface IIngredientesBusiness {
 
 	IngredientesResponse modificar(IngredientesRequest request, Integer id);
 
-	List<IngredientesResponse> obtenerTodos();
-
-
+    List<IngredientesResponse> obtenerTodos(String tipo);
 }
