@@ -39,5 +39,15 @@ public class Recetas {
 	
 	@OneToMany(mappedBy = "recetas") //Le indicamos que es una relación de 1 a muchos, y que coja el objeto recetas de la tabla RecetasIngredientes
 	Set<RecetasIngredientes> ingredientes;
+	
+	
+	// Creamos la relación con la tabla Pasos
+	@OneToMany(mappedBy = "recetas")
+	Set<Pasos> pasos;
+
+	
+	/*@OneToMany(mappedBy = "usuario")
+	Set<Usuarios> usuarios;*/
+	
 
 }

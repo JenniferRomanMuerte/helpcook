@@ -1,5 +1,7 @@
 package com.help.cook.helpcook.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.help.cook.helpcook.business.IRecetasBusiness;
+import com.help.cook.helpcook.models.PasosResponse;
 import com.help.cook.helpcook.models.RecetasRequest;
 import com.help.cook.helpcook.models.RecetasResponse;
 
@@ -41,5 +44,10 @@ public class RecetasController {
 	@PutMapping ("/{id}")
 	public RecetasResponse modificar(@RequestBody RecetasRequest request, @PathVariable Integer id) {
 		return recetasBusiness.modificar(request, id);
+	}
+	
+	@GetMapping
+	public List<RecetasResponse> obtenerTodos() {
+		return recetasBusiness.obtenerTodos();
 	}
 }

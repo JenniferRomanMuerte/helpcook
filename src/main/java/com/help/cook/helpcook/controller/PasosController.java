@@ -1,5 +1,7 @@
 package com.help.cook.helpcook.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +41,11 @@ public class PasosController {
 	@PutMapping("/{id}")
 	public PasosResponse modificar(@RequestBody PasosRequest request, @PathVariable Integer id) {
 		return pasosBusiness.modificar(request, id);
+	}
+	
+	@GetMapping
+	public List<PasosResponse> obtenerTodos() {
+		return pasosBusiness.obtenerTodos();
 	}
 	
 

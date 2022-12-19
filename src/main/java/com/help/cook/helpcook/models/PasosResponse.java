@@ -1,5 +1,9 @@
 package com.help.cook.helpcook.models;
 
+import java.util.List;
+
+import com.help.cook.helpcook.repository.domain.Pasos;
+
 import lombok.Data;
 
 @Data
@@ -12,5 +16,9 @@ public class PasosResponse {
 	private Integer tipo;
 
 	private String descripcion;
+	
+	private List<PasosResponse> pasosResponseLista;
+	
+	private List<Pasos> pasosLista;
 
 }

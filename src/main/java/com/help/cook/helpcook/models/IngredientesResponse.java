@@ -1,5 +1,9 @@
 package com.help.cook.helpcook.models;
 
+import java.util.List;
+
+import com.help.cook.helpcook.repository.domain.Ingredientes;
+
 import lombok.Data;
 
 //CONTIENE LOS DATOS DE COMUNICACIÓN CON EL FRONT QUE USAREMOS LUEGO EN EL PAQUETE CONTROLLER
@@ -16,6 +20,10 @@ public class IngredientesResponse {
 	private String tipo;
 
 	private String cantidad;
+	
+	private List<IngredientesResponse> ingredientesResponseLista;
+	
+	private List<Ingredientes> ingredientesLista;
 
 	
 }

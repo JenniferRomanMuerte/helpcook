@@ -38,4 +38,12 @@ public class Usuarios {
 
 	@OneToMany(mappedBy = "usuarios") // Le indicamos que es una relación de 1 a muchos, y que coja el objeto usuarios de la tabla valoraciones
 	private  Set<Favoritos> favoritos;
+	
+	
+	// Establecemos relación también entre las tablas Usuarios y Recetas
+	
+	/*@ManyToOne
+	@JoinColumn(name="ID_Usuarios")
+	private Recetas recetas;*/
+
 }

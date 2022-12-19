@@ -1,5 +1,7 @@
 package com.help.cook.helpcook.business;
 
+import java.util.List;
+
 import com.help.cook.helpcook.models.RecetasRequest;
 import com.help.cook.helpcook.models.RecetasResponse;
 
@@ -12,6 +14,8 @@ public interface IRecetasBusiness {
 	void eliminar(Integer id);
 	
 	RecetasResponse modificar(RecetasRequest request, Integer id);
+	
+	List<RecetasResponse> obtenerTodos();
 	
 	
 

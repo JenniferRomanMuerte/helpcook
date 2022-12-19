@@ -1,5 +1,8 @@
 package com.help.cook.helpcook.business;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -70,6 +73,27 @@ public class PasosBusinessImpl implements IPasosBusiness{
 		response.setDescripcion(datoModificado.getDescripcion());
 		
 		return response;
+	}
+	
+	@Override
+	public List<PasosResponse> obtenerTodos() {
+		
+		List <PasosResponse> pasosResponseLista = new ArrayList();
+		
+		List <Pasos> pasosLista = pasosRepository.findAll();
+		
+		for(Pasos paso : pasosLista) {
+			PasosResponse pasosResponse = new PasosResponse();
+			
+			pasosResponse.setIdPasos(paso.getIdPasos());
+			pasosResponse.setIdRecetas(paso.getIdRecetas());
+			pasosResponse.setTipo(paso.getTipo());
+			pasosResponse.setDescripcion(paso.getDescripcion());
+			
+			pasosResponseLista.add(pasosResponse);
+		}
+		
+		return pasosResponseLista;
 	}
 
 }

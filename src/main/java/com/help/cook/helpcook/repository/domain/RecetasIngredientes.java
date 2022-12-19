@@ -8,24 +8,16 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name =  "recetas_ingredientes")
+@Table(name =  "recetas_ingredientes") // Indicamos la tabla a la que hace referencia ya que tienen nombres distintos en backend y bd.
 public class RecetasIngredientes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_Rec_Ingr")
+    @Column(name = "ID_Rec_Ingr") // Indicamos la columna a la que hace referencia ya que tienen nombres distintos en backend y bd.
     private Integer id;
     
     private String cantidad;
-/*
-    @Column(name = "ID_Recetas")
-    Integer idRecetas;
 
-    @Column(name = "ID_Ingredientes")
-    private Integer idIngredientes;
-*/
-
-    
     //Creamos los objeto Recetas e Ingredientes para la relación con esas tablas
     
     @ManyToOne //Indicamos que es una relación de muchos a 1

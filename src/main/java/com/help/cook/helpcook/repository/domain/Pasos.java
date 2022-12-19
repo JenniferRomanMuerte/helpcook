@@ -4,10 +4,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class Pasos {
 	@Id
@@ -19,5 +24,9 @@ public class Pasos {
 	private Integer tipo;
 
 	private String descripcion;
+	
+	@ManyToOne
+	@JoinColumn(name="ID_Recetas")
+	private Pasos pasos;
 
 }

@@ -1,5 +1,7 @@
 package com.help.cook.helpcook.business;
 
+import java.util.List;
+
 import com.help.cook.helpcook.models.PasosRequest;
 import com.help.cook.helpcook.models.PasosResponse;
 
@@ -12,5 +14,7 @@ public interface IPasosBusiness {
 	void eliminar(Integer id);
 	
 	PasosResponse modificar(PasosRequest request, Integer id);
+	
+	List<PasosResponse> obtenerTodos();
 
 }

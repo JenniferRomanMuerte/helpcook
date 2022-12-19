@@ -122,5 +122,31 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
 
         return response;
     }
+    
+    @Override
+    public List<RecetasResponse> obtenerTodos() {
+    	List <RecetasResponse> recetasResponseLista = new ArrayList();
+    	
+    	List <Recetas> recetasLista = recetasRepository.findAll();
+    	
+    	for (Recetas receta : recetasLista) {
+    		RecetasResponse recetasResponse = new RecetasResponse();
+    		
+    		recetasResponse.setIdRecetas(receta.getIdRecetas());
+    		recetasResponse.setIdUsuarios(receta.getIdUsuarios());
+    		recetasResponse.setDescripcion(receta.getDescripcion());
+    		recetasResponse.setTiempo(receta.getTiempo());
+    		recetasResponse.setFoto(receta.getFoto());
+    		recetasResponse.setTipo(receta.getTipo());
+    		recetasResponse.setCategoria(receta.getCategoria());
+    		recetasResponse.setFecha_alta(receta.getFecha_alta());
+    		recetasResponse.setValoracionMedia(receta.getValoracionMedia());
+    		recetasResponse.setComensales(receta.getComensales());
+    		
+    		recetasResponseLista.add(recetasResponse);
+    	}
+    	
+    	return recetasResponseLista;
+    }
 
 }
