@@ -15,6 +15,8 @@ public class RecetasIngredientes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_Rec_Ingr")
     private Integer id;
+    
+    private String cantidad;
 /*
     @Column(name = "ID_Recetas")
     Integer idRecetas;
@@ -23,15 +25,18 @@ public class RecetasIngredientes {
     private Integer idIngredientes;
 */
 
-    @ManyToOne
-    @JoinColumn(name = "ID_Recetas")
+    
+    //Creamos los objeto Recetas e Ingredientes para la relación con esas tablas
+    
+    @ManyToOne //Indicamos que es una relación de muchos a 1
+    @JoinColumn(name = "ID_Recetas") //Le indicamos que use esa columna para la relación
     Recetas recetas;
 
     @ManyToOne
     @JoinColumn(name = "ID_Ingredientes")
     Ingredientes ingredientes;
 
-    private String cantidad;
+    
 
 
 

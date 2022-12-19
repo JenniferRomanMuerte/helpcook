@@ -86,21 +86,25 @@ public class IngredientesBusinessImpl implements IIngredientesBusiness {
 	@Override
 	public List<IngredientesResponse> obtenerTodos() {
 		
-		List<IngredientesResponse> ingredientesResponseLista = new ArrayList<>();
+		List<IngredientesResponse> ingredientesResponseLista = new ArrayList<>(); //Creamos una lista que nos devolvera los objetos ingredientes a mostrar
 		
-		List<Ingredientes> ingredientesLista = ingredientesRepository.findAll();
+		List<Ingredientes> ingredientesLista = ingredientesRepository.findAll(); //Creamos una lista que almacena todos los objetos de ingredientes de la BBDD
 		
 		
-		
+		//Recorremos la lista
 		for(Ingredientes ingrediente: ingredientesLista) {
-			IngredientesResponse ingredientesResponse = new IngredientesResponse();
-			ingredientesResponse.setNombre(ingrediente.getNombre());
+			IngredientesResponse ingredientesResponse = new IngredientesResponse(); //Creamos el objeto ingredientes a devolver
+			
+			//Le asignamos los datos que capturamos del objeto ingrediente de la tabla
 			ingredientesResponse.setIdIngredientes(ingrediente.getIdIngredientes());
+			ingredientesResponse.setNombre(ingrediente.getNombre());
 			ingredientesResponse.setTipo(ingrediente.getTipo());
+			
+			//Metemos en la lista a devolver los objetos
 			ingredientesResponseLista.add(ingredientesResponse);
 		}
 		
-		return ingredientesResponseLista;
+		return ingredientesResponseLista; //Devolvemos la lista con los objetos a devolver
 	}
 	
 }

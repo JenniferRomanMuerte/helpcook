@@ -16,13 +16,15 @@ public class Favoritos {
 	private Integer idFavoritos;
 	
 	private Integer idRecetas;
+	
+	private String descripcion;
 
 	@ManyToOne
 	@JoinColumn(name="ID_Usuarios")
 	private Usuarios usuarios;
 
 
-	private String descripcion;
+
 	
 	
 }

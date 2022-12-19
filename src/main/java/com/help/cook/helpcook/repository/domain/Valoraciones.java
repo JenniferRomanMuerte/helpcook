@@ -20,11 +20,17 @@ public class Valoraciones {
 	private Integer idValoraciones;
 	
 	private Integer idRecetas;
+	
+	private Integer valor;
 
-	@ManyToOne
-	@JoinColumn(name="ID_Usuarios")
+	
+	//Declaramos el objeto Usuarios para la relación entre las tablas
+	
+	
+	@ManyToOne //Le indicamos que es una relación de muchos a uno
+	@JoinColumn(name="ID_Usuarios") //Le indicamos que use la columna Id para la relación
 	private Usuarios usuarios;
 
-	private Integer valor;
+	
 
 }

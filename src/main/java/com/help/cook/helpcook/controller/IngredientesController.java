@@ -57,7 +57,7 @@ public class IngredientesController {
 
 	}
 	
-	@GetMapping 
+	@GetMapping // Para obtener todo el listado 
 	public List<IngredientesResponse> obtenerTodos() {
 
 

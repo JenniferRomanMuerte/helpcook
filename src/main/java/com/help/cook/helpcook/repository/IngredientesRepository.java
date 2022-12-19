@@ -12,6 +12,6 @@ import com.help.cook.helpcook.repository.domain.Ingredientes;
 
 public interface  IngredientesRepository  extends CrudRepository<Ingredientes, Integer> {
 	
-	List<Ingredientes> findAll();
+	List<Ingredientes> findAll(); //Declaramos el método que usará Business
 
 }

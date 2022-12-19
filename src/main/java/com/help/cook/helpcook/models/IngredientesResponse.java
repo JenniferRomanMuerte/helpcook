@@ -15,7 +15,6 @@ public class IngredientesResponse {
 	
 	private String tipo;
 
-
 	private String cantidad;
 
 	

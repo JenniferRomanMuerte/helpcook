@@ -28,11 +28,14 @@ public class Usuarios {
 	private String email;
 
 	private String foto;
-
-	@OneToMany(mappedBy="usuarios")
+	
+	
+	//Creamos éstos 2 objetos para la relación entre tablas
+	
+	@OneToMany(mappedBy="usuarios") // Le indicamos que es una relación de 1 a muchos, y que coja el objeto usuarios de la tabla valoraciones
 	private Set<Valoraciones> valoraciones;
 
 
-	@OneToMany(mappedBy = "usuarios")
+	@OneToMany(mappedBy = "usuarios") // Le indicamos que es una relación de 1 a muchos, y que coja el objeto usuarios de la tabla valoraciones
 	private  Set<Favoritos> favoritos;
 }
