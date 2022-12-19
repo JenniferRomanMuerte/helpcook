@@ -2,7 +2,7 @@ package com.help.cook.helpcook.repository.domain;
 
 import javax.persistence.*;
 
-import lombok.Data;
+
 import lombok.Getter;
 import lombok.Setter;
 
