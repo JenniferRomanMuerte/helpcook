@@ -1,22 +1,25 @@
 package com.help.cook.helpcook.business;
 
-import com.help.cook.helpcook.models.IngredientesRecetasResponse;
-import com.help.cook.helpcook.models.IngredientesResponse;
-import com.help.cook.helpcook.repository.domain.Ingredientes;
-import com.help.cook.helpcook.repository.domain.RecetasIngredientes;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.help.cook.helpcook.models.IngredientesResponse;
+import com.help.cook.helpcook.models.PasosResponse;
+import com.help.cook.helpcook.models.RecetasIngredientesRequest;
+import com.help.cook.helpcook.models.RecetasPasosRequest;
 import com.help.cook.helpcook.models.RecetasRequest;
 import com.help.cook.helpcook.models.RecetasResponse;
+import com.help.cook.helpcook.repository.PasosRepository;
+import com.help.cook.helpcook.repository.RecetasIngredientesRepository;
 import com.help.cook.helpcook.repository.RecetasRepository;
+import com.help.cook.helpcook.repository.domain.Ingredientes;
+import com.help.cook.helpcook.repository.domain.Pasos;
 import com.help.cook.helpcook.repository.domain.Recetas;
-
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import com.help.cook.helpcook.repository.domain.RecetasIngredientes;
 
 @Service
 public class RecetasBusinessImpl implements IRecetasBusiness {
@@ -24,6 +27,12 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
     @Autowired
     private RecetasRepository recetasRepository;
 
+    @Autowired
+    private RecetasIngredientesRepository recetasIngredientesRepository;
+    
+    @Autowired
+    private PasosRepository pasosRepository;
+    
     @Override
     public RecetasResponse crear(RecetasRequest request) {
         Recetas recetas = new Recetas();
@@ -38,30 +47,50 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
         recetas.setCategoria(request.getCategoria());
         recetas.setValoracionMedia(0F);
         recetas.setFechaAlta(Timestamp.valueOf(request.getFechaAlta().atStartOfDay()));
-        //    recetas.setValoracionMedia(request.getValoracionMedia());
         recetas.setComensales(request.getComensales());
-        Set<RecetasIngredientes> recetasIngredientesSet = new HashSet<>();
 
-        for (IngredientesRecetasResponse ingredientesRecetasResponse : request.getIngredientes()) {
+        Recetas datoGuardado = recetasRepository.save(recetas); // Guardamos la receta
+        
+        for (RecetasIngredientesRequest recetasIngredientesRequest : request.getIngredientes()) { //Recorremos el objeto de ingrediente q nos envia el front
 
-            Ingredientes ingredienteIntermedio = new Ingredientes();
-            Recetas recetasIntermedio = new Recetas();
+            Ingredientes ingredienteIntermedio = new Ingredientes(); //Creamos este objeto que es para la relación
+            Recetas recetasIntermedio = new Recetas(); //Creamos este objeto que es para la relación
 
-            RecetasIngredientes recetasIngredientes = new RecetasIngredientes();
+            RecetasIngredientes recetasIngredientes = new RecetasIngredientes(); //Creamos el objeto que guardaremos en repositorio con los datos obtenidos de los objetos intermedios
 
 
-            ingredienteIntermedio.setIdIngredientes(ingredientesRecetasResponse.getId());
-            recetasIntermedio.setIdRecetas(request.getIdRecetas());
+            ingredienteIntermedio.setIdIngredientes(recetasIngredientesRequest.getId()); //Asignamos el id del ingredinete que llega del front al objeto ingrediente intermedio
+            recetasIntermedio.setIdRecetas(datoGuardado.getIdRecetas()); //Asignamos el id de la receta que acabamos de crear al objeto de receta intermedio
 
-            recetasIngredientes.setIngredientes(ingredienteIntermedio);
+            recetasIngredientes.setIngredientes(ingredienteIntermedio); //Asignamos al objeto ue vamos a guardar los valores que acabamos de conseguir
             recetasIngredientes.setRecetas(recetasIntermedio);
-            recetasIngredientes.setCantidad(ingredientesRecetasResponse.getCantidad());
+            recetasIngredientes.setCantidad(recetasIngredientesRequest.getCantidad());
 
-            recetasIngredientesSet.add(recetasIngredientes);
+            
+            recetasIngredientesRepository.save(recetasIngredientes); //Guardamos en el repositorio
         }
 
-        recetas.setIngredientes(recetasIngredientesSet);
-        Recetas datoGuardado = recetasRepository.save(recetas);
+        
+        
+        for (RecetasPasosRequest pasosRequest : request.getPasos()) { //Recorremos el objeto que nos llega del front
+        	
+        	Pasos recetaPaso = new Pasos(); //Creamos el objeto para almacenar los datos
+            Recetas recetasIntermedio = new Recetas(); //Creamos este objeto intermedio para almacenar los datos de la receta que acabamos de crear
+        	
+            recetasIntermedio.setIdRecetas(datoGuardado.getIdRecetas()); //Asignamos a este objeto el id de la receta 
+            
+        	recetaPaso.setRecetas(recetasIntermedio); //Asignamos los valores de los atributos de éste objeto
+        	recetaPaso.setTipo(pasosRequest.getTipo());
+        	recetaPaso.setDescripcion(pasosRequest.getDescripcion());
+        	
+        	pasosRepository.save(recetaPaso);//Lo guardamos en el repositorio
+        	
+        }
+        
+         
+
+        
+        
 
         response.setIdRecetas(datoGuardado.getIdRecetas());
         response.setDescripcion(datoGuardado.getDescripcion());
@@ -84,6 +113,8 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
         RecetasResponse response = new RecetasResponse();
 
         List<IngredientesResponse> ingredientesResponseList = new ArrayList<>();
+        List<PasosResponse> pasosResponseList = new ArrayList<>();
+
 
         Recetas datoGuardado = recetasRepository.findById(id).get();
 
@@ -105,8 +136,19 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
             ingredientesResponse.setCantidad(ingredientesRecetas.getCantidad());
             ingredientesResponseList.add(ingredientesResponse);
         }
+        
+        for(Pasos pasos: datoGuardado.getPasos()) {
+        	
+        	PasosResponse pasosResponse = new PasosResponse();
+        	pasosResponse.setDescripcion(pasos.getDescripcion());
+        
+        	
+        	pasosResponseList.add(pasosResponse);
+        	
+        }
 
         response.setIngredientesResponse(ingredientesResponseList);
+        response.setPasosResponse(pasosResponseList);
 
         return response;
 

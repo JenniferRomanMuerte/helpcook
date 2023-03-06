@@ -36,7 +36,7 @@ public class Usuarios {
 	private Set<Valoraciones> valoraciones;
 
 
-	@OneToMany(mappedBy = "usuarios") // Le indicamos que es una relación de 1 a muchos, y que coja el objeto usuarios de la tabla valoraciones
+	@OneToMany(mappedBy = "usuarios") // Le indicamos que es una relación de 1 a muchos, y que coja el objeto usuarios de la tabla favoritos
 	private  Set<Favoritos> favoritos;
 
 }

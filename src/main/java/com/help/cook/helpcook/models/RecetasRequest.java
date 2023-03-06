@@ -1,11 +1,11 @@
 package com.help.cook.helpcook.models;
 
-import java.sql.Time;
 import java.time.LocalDate;
 import java.util.List;
 
-import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import lombok.Data;
 
 @Data
 public class RecetasRequest {
@@ -31,6 +31,8 @@ public class RecetasRequest {
 	
 	private Integer comensales;
 
-	private List<IngredientesRecetasResponse> ingredientes;
+	private List<RecetasIngredientesRequest> ingredientes;
+	
+	private List<RecetasPasosRequest> pasos;
 
 }

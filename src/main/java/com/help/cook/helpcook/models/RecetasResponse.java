@@ -30,5 +30,7 @@ public class RecetasResponse {
     private Integer comensales;
 
     private List<IngredientesResponse> ingredientesResponse;
+    
+    private List<PasosResponse> pasosResponse;
 
 }

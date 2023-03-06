@@ -35,20 +35,23 @@ public class ValoracionesBusinessImpl implements IValoracionesBusiness {
         valoraciones.setIdRecetas(request.getIdRecetas());
         valoraciones.getUsuarios().setIdUsuarios(request.getIdUsuarios());
         valoraciones.setValor(request.getValor());
-
+        
         Valoraciones datoGuardado = valoracionesRepository.save(valoraciones);
 
-        Recetas recetaGuardada = recetasRepository.findById(datoGuardado.getIdRecetas()).get();
+        
+        //PARA CALCULAR MEDIA DE LA VALORACIÓN DE LA RECETA
+        
+        Recetas recetaGuardada = recetasRepository.findById(datoGuardado.getIdRecetas()).get(); //Recuperamos la receta
 
-        List<Valoraciones> valoracionesGuardadas = valoracionesRepository.findAll();
-        long sumaMedia = request.getValor();
-        for (Valoraciones valoracionMedia : valoracionesGuardadas) {
-            sumaMedia += valoracionMedia.getValor();
+        List<Valoraciones> valoracionesGuardadas = valoracionesRepository.findByIdRecetas(recetaGuardada.getIdRecetas()); // Recuperamos todas las valoraciones de una receta 
+        int sumaMedia = request.getValor(); // Creamos una variable para recuperar la valoración que nos llega del front
+        for (Valoraciones valoracionMedia : valoracionesGuardadas) { //Recorremos la lista de todas las valoraciones que tenia la receta
+            sumaMedia += valoracionMedia.getValor(); //Sumamos todas las valoraciones con la nueva valoración
         }
 
-        Float valorMedio =  (float) sumaMedia / (valoracionesGuardadas.size() + 1);
-        recetaGuardada.setValoracionMedia(valorMedio);
-        recetasRepository.save(recetaGuardada);
+        float valorMedio =  (float) sumaMedia / (valoracionesGuardadas.size() + 1); // Calculamos la media recuperando la cantidad de valoraciones y sumandole la nueva
+        recetaGuardada.setValoracionMedia(valorMedio); //Asignamos el nuevo dato
+        recetasRepository.save(recetaGuardada); //Guardamos el dato
 
         response.setIdValoraciones(datoGuardado.getIdValoraciones());
         response.setIdRecetas(datoGuardado.getIdRecetas());
@@ -102,12 +105,28 @@ public class ValoracionesBusinessImpl implements IValoracionesBusiness {
         datoGuardado.setValor(request.getValor());
 
         Valoraciones datoModificado = valoracionesRepository.save(datoGuardado);
+        
+        
 
         response.setIdValoraciones(datoModificado.getIdValoraciones());
         response.setIdRecetas(datoModificado.getIdRecetas());
         response.setValor(datoModificado.getValor());
 
         UsuariosResponse usuariosResponse = new UsuariosResponse();
+        
+ //PARA CALCULAR MEDIA DE LA VALORACIÓN DE LA RECETA
+        
+        Recetas recetaGuardada = recetasRepository.findById(datoGuardado.getIdRecetas()).get(); //Recuperamos la receta
+
+        List<Valoraciones> valoracionesGuardadas = valoracionesRepository.findByIdRecetas(recetaGuardada.getIdRecetas()); // Recuperamos todas las valoraciones de una receta 
+        int sumaMedia = 0; // Creamos una variable para recuperar la valoración que nos llega del front
+        for (Valoraciones valoracionMedia : valoracionesGuardadas) { //Recorremos la lista de todas las valoraciones que tenia la receta
+            sumaMedia += valoracionMedia.getValor(); //Sumamos todas las valoraciones con la nueva valoración
+        }
+
+        float valorMedio =  (float) sumaMedia / (valoracionesGuardadas.size()); // Calculamos la media recuperando la cantidad de valoraciones y sumandole la nueva
+        recetaGuardada.setValoracionMedia(valorMedio); //Asignamos el nuevo dato
+        recetasRepository.save(recetaGuardada); //Guardamos el dato
 
         usuariosResponse.setApellido(datoGuardado.getUsuarios().getApellido());
         usuariosResponse.setNombre(datoGuardado.getUsuarios().getNombre());

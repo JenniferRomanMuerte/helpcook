@@ -10,4 +10,6 @@ public interface ValoracionesRepository extends CrudRepository<Valoraciones, Int
 
     List<Valoraciones> findAll();
 
+    
+    List<Valoraciones> findByIdRecetas(Integer idReceta);
 }

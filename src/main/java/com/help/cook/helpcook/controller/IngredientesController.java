@@ -51,7 +51,7 @@ public class IngredientesController {
 	}
 	
 	@GetMapping // Para obtener todo el listado 
-	public List<IngredientesResponse> obtenerTodos(@RequestParam String tipo) {
+	public List<IngredientesResponse> obtenerTodos(@RequestParam(required = false) String tipo) {
 
 
 		return ingredientesBusiness.obtenerTodos(tipo);
