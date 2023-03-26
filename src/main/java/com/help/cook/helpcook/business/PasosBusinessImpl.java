@@ -3,6 +3,7 @@ package com.help.cook.helpcook.business;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.help.cook.helpcook.repository.domain.Recetas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,15 +23,19 @@ public class PasosBusinessImpl implements IPasosBusiness{
 		
 		Pasos pasos = new Pasos();
 		PasosResponse response = new PasosResponse();
-		
+		Recetas recetas = new Recetas();
+
 		pasos.setTipo(request.getTipo());
 		pasos.setDescripcion(request.getDescripcion());
+		recetas.setIdRecetas(request.getIdRecetas());
+		pasos.setRecetas(recetas);
 		
 		Pasos datoGuardado = pasosRepository.save(pasos);
 		
 		response.setIdPasos(datoGuardado.getIdPasos());
 		response.setTipo(datoGuardado.getTipo());
 		response.setDescripcion(datoGuardado.getDescripcion());
+		response.setIdRecetas(datoGuardado.getRecetas().getIdRecetas());
 		
 		return response;
 	}
@@ -45,6 +50,7 @@ public class PasosBusinessImpl implements IPasosBusiness{
 		response.setIdPasos(datoGuardado.getIdPasos());
 		response.setTipo(datoGuardado.getTipo());
 		response.setDescripcion(datoGuardado.getDescripcion());
+		response.setIdRecetas(datoGuardado.getRecetas().getIdRecetas());
 		
 		return response;
 		
@@ -71,6 +77,7 @@ public class PasosBusinessImpl implements IPasosBusiness{
 		response.setIdPasos(datoModificado.getIdPasos());
 		response.setTipo(datoModificado.getTipo());
 		response.setDescripcion(datoModificado.getDescripcion());
+		response.setIdRecetas(datoGuardado.getRecetas().getIdRecetas());
 		
 		return response;
 	}
@@ -88,6 +95,7 @@ public class PasosBusinessImpl implements IPasosBusiness{
 			pasosResponse.setIdPasos(paso.getIdPasos());
 			pasosResponse.setTipo(paso.getTipo());
 			pasosResponse.setDescripcion(paso.getDescripcion());
+			pasosResponse.setIdRecetas(paso.getRecetas().getIdRecetas());
 			
 			pasosResponseLista.add(pasosResponse);
 		}

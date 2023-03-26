@@ -15,7 +15,7 @@ public interface IRecetasBusiness {
 	
 	RecetasResponse modificar(RecetasRequest request, Integer id);
 	
-	List<RecetasResponse> obtenerTodos();
+	List<RecetasResponse> obtenerTodos(String categoria, List<Integer> idIngredientes, Integer idUsuario);
 	
 	
 

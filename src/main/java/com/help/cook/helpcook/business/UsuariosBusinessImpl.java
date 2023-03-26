@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.help.cook.helpcook.repository.UsuariosRepository;
-import com.help.cook.helpcook.repository.domain.Ingredientes;
 import com.help.cook.helpcook.repository.domain.Usuarios;
 
 import java.util.ArrayList;
@@ -29,7 +28,7 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
 
 
         usuarios.setNick(request.getNick());
-        usuarios.setContraseña(request.getContraseña());
+        usuarios.setContrasenia(request.getContraseña());
         usuarios.setNombre(request.getNombre());
         usuarios.setApellido(request.getApellido());
         usuarios.setEmail(request.getEmail());
@@ -38,9 +37,9 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
 
         Usuarios datoGuardado = usuariosRepository.save(usuarios);
 
-        response.setIdUsuarios(datoGuardado.getIdUsuarios());
+        response.setIdUsuarios(datoGuardado.getId());
         response.setNick(datoGuardado.getNick());
-        response.setContraseña(datoGuardado.getContraseña());
+        response.setContraseña(datoGuardado.getContrasenia());
         response.setNombre(datoGuardado.getNombre());
         response.setApellido(datoGuardado.getApellido());
         response.setEmail(datoGuardado.getEmail());
@@ -58,9 +57,9 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
         List<ValoracionesResponse> valoracionesResponseList = new ArrayList<>();
 
         Usuarios datoGuardado = usuariosRepository.findById(id).get();
-        response.setIdUsuarios(datoGuardado.getIdUsuarios());
+        response.setIdUsuarios(datoGuardado.getId());
         response.setNick(datoGuardado.getNick());
-        response.setContraseña(datoGuardado.getContraseña());
+        response.setContraseña(datoGuardado.getContrasenia());
         response.setNombre(datoGuardado.getNombre());
         response.setApellido(datoGuardado.getApellido());
         response.setEmail(datoGuardado.getEmail());
@@ -100,7 +99,7 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
         Usuarios usuario = usuariosRepository.findById(id).get();
 
         usuario.setNick(request.getNick());
-        usuario.setContraseña(request.getContraseña());
+        usuario.setContrasenia(request.getContraseña());
         usuario.setNombre(request.getNombre());
         usuario.setApellido(request.getApellido());
         usuario.setEmail(request.getEmail());
@@ -108,9 +107,9 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
 
         Usuarios datoModificado = usuariosRepository.save(usuario);
 
-        response.setIdUsuarios(datoModificado.getIdUsuarios());
+        response.setIdUsuarios(datoModificado.getId());
         response.setNick(datoModificado.getNick());
-        response.setContraseña(datoModificado.getContraseña());
+        response.setContraseña(datoModificado.getContrasenia());
         response.setNombre(datoModificado.getNombre());
         response.setApellido(datoModificado.getApellido());
         response.setEmail(datoModificado.getEmail());

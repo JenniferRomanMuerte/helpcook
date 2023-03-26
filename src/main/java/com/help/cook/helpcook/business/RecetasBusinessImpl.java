@@ -3,6 +3,7 @@ package com.help.cook.helpcook.business;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,10 +30,10 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
 
     @Autowired
     private RecetasIngredientesRepository recetasIngredientesRepository;
-    
+
     @Autowired
     private PasosRepository pasosRepository;
-    
+
     @Override
     public RecetasResponse crear(RecetasRequest request) {
         Recetas recetas = new Recetas();
@@ -50,7 +51,7 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
         recetas.setComensales(request.getComensales());
 
         Recetas datoGuardado = recetasRepository.save(recetas); // Guardamos la receta
-        
+
         for (RecetasIngredientesRequest recetasIngredientesRequest : request.getIngredientes()) { //Recorremos el objeto de ingrediente q nos envia el front
 
             Ingredientes ingredienteIntermedio = new Ingredientes(); //Creamos este objeto que es para la relación
@@ -66,31 +67,26 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
             recetasIngredientes.setRecetas(recetasIntermedio);
             recetasIngredientes.setCantidad(recetasIngredientesRequest.getCantidad());
 
-            
+
             recetasIngredientesRepository.save(recetasIngredientes); //Guardamos en el repositorio
         }
 
-        
-        
-        for (RecetasPasosRequest pasosRequest : request.getPasos()) { //Recorremos el objeto que nos llega del front
-        	
-        	Pasos recetaPaso = new Pasos(); //Creamos el objeto para almacenar los datos
-            Recetas recetasIntermedio = new Recetas(); //Creamos este objeto intermedio para almacenar los datos de la receta que acabamos de crear
-        	
-            recetasIntermedio.setIdRecetas(datoGuardado.getIdRecetas()); //Asignamos a este objeto el id de la receta 
-            
-        	recetaPaso.setRecetas(recetasIntermedio); //Asignamos los valores de los atributos de éste objeto
-        	recetaPaso.setTipo(pasosRequest.getTipo());
-        	recetaPaso.setDescripcion(pasosRequest.getDescripcion());
-        	
-        	pasosRepository.save(recetaPaso);//Lo guardamos en el repositorio
-        	
-        }
-        
-         
 
-        
-        
+        for (RecetasPasosRequest pasosRequest : request.getPasos()) { //Recorremos el objeto que nos llega del front
+
+            Pasos recetaPaso = new Pasos(); //Creamos el objeto para almacenar los datos
+            Recetas recetasIntermedio = new Recetas(); //Creamos este objeto intermedio para almacenar los datos de la receta que acabamos de crear
+
+            recetasIntermedio.setIdRecetas(datoGuardado.getIdRecetas()); //Asignamos a este objeto el id de la receta 
+
+            recetaPaso.setRecetas(recetasIntermedio); //Asignamos los valores de los atributos de éste objeto
+            recetaPaso.setTipo(pasosRequest.getTipo());
+            recetaPaso.setDescripcion(pasosRequest.getDescripcion());
+
+            pasosRepository.save(recetaPaso);//Lo guardamos en el repositorio
+
+        }
+
 
         response.setIdRecetas(datoGuardado.getIdRecetas());
         response.setDescripcion(datoGuardado.getDescripcion());
@@ -136,15 +132,16 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
             ingredientesResponse.setCantidad(ingredientesRecetas.getCantidad());
             ingredientesResponseList.add(ingredientesResponse);
         }
-        
-        for(Pasos pasos: datoGuardado.getPasos()) {
-        	
-        	PasosResponse pasosResponse = new PasosResponse();
-        	pasosResponse.setDescripcion(pasos.getDescripcion());
-        
-        	
-        	pasosResponseList.add(pasosResponse);
-        	
+
+        for (Pasos pasos : datoGuardado.getPasos()) {
+
+            PasosResponse pasosResponse = new PasosResponse();
+            pasosResponse.setDescripcion(pasos.getDescripcion());
+            pasosResponse.setTipo(pasos.getTipo());
+
+
+            pasosResponseList.add(pasosResponse);
+
         }
 
         response.setIngredientesResponse(ingredientesResponseList);
@@ -190,13 +187,14 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
     }
 
     @Override
-    public List<RecetasResponse> obtenerTodos() {
+    public List<RecetasResponse> obtenerTodos(String categoria, List<Integer> idIngredientes, Integer idUsuario) {
         List<RecetasResponse> recetasResponseLista = new ArrayList();
 
-        List<Recetas> recetasLista = recetasRepository.findAll();
+        Set<Recetas> recetasLista = recetasRepository.findAdvance(categoria, idIngredientes, idUsuario);
 
         for (Recetas receta : recetasLista) {
             RecetasResponse recetasResponse = new RecetasResponse();
+            List<IngredientesResponse> ingredientesResponseList = new ArrayList<>();
 
             recetasResponse.setIdRecetas(receta.getIdRecetas());
             recetasResponse.setIdUsuarios(receta.getIdUsuarios());
@@ -209,6 +207,15 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
             recetasResponse.setValoracionMedia(receta.getValoracionMedia());
             recetasResponse.setComensales(receta.getComensales());
 
+
+            for (RecetasIngredientes ingrediente : receta.getIngredientes()) {
+                IngredientesResponse ingredientesResponse = new IngredientesResponse();
+                ingredientesResponse.setIdIngredientes(ingrediente.getIngredientes().getIdIngredientes());
+                ingredientesResponse.setNombre(ingrediente.getIngredientes().getNombre());
+                ingredientesResponse.setTipo(ingrediente.getIngredientes().getTipo());
+                ingredientesResponseList.add(ingredientesResponse);
+            }
+            recetasResponse.setIngredientesResponse(ingredientesResponseList);
             recetasResponseLista.add(recetasResponse);
         }
 

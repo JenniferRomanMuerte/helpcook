@@ -33,7 +33,7 @@ public class ValoracionesController {
 	
 	@DeleteMapping("/{id}")
 	public void eliminar(@PathVariable Integer id) {
-		
+		valoracionesBusiness.eliminar(id);
 	}
 	
 	@PutMapping ("/{id}")

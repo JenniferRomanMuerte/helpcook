@@ -14,12 +14,14 @@ import java.util.Set;
 public class Usuarios {
 
 	@Id
+	@Column(name = "ID_Usuarios")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idUsuarios;
+	private Integer id;
 
 	private String nick;
 
-	private String contraseña;
+	@Column(name = "contraseña")
+	private String contrasenia;
 
 	private String nombre;
 

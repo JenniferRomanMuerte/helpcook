@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.help.cook.helpcook.business.IRecetasBusiness;
@@ -38,7 +39,7 @@ public class RecetasController {
 	
 	@DeleteMapping("/{id}")
 	public void eliminar(@PathVariable Integer id) {
-		
+		recetasBusiness.eliminar(id);
 	}
 	
 	@PutMapping ("/{id}")
@@ -47,7 +48,9 @@ public class RecetasController {
 	}
 	
 	@GetMapping
-	public List<RecetasResponse> obtenerTodos() {
-		return recetasBusiness.obtenerTodos();
+	public List<RecetasResponse> obtenerTodos(@RequestParam(required = false) String categoria,@RequestParam(required = false) List<Integer> idIngredientes, @RequestParam(required = false) Integer idUsuario ) {
+		return recetasBusiness.obtenerTodos(categoria,idIngredientes,idUsuario);
 	}
+	
+	
 }

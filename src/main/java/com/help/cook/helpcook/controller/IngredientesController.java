@@ -39,7 +39,7 @@ public class IngredientesController {
 
 	@DeleteMapping("/{id}") //Para borrar
 	public void eliminar(@PathVariable Integer id) { //@PathVariable indica que en la url va una variable
-
+		ingredientesBusiness.eliminar(id);
 	}
 
 

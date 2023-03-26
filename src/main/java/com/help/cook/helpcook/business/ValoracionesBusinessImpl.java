@@ -3,6 +3,7 @@ package com.help.cook.helpcook.business;
 import com.help.cook.helpcook.models.UsuariosResponse;
 import com.help.cook.helpcook.repository.RecetasRepository;
 import com.help.cook.helpcook.repository.domain.Recetas;
+import com.help.cook.helpcook.repository.domain.Usuarios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,6 @@ import com.help.cook.helpcook.repository.domain.Valoraciones;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ValoracionesBusinessImpl implements IValoracionesBusiness {
@@ -28,30 +28,20 @@ public class ValoracionesBusinessImpl implements IValoracionesBusiness {
     public ValoracionesResponse crear(ValoracionesRequest request) {
 
         Valoraciones valoraciones = new Valoraciones();
-        List<Integer> media = new ArrayList<>();
+        Usuarios usuarios = new Usuarios();
 
         ValoracionesResponse response = new ValoracionesResponse();
         UsuariosResponse usuariosResponse = new UsuariosResponse();
         valoraciones.setIdRecetas(request.getIdRecetas());
-        valoraciones.getUsuarios().setIdUsuarios(request.getIdUsuarios());
         valoraciones.setValor(request.getValor());
+
+        usuarios.setId(request.getIdUsuarios());
+        valoraciones.setUsuarios(usuarios);
         
         Valoraciones datoGuardado = valoracionesRepository.save(valoraciones);
 
         
-        //PARA CALCULAR MEDIA DE LA VALORACIÓN DE LA RECETA
-        
-        Recetas recetaGuardada = recetasRepository.findById(datoGuardado.getIdRecetas()).get(); //Recuperamos la receta
-
-        List<Valoraciones> valoracionesGuardadas = valoracionesRepository.findByIdRecetas(recetaGuardada.getIdRecetas()); // Recuperamos todas las valoraciones de una receta 
-        int sumaMedia = request.getValor(); // Creamos una variable para recuperar la valoración que nos llega del front
-        for (Valoraciones valoracionMedia : valoracionesGuardadas) { //Recorremos la lista de todas las valoraciones que tenia la receta
-            sumaMedia += valoracionMedia.getValor(); //Sumamos todas las valoraciones con la nueva valoración
-        }
-
-        float valorMedio =  (float) sumaMedia / (valoracionesGuardadas.size() + 1); // Calculamos la media recuperando la cantidad de valoraciones y sumandole la nueva
-        recetaGuardada.setValoracionMedia(valorMedio); //Asignamos el nuevo dato
-        recetasRepository.save(recetaGuardada); //Guardamos el dato
+        valoracionMedia(datoGuardado.getIdRecetas());
 
         response.setIdValoraciones(datoGuardado.getIdValoraciones());
         response.setIdRecetas(datoGuardado.getIdRecetas());
@@ -90,7 +80,15 @@ public class ValoracionesBusinessImpl implements IValoracionesBusiness {
     }
 
     public void eliminar(Integer id) {
+    	
+    	Integer idReceta = valoracionesRepository.findById(id).get().getIdRecetas();
+    	
         valoracionesRepository.deleteById(id);
+        
+        
+        valoracionMedia(idReceta);
+        
+        
     }
 
     @Override
@@ -101,7 +99,7 @@ public class ValoracionesBusinessImpl implements IValoracionesBusiness {
         Valoraciones datoGuardado = valoracionesRepository.findById(id).get();
 
         datoGuardado.setIdRecetas(request.getIdRecetas());
-        datoGuardado.getUsuarios().setIdUsuarios(request.getIdUsuarios());
+        datoGuardado.getUsuarios().setId(request.getIdUsuarios());
         datoGuardado.setValor(request.getValor());
 
         Valoraciones datoModificado = valoracionesRepository.save(datoGuardado);
@@ -113,21 +111,9 @@ public class ValoracionesBusinessImpl implements IValoracionesBusiness {
         response.setValor(datoModificado.getValor());
 
         UsuariosResponse usuariosResponse = new UsuariosResponse();
-        
- //PARA CALCULAR MEDIA DE LA VALORACIÓN DE LA RECETA
-        
-        Recetas recetaGuardada = recetasRepository.findById(datoGuardado.getIdRecetas()).get(); //Recuperamos la receta
-
-        List<Valoraciones> valoracionesGuardadas = valoracionesRepository.findByIdRecetas(recetaGuardada.getIdRecetas()); // Recuperamos todas las valoraciones de una receta 
-        int sumaMedia = 0; // Creamos una variable para recuperar la valoración que nos llega del front
-        for (Valoraciones valoracionMedia : valoracionesGuardadas) { //Recorremos la lista de todas las valoraciones que tenia la receta
-            sumaMedia += valoracionMedia.getValor(); //Sumamos todas las valoraciones con la nueva valoración
-        }
-
-        float valorMedio =  (float) sumaMedia / (valoracionesGuardadas.size()); // Calculamos la media recuperando la cantidad de valoraciones y sumandole la nueva
-        recetaGuardada.setValoracionMedia(valorMedio); //Asignamos el nuevo dato
-        recetasRepository.save(recetaGuardada); //Guardamos el dato
-
+               
+        valoracionMedia(datoGuardado.getIdRecetas());
+           
         usuariosResponse.setApellido(datoGuardado.getUsuarios().getApellido());
         usuariosResponse.setNombre(datoGuardado.getUsuarios().getNombre());
         usuariosResponse.setNick(datoGuardado.getUsuarios().getNick());
@@ -137,5 +123,23 @@ public class ValoracionesBusinessImpl implements IValoracionesBusiness {
         return response;
     }
 
+    
+    public void valoracionMedia(Integer idRecetas) {
+    	
+    	 //PARA CALCULAR MEDIA DE LA VALORACIÓN DE LA RECETA
+        
+        Recetas recetaGuardada = recetasRepository.findById(idRecetas).get(); //Recuperamos la receta
 
+        List<Valoraciones> valoracionesGuardadas = valoracionesRepository.findByIdRecetas(recetaGuardada.getIdRecetas()); // Recuperamos todas las valoraciones de una receta 
+        int sumaMedia = 0; // Creamos una variable para alamacenar todas la valoraciones
+        for (Valoraciones valoracionMedia : valoracionesGuardadas) { //Recorremos la lista de todas las valoraciones que tenia la receta
+            sumaMedia += valoracionMedia.getValor(); //Sumamos todas las valoraciones 
+        }
+
+        float valorMedio =  (float) sumaMedia / (valoracionesGuardadas.size()); // Calculamos la media recuperando la cantidad de valoraciones
+        recetaGuardada.setValoracionMedia(valorMedio); //Asignamos el nuevo dato
+        recetasRepository.save(recetaGuardada); //Guardamos el dato
+    	
+    }
+   
 }

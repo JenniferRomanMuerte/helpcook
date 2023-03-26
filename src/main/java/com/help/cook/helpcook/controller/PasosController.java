@@ -35,7 +35,7 @@ public class PasosController {
 	
 	@DeleteMapping("/{id}")
 	public void eliminar(@PathVariable Integer id) {
-		
+		pasosBusiness.eliminar(id);
 	}
 	
 	@PutMapping("/{id}")
