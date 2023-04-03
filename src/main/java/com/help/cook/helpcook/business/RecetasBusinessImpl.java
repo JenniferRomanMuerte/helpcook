@@ -89,6 +89,7 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
 
 
         response.setIdRecetas(datoGuardado.getIdRecetas());
+        response.setIdUsuarios(datoGuardado.getIdUsuarios());
         response.setDescripcion(datoGuardado.getDescripcion());
         response.setTiempo(datoGuardado.getTiempo());
         response.setFoto(datoGuardado.getFoto());

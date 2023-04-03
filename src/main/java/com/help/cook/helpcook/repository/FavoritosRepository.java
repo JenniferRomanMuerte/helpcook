@@ -12,5 +12,6 @@ public interface FavoritosRepository extends CrudRepository<Favoritos, Integer>{
 	@Query ("SELECT f FROM Favoritos f  LEFT JOIN f.usuarios u WHERE (:IdUsuarios is null or u.id = :IdUsuarios)")
 	List<Favoritos> findByUsuarios(@Param("IdUsuarios") Integer IdUsuarios);
 	
+	
 
 }

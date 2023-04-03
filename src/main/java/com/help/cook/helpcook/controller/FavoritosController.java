@@ -46,6 +46,7 @@ public class FavoritosController {
 	
 	@DeleteMapping("/{id}")
 	public void eliminar(@PathVariable Integer id) {
+		favoritosBusiness.eliminar(id);
 		
 	}
 
@@ -58,10 +59,10 @@ public class FavoritosController {
 	}
 	
 	@GetMapping // Para obtener todo el listado 
-	public List<FavoritosResponse> obtenerTodos(@RequestParam(required = false) Integer IdUsuarios) {
+	public List<FavoritosResponse> obtenerTodos(@RequestParam(required = false) Integer idUsuario) {
 
 
-		return favoritosBusiness.obtenerTodos(IdUsuarios);
+		return favoritosBusiness.obtenerTodos(idUsuario);
 	}
 
 }

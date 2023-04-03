@@ -122,6 +122,30 @@ public class ValoracionesBusinessImpl implements IValoracionesBusiness {
 
         return response;
     }
+    
+    
+public List<ValoracionesResponse> obtenerTodos() {
+		
+		List<ValoracionesResponse> valoracionesResponseLista = new ArrayList<>();
+		List<Valoraciones> valoracionesLista = valoracionesRepository.findAll();
+		
+		for(Valoraciones valoraciones: valoracionesLista) {
+			
+			ValoracionesResponse valoracionesResponse = new ValoracionesResponse();
+			
+			
+			valoracionesResponse.setIdValoraciones(valoraciones.getIdValoraciones());
+			valoracionesResponse.setIdRecetas(valoraciones.getIdRecetas());
+			valoracionesResponse.setValor(valoraciones.getValor());
+			
+			
+			valoracionesResponseLista.add(valoracionesResponse);	
+			
+		}
+		
+		return valoracionesResponseLista;
+	}
+    
 
     
     public void valoracionMedia(Integer idRecetas) {

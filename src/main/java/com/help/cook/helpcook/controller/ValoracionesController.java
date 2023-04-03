@@ -1,5 +1,7 @@
 package com.help.cook.helpcook.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.help.cook.helpcook.business.IValoracionesBusiness;
+import com.help.cook.helpcook.models.UsuariosResponse;
 import com.help.cook.helpcook.models.ValoracionesRequest;
 import com.help.cook.helpcook.models.ValoracionesResponse;
 
@@ -40,5 +43,11 @@ public class ValoracionesController {
 	public ValoracionesResponse modificar(@RequestBody ValoracionesRequest request, @PathVariable Integer id) {
 		return valoracionesBusiness.modificar(request, id);
 	}
+	
+	@GetMapping
+	public List<ValoracionesResponse> obtenerTodos(){
+		return valoracionesBusiness.obtenerTodos();
+	}
+	
 
 }

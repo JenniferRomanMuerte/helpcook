@@ -19,8 +19,7 @@ public class Usuarios {
 	private Integer id;
 
 	private String nick;
-
-	@Column(name = "contraseña")
+	
 	private String contrasenia;
 
 	private String nombre;

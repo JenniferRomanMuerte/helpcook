@@ -15,6 +15,6 @@ public interface RecetasRepository extends CrudRepository<Recetas, Integer>{
 	
 	@Query("SELECT r FROM Recetas r LEFT JOIN r.ingredientes i  WHERE ((:categoria is null or r.categoria like %:categoria%) " +
 			"AND (:idIngredientes is null or i.ingredientes.idIngredientes in (:idIngredientes)) " +
-			"AND (:idUsuario is null or r.id = :idUsuario ))")
+			"AND (:idUsuario is null or r.idUsuarios = :idUsuario ))")
 	Set<Recetas> findAdvance (@Param("categoria") String categoria, @Param ("idIngredientes") List<Integer> idIngredientes, @Param("idUsuario") Integer idUsuario);
 }

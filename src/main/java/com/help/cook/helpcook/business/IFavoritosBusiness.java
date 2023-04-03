@@ -18,6 +18,8 @@ public interface IFavoritosBusiness {
 
 	FavoritosResponse modificar(FavoritosRequest request, Integer id);
 	
-	List<FavoritosResponse> obtenerTodos(Integer IdUsuarios);
+	List<FavoritosResponse> obtenerTodos(Integer IdUsuario);
+
+	
 
 }

@@ -9,7 +9,7 @@ public class UsuariosRequest {
 
 	private String nick;
 	
-	private String contraseña;
+	private String contrasenia;
 
 	private String nombre;
 

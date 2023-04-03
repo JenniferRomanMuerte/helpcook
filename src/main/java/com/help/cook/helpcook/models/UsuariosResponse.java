@@ -11,7 +11,7 @@ public class UsuariosResponse {
 
     private String nick;
 
-    private String contraseña;
+    private String contrasenia;
 
     private String nombre;
 

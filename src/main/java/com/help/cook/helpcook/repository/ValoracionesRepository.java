@@ -9,7 +9,6 @@ import java.util.List;
 public interface ValoracionesRepository extends CrudRepository<Valoraciones, Integer>{
 
     List<Valoraciones> findAll();
-
-    
+ 
     List<Valoraciones> findByIdRecetas(Integer idReceta);
 }

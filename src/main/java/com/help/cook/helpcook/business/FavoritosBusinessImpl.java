@@ -85,11 +85,11 @@ public class FavoritosBusinessImpl implements IFavoritosBusiness {
 		return response;
 	}
 	
-	 public List <FavoritosResponse> obtenerTodos(Integer IdUsuarios) {
+	 public List <FavoritosResponse> obtenerTodos(Integer idUsuario) {
 		 
 		List<FavoritosResponse> favoritosResponseLista = new ArrayList<>(); //Creamos una lista que nos devolvera los favoritos a mostrar
 			
-		List<Favoritos> favoritosLista = favoritosRepository.findByUsuarios(IdUsuarios); //Creamos una lista que almacena todos los objetos de favoritos de la BBDD con ese Usuario
+		List<Favoritos> favoritosLista = favoritosRepository.findByUsuarios(idUsuario); //Creamos una lista que almacena todos los objetos de favoritos de la BBDD con ese Usuario
 			
 			
 			//Recorremos la lista

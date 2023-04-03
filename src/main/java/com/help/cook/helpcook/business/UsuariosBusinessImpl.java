@@ -28,7 +28,7 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
 
 
         usuarios.setNick(request.getNick());
-        usuarios.setContrasenia(request.getContraseña());
+        usuarios.setContrasenia(request.getContrasenia());
         usuarios.setNombre(request.getNombre());
         usuarios.setApellido(request.getApellido());
         usuarios.setEmail(request.getEmail());
@@ -39,7 +39,7 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
 
         response.setIdUsuarios(datoGuardado.getId());
         response.setNick(datoGuardado.getNick());
-        response.setContraseña(datoGuardado.getContrasenia());
+        response.setContrasenia(datoGuardado.getContrasenia());
         response.setNombre(datoGuardado.getNombre());
         response.setApellido(datoGuardado.getApellido());
         response.setEmail(datoGuardado.getEmail());
@@ -53,13 +53,16 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
     public UsuariosResponse obtener(Integer id) {
 
         UsuariosResponse response = new UsuariosResponse();
+        
         List<FavoritosResponse> favoritosResponseList = new ArrayList<>();
+        
         List<ValoracionesResponse> valoracionesResponseList = new ArrayList<>();
 
         Usuarios datoGuardado = usuariosRepository.findById(id).get();
+        
         response.setIdUsuarios(datoGuardado.getId());
         response.setNick(datoGuardado.getNick());
-        response.setContraseña(datoGuardado.getContrasenia());
+        response.setContrasenia(datoGuardado.getContrasenia());
         response.setNombre(datoGuardado.getNombre());
         response.setApellido(datoGuardado.getApellido());
         response.setEmail(datoGuardado.getEmail());
@@ -99,7 +102,7 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
         Usuarios usuario = usuariosRepository.findById(id).get();
 
         usuario.setNick(request.getNick());
-        usuario.setContrasenia(request.getContraseña());
+        usuario.setContrasenia(request.getContrasenia());
         usuario.setNombre(request.getNombre());
         usuario.setApellido(request.getApellido());
         usuario.setEmail(request.getEmail());
@@ -109,7 +112,7 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
 
         response.setIdUsuarios(datoModificado.getId());
         response.setNick(datoModificado.getNick());
-        response.setContraseña(datoModificado.getContrasenia());
+        response.setContrasenia(datoModificado.getContrasenia());
         response.setNombre(datoModificado.getNombre());
         response.setApellido(datoModificado.getApellido());
         response.setEmail(datoModificado.getEmail());
@@ -119,10 +122,34 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
     }
 	
 
-	/*public List<UsuariosResponse> obtenerTodos() {
+	public List<UsuariosResponse> obtenerTodos() {
+		
+		List<UsuariosResponse> usuariosResponseLista = new ArrayList<>();
+		
+		List<Usuarios> usuariosLista = usuariosRepository.findAll();
+		
+		for(Usuarios usuario: usuariosLista) {
+			
+			UsuariosResponse usuariosResponse = new UsuariosResponse();
+			
+			usuariosResponse.setIdUsuarios(usuario.getId());
+			usuariosResponse.setContrasenia(usuario.getContrasenia());
+			usuariosResponse.setNick(usuario.getNick());
+			usuariosResponse.setNombre(usuario.getNombre());
+			usuariosResponse.setApellido(usuario.getApellido());
+			usuariosResponse.setEmail(usuario.getEmail());
+			usuariosResponse.setFoto(usuario.getFoto());
+			
+			usuariosResponseLista.add(usuariosResponse);	
+			
+		}
+		
+		
 	
-		return null;
+		return usuariosResponseLista;
 	}
-	*/
+
+
+	
 
 }
