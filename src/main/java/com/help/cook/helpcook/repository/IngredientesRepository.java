@@ -11,7 +11,11 @@ import org.springframework.data.repository.query.Param;
 
 //Es la interface que accede a la base de datos
 //Extiende del CrudRepository y le indicamos la tabla y el tipo de la primaryKey
-
+/**
+ * Generada Interfaz de la tabla Ingredientes para acceder a la base datos
+ * @author Jennifer
+ * @version 1.0, 2022/11/05
+ */
 public interface  IngredientesRepository  extends CrudRepository<Ingredientes, Integer> {
 	
 	List<Ingredientes> findAll(); //Declaramos el método que usará Business

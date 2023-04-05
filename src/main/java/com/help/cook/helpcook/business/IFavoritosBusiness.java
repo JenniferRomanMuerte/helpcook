@@ -8,6 +8,12 @@ import com.help.cook.helpcook.models.IngredientesRequest;
 import com.help.cook.helpcook.models.IngredientesResponse;
 import com.help.cook.helpcook.repository.domain.Usuarios;
 
+/**
+ * Declarada interfaz Favoritos en el paquete Business,
+ * se definen los métodos que se usarán en la clase 
+ * @author Jennifer
+ * @version 1.0, 2022/11/05
+ */
 public interface IFavoritosBusiness {
 
 	FavoritosResponse crear(FavoritosRequest request);

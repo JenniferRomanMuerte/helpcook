@@ -7,6 +7,12 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
+
+/**
+ * Generada Interfaz de la tabla Favoritos para acceder a la base de datos
+ * @author Jennifer
+ * @version 1.0, 2022/11/05
+ */
 public interface FavoritosRepository extends CrudRepository<Favoritos, Integer>{
 	
 	@Query ("SELECT f FROM Favoritos f  LEFT JOIN f.usuarios u WHERE (:IdUsuarios is null or u.id = :IdUsuarios)")

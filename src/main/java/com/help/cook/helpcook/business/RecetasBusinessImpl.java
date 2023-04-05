@@ -23,6 +23,11 @@ import com.help.cook.helpcook.repository.domain.Recetas;
 import com.help.cook.helpcook.repository.domain.RecetasIngredientes;
 
 @Service
+/**
+ * Usamos ésta clase para subir al contexto de Spring la información
+ * @author Jennifer
+ * @version 1.0, 2022/11/05
+ */
 public class RecetasBusinessImpl implements IRecetasBusiness {
 
     @Autowired
@@ -35,6 +40,22 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
     private PasosRepository pasosRepository;
 
     @Override
+    /**
+	 * 
+	 * Método para crear una Receta
+	 * 
+	 * @param recetas. Creamos una receta a la cúal le asignaremos los valores que manda el usuario
+	 * @param response. Creamos la receta que vamos a devolver
+	 * Se asignan los valores recibidos del front(del objeto Recetas request) a los atributos de la receta 
+	 * @param datoGuardado. Creamos un nuevo objeto recetas (datoGuardado) asignandole la receta que hemos creado y guardamos en el repositorio
+	 * 
+	 * 
+	 * Asignamos a la receta que vamos a devolver(response) los valores de la receta (datoGuardo)  
+	 * 
+	 * Como uno de los atributos de la receta es ingredientes
+	 * 
+	 * @return. Devuelve la receta que hemos creado con los datos dados por el usuario
+	 */
     public RecetasResponse crear(RecetasRequest request) {
         Recetas recetas = new Recetas();
         RecetasResponse response = new RecetasResponse();
@@ -82,6 +103,7 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
             recetaPaso.setRecetas(recetasIntermedio); //Asignamos los valores de los atributos de éste objeto
             recetaPaso.setTipo(pasosRequest.getTipo());
             recetaPaso.setDescripcion(pasosRequest.getDescripcion());
+            recetaPaso.setFoto(pasosRequest.getFoto());
 
             pasosRepository.save(recetaPaso);//Lo guardamos en el repositorio
 
@@ -105,6 +127,22 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
     }
 
     @Override
+    /**
+	 * Método para recuperar los datos de una receta por su id
+	 * 
+	 * @param response. Creamos el objeto recetas que vamos a devolver
+	 * @param ingredientesResponseList. Creamos una lista para almacenar los ingredientes que posee la receta
+	 * @param pasosResponseList. Creamos una lista para almacenar los pasos que posee la receta
+	 * @param datoGuardado. Recuperamos la receta del repositorio y la almacenamos
+	 * Asignamos al objeto recetas a devolver los valores de la receta guardada
+	 * @param ingredientesResponse. Recorremos la lista de ingredientes de la receta guardada y almacenamos los datos de cada ingrediente en el ingrediente a devolver,
+	 * los añadimos a su lista
+	 * @param pasosResponse.Recorremos la lista de pasos de la receta guardada y almacenamos los datos de cada paso en el paso a devolver,
+	 * los añadimos a su lista
+	 * Añadimos a la receta a devolver la lista de ingredientes y la lista de pasos
+	 * @return. Devolvemos la receta
+	 * 
+	 */
     public RecetasResponse obtener(Integer id) {
 
         RecetasResponse response = new RecetasResponse();
@@ -139,6 +177,7 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
             PasosResponse pasosResponse = new PasosResponse();
             pasosResponse.setDescripcion(pasos.getDescripcion());
             pasosResponse.setTipo(pasos.getTipo());
+            pasosResponse.setFoto(pasos.getFoto());
 
 
             pasosResponseList.add(pasosResponse);
@@ -151,12 +190,27 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
         return response;
 
     }
-
+    
+    /**
+	 * Método para borrar una receta
+	 * Borramos de la base de datos la receta mediante su id
+	 */
     public void eliminar(Integer id) {
         recetasRepository.deleteById(id);
     }
 
     @Override
+    /**
+	 * Método para modificar una receta
+	 * 
+	 * @param response. Creamos la receta que se va a devolver
+	 * @param datoGuardado. Recuperamos la receta del repositorio mediante su id
+	 * Asignamos a la receta que hemos recuperado los valores dados por el usuario
+	 * @param datoModificado. Creamos una receta con los datos ya modificados y guardamos en el repositorio
+	 * Asignamos a la receta a devolver los nuevos datos
+	 * 
+	 * @return. Devolvemos la receta ya modificada.
+	 */
     public RecetasResponse modificar(RecetasRequest request, Integer id) {
 
         RecetasResponse response = new RecetasResponse();
@@ -188,7 +242,26 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
     }
 
     @Override
+    /**
+	 * Método para obtener todas las recetas de la base de datos
+	 * 
+	 * @param recetasResponseLista. Declaramos la lista de recetas que vamos a devolver
+	 * @param recetasLista. Declaramos una lista de recetas que almacenará las recetas del repositorio, 
+	 * pudiendo filtrar las recetas que nos devuelve dependiendo de los datos que mande el usuario, mostrando todas, sólo las que posean la categoria que mande el usuario,
+	 * las que contengan esos ingredientes o las que haya añadido un Usuario.
+	 * Recorremos la lista de recetas recuperando todas las recetas que necesitemos según los datos mandados
+	 * @param recetasResponse. Creamos la receta que vamos a devolver asignandole los valores que recuperamos de la receta guardada
+	 * 
+	 * @param ingredientesResponseList. Declaramos un lista de ingredientes para almacenar los ingredientes que posee la receta
+	 * @param pasosResponseList. Declaramos un lista de pasos para almacenar los pasos que posee la receta
+	 * 
+	 * Recorremos los ingredientes y los pasos de la receta los almacenamos en el objeto a devolver y lo añadimos a su respectiva lista añadiendola después a la receta a devolver
+	 * 
+	 * @return. Devolvemos la lista de las recetas que hemos recuperado del repositorio
+	 * 
+	 */
     public List<RecetasResponse> obtenerTodos(String categoria, List<Integer> idIngredientes, Integer idUsuario) {
+    	
         List<RecetasResponse> recetasResponseLista = new ArrayList();
 
         Set<Recetas> recetasLista = recetasRepository.findAdvance(categoria, idIngredientes, idUsuario);
@@ -196,6 +269,7 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
         for (Recetas receta : recetasLista) {
             RecetasResponse recetasResponse = new RecetasResponse();
             List<IngredientesResponse> ingredientesResponseList = new ArrayList<>();
+            List<PasosResponse> pasosResponseList = new ArrayList<>();
 
             recetasResponse.setIdRecetas(receta.getIdRecetas());
             recetasResponse.setIdUsuarios(receta.getIdUsuarios());
@@ -218,6 +292,18 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
             }
             recetasResponse.setIngredientesResponse(ingredientesResponseList);
             recetasResponseLista.add(recetasResponse);
+            
+            for (Pasos paso : receta.getPasos()) {
+                PasosResponse pasosResponse = new PasosResponse();
+                pasosResponse.setIdPasos(paso.getIdPasos());
+                pasosResponse.setTipo(paso.getTipo());
+                pasosResponse.setDescripcion(paso.getDescripcion());
+                pasosResponse.setFoto(paso.getFoto());
+                pasosResponseList.add(pasosResponse);
+            }
+            recetasResponse.setPasosResponse(pasosResponseList);
+            recetasResponseLista.add(recetasResponse);
+            
         }
 
         return recetasResponseLista;

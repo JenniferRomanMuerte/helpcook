@@ -13,6 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+/**
+ * Usamos ésta clase para subir al contexto de Spring la información
+ * @author Jennifer
+ * @version 1.0, 2022/11/05
+ */
 public class UsuariosBusinessImpl implements IUsuariosBusiness {
 
     @Autowired
@@ -20,6 +25,18 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
 
 
     @Override
+    /**
+	 * 
+	 * Método para crear un usuario
+	 * 
+	 * @param ususarios. Creamos un usuario al cúal le asignaremos los valores que manda el usuario
+	 * @param response. Creamos el usuario que vamos a devolver
+	 * Se asignan los valores recibidos del front(del objeto usuarios request) a los atributos del usuario
+	 * @param datoGuardado. Creamos un nuevo objeto usuarios (datoGuardado) asignandole el usuario que hemos creado y guardado en el repositorio
+	 * Asignamos al usuario que vamos a devolver(response) los valores del usuario (datoGuardo)  
+	 * 
+	 * @return. Devuelve el usuario que hemos creado con los datos dados por el usuario
+	 */
     public UsuariosResponse crear(UsuariosRequest request) {
 
         Usuarios usuarios = new Usuarios();
@@ -50,6 +67,26 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
 
 
     @Override
+    /**
+	 * Método para recuperar los datos de un usuario por su id
+	 * 
+	 * @param respònse. Creamos el objeto usuario que vamos a devolver
+	 * @param datoGuardado. Recuperamos el usuario por su id del repositorio y lo almacenamos
+	 * Asignamos al usuario a devolver los valores del usuario guardado
+	 * 
+	 * @param favoritosResponseList. Creamos una lista para almacenar los favoritos que tiene guardado el usuario
+	 * @favoritos. Recorremos la lista de favoritos del usuario guardado en el repositorio, y los guardamos
+	 * @favoritosResponse. Asignamos los valores del favorito que acabamos de recuperar y lo metemos en la lista de Favoritos que vamos a devolver
+	 * Asignamosa los favoritos del Usuario que vamos a devolver la lista de favoritos 
+	 * 
+	 * @param valoracionesResponseList. Creamos una lista para almacenar las valoraciones que tiene guardado el usuario
+	 * @param valoraciones. Recorremos la lista de valoraciones del usuario guardado en el repositorio, y los guardamos
+	 * @param valoracionesResponse. Asignamos los valores de las valoraciones que acabamos de recuperar y lo metemos en la lista de Valoraciones que vamos a devolver
+	 * Asignamos las valoraciones del Usuario que vamos a devolver la lista de valoraciones 
+	 * 
+	 * @return. Devolvemos el usuario
+	 * 
+	 */
     public UsuariosResponse obtener(Integer id) {
 
         UsuariosResponse response = new UsuariosResponse();
@@ -88,13 +125,28 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
         return response;
     }
 
-
+    /**
+	 * Método para borrar un usuario
+	 * Borramos de la base de datos el usuario mediante su id
+	 */
     public void eliminar(Integer id) {
         usuariosRepository.deleteById(id);
 
     }
 
 
+    
+    /**
+	 * Método para modificar los valores de un usuario
+	 * 
+	 * @param response. Creamos el usuario que se va a devolver
+	 * @param datoGuardado. Recuperamos el usuario del repositorio mediante su id
+	 * Asignamos al usuario que hemos recuperado los valores dados por el usuario
+	 * @param datoModificado. Creamos un usuario con los datos ya modificados y guardamos en el repositorio
+	 * Asignamos al usuario a devolver los nuevos datos
+	 * 
+	 * @return. Devolvemos el usuario ya modificado.
+	 */
     public UsuariosResponse modificar(UsuariosRequest request, Integer id) {
 
         UsuariosResponse response = new UsuariosResponse();
@@ -121,7 +173,18 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
         return response;
     }
 	
-
+    /**
+	 * Método para obtener todos los usuarios de la base de datos
+	 * 
+	 * @param usuariosResponseLista. Declaramos la lista de usuarios que vamos a devolver
+	 * @param usuariosLista. Declaramos una lista de usuarios que almacenará los usuarios del repositorio
+	 * 
+	 * Recorremos la lista de usuarios recuperando todos los usuarios
+	 * @param usuariosResponse. Creamos el usuario a devolver para almacenar los valores del usuario del repositorio y lo añadimos a la lista que vamos a devolver
+	 * 
+	 * @return. Devolvemosla lista de los usuarios que hemos recuperado del repositorio
+	 * 
+	 */
 	public List<UsuariosResponse> obtenerTodos() {
 		
 		List<UsuariosResponse> usuariosResponseLista = new ArrayList<>();

@@ -8,7 +8,11 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import com.help.cook.helpcook.repository.domain.Recetas;
-
+/**
+ * Generada Interfaz de la tabla Recetas para acceder a la base datos
+ * @author Hugo
+ *
+ */
 public interface RecetasRepository extends CrudRepository<Recetas, Integer>{
 	
 	List<Recetas> findAll();

@@ -10,9 +10,17 @@ import javax.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
+
+
 @Getter
 @Setter
 @Entity
+/** 
+ * Clase de la tabla Valoraciones de BBDD Helpcook
+ * @author Jennifer
+ * @version 1.0, 2022/11/05
+ * 
+ */
 public class Valoraciones {
 	
 	@Id
@@ -24,9 +32,10 @@ public class Valoraciones {
 	private Integer valor;
 
 	
+	
+	
+	
 	//Declaramos el objeto Usuarios para la relación entre las tablas
-	
-	
 	@ManyToOne //Le indicamos que es una relación de muchos a uno
 	@JoinColumn(name="ID_Usuarios") //Le indicamos que use la columna Id para la relación
 	private Usuarios usuarios;

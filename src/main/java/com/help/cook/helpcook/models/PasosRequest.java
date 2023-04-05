@@ -13,4 +13,6 @@ public class PasosRequest {
 
 	private String descripcion;
 
+	private String foto;
+
 }

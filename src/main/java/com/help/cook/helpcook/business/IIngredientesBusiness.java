@@ -8,7 +8,13 @@ import com.help.cook.helpcook.models.IngredientesResponse;
 
 
 //CREACIÓN DE LA INTERFACE PARA QUE PUEDAN LLAMARLAS OTRAS CLASES
-
+/**
+ * Declarada interfaz Ingredientes en el paquete Business,
+ * se definen los métodos que se usarán en la clase 
+ * @author Jennifer
+ * @version 1.0, 2022/11/05
+ *
+ */
 public interface IIngredientesBusiness {
 
 	// Definimos los métodos públicos para generar el CRUD

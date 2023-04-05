@@ -8,4 +8,6 @@ public class RecetasPasosRequest {
 	private Integer tipo;
 	
 	private String descripcion;
+	
+	private String foto;
 }

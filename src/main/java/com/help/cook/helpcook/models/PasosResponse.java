@@ -17,6 +17,8 @@ public class PasosResponse {
 
 	private String descripcion;
 	
+	private String foto;
+	
 	private List<PasosResponse> pasosResponseLista;
 	
 	private List<Pasos> pasosLista;
