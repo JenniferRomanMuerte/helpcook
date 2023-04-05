@@ -31,7 +31,7 @@ public class Recetas {
 	
 	private String foto;
 	
-	private String tipo;
+	private String titulo;
 	
 	private String categoria;
 	

@@ -20,7 +20,7 @@ public class RecetasRequest {
 	
 	private String foto;
 	
-	private String tipo;
+	private String titulo;
 	
 	private String categoria;
 

@@ -64,7 +64,7 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
         recetas.setDescripcion(request.getDescripcion());
         recetas.setTiempo(request.getTiempo());
         recetas.setFoto(request.getFoto());
-        recetas.setTipo(request.getTipo());
+        recetas.setTitulo(request.getTitulo());
         recetas.setIdUsuarios(request.getIdUsuarios());
         recetas.setCategoria(request.getCategoria());
         recetas.setValoracionMedia(0F);
@@ -115,7 +115,7 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
         response.setDescripcion(datoGuardado.getDescripcion());
         response.setTiempo(datoGuardado.getTiempo());
         response.setFoto(datoGuardado.getFoto());
-        response.setTipo(datoGuardado.getTipo());
+        response.setTitulo(datoGuardado.getTitulo());
         response.setCategoria(datoGuardado.getCategoria());
         response.setFechaAlta(datoGuardado.getFechaAlta().toLocalDateTime().toLocalDate());
         response.setValoracionMedia(datoGuardado.getValoracionMedia());
@@ -157,7 +157,7 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
         response.setDescripcion(datoGuardado.getDescripcion());
         response.setTiempo(datoGuardado.getTiempo());
         response.setFoto(datoGuardado.getFoto());
-        response.setTipo(datoGuardado.getTipo());
+        response.setTitulo(datoGuardado.getTitulo());
         response.setCategoria(datoGuardado.getCategoria());
         response.setFechaAlta(datoGuardado.getFechaAlta().toLocalDateTime().toLocalDate());
         response.setValoracionMedia(datoGuardado.getValoracionMedia());
@@ -220,7 +220,7 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
         datoGuardado.setDescripcion(request.getDescripcion());
         datoGuardado.setTiempo(request.getTiempo());
         datoGuardado.setFoto(request.getFoto());
-        datoGuardado.setTipo(request.getTipo());
+        datoGuardado.setTitulo(request.getTitulo());
         datoGuardado.setCategoria(request.getCategoria());
         datoGuardado.setFechaAlta(Timestamp.valueOf(request.getFechaAlta().atStartOfDay()));
         datoGuardado.setValoracionMedia(request.getValoracionMedia());
@@ -232,7 +232,7 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
         response.setDescripcion(datoModificado.getDescripcion());
         response.setTiempo(datoModificado.getTiempo());
         response.setFoto(datoModificado.getFoto());
-        response.setTipo(datoModificado.getTipo());
+        response.setTitulo(datoModificado.getTitulo());
         response.setCategoria(datoModificado.getCategoria());
         response.setFechaAlta(datoModificado.getFechaAlta().toLocalDateTime().toLocalDate());
         response.setValoracionMedia(datoModificado.getValoracionMedia());
@@ -276,7 +276,7 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
             recetasResponse.setDescripcion(receta.getDescripcion());
             recetasResponse.setTiempo(receta.getTiempo());
             recetasResponse.setFoto(receta.getFoto());
-            recetasResponse.setTipo(receta.getTipo());
+            recetasResponse.setTitulo(receta.getTitulo());
             recetasResponse.setCategoria(receta.getCategoria());
             recetasResponse.setFechaAlta(receta.getFechaAlta().toLocalDateTime().toLocalDate());
             recetasResponse.setValoracionMedia(receta.getValoracionMedia());
