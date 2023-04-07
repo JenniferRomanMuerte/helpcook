@@ -14,7 +14,7 @@ import com.help.cook.helpcook.repository.domain.Pasos;
 
 @Service
 /**
- * Usamos ésta clase para subir al contexto de Spring la información
+ * Clase con la lógica del Negocio
  * @author Hugo
  * @version 1.0, 2022/11/05
  */

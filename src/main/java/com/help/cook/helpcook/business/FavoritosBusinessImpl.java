@@ -26,18 +26,6 @@ public class FavoritosBusinessImpl implements IFavoritosBusiness {
 	@Override
 	/**
 	 * 
-	 * Método para crear un favorito
-	 * 
-	 * 
-	 * @param favoritos. Creamos un favorito al cúal le asignaremos los valores que manda el usuario
-	 * @param response. Creamos el favorito que vamos a devolver
-	 * @param usuarios. Declaramos el usuario al cúal le asigamos el id que nos manda el usuario,
-	 * Se asignan los valores recibidos del front(del objeto favoritos request) a los atributos del favoritos
-	 * @param datoGuardado. Creamos este favorito con los datos del favorito que guardamos en el respositorio
-	 * Asignamos al favorito a devolver los datos del favorito guardado en el repositorio
-	 * 
-	 * @return. Devuelve el favorito que acabamos de generar
-	 * 
 	 */
 	public FavoritosResponse crear(FavoritosRequest request) {
 

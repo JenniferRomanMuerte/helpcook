@@ -16,6 +16,7 @@ import com.help.cook.helpcook.models.IngredientesResponse;
 
 @RestController //Indica que es un controlador de tipo rest
 @RequestMapping("ingredientes") //Le indica la ruta donde va a llamar el front
+
 public class IngredientesController {
 
 	@Autowired //Le indicamos que recupera la información del contexto de Spring de ésta Interface
@@ -23,6 +24,11 @@ public class IngredientesController {
 
 
 	@PostMapping //Para crear
+	/**
+	 * Método de comunicacion con el Front para crear un ingrediente
+	 * @param request
+	 * @return
+	 */
 	public IngredientesResponse crear(@RequestBody  IngredientesRequest request) { //Le indicamos que coja el cuerpo del mensaje del objeto de entrada
 
 		return ingredientesBusiness.crear(request); //Llamamos al método pasandole el objeto de entrada

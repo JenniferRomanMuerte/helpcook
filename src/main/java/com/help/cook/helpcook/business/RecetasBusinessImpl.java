@@ -52,7 +52,8 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
 	 * 
 	 * Asignamos a la receta que vamos a devolver(response) los valores de la receta (datoGuardo)  
 	 * 
-	 * Como uno de los atributos de la receta es ingredientes
+	 * creamos Ingrediente intermedio y receta intermedio oparea poder relacionarlos con sus id y acceder a la cantidad de cada ingredciente deperndiendo de la recetq,
+	 * 
 	 * 
 	 * @return. Devuelve la receta que hemos creado con los datos dados por el usuario
 	 */
@@ -260,53 +261,76 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
 	 * @return. Devolvemos la lista de las recetas que hemos recuperado del repositorio
 	 * 
 	 */
-    public List<RecetasResponse> obtenerTodos(String categoria, List<Integer> idIngredientes, Integer idUsuario) {
+    public List<RecetasResponse> obtenerTodos(String categoria, List<Integer> idIngredientes, Integer idUsuario, String ordenacion) {
     	
-        List<RecetasResponse> recetasResponseLista = new ArrayList();
-
+    	 List<RecetasResponse> recetasResponseLista = new ArrayList();
+    	 
+        if(ordenacion==null){
         Set<Recetas> recetasLista = recetasRepository.findAdvance(categoria, idIngredientes, idUsuario);
-
-        for (Recetas receta : recetasLista) {
-            RecetasResponse recetasResponse = new RecetasResponse();
-            List<IngredientesResponse> ingredientesResponseList = new ArrayList<>();
-            List<PasosResponse> pasosResponseList = new ArrayList<>();
-
-            recetasResponse.setIdRecetas(receta.getIdRecetas());
-            recetasResponse.setIdUsuarios(receta.getIdUsuarios());
-            recetasResponse.setDescripcion(receta.getDescripcion());
-            recetasResponse.setTiempo(receta.getTiempo());
-            recetasResponse.setFoto(receta.getFoto());
-            recetasResponse.setTitulo(receta.getTitulo());
-            recetasResponse.setCategoria(receta.getCategoria());
-            recetasResponse.setFechaAlta(receta.getFechaAlta().toLocalDateTime().toLocalDate());
-            recetasResponse.setValoracionMedia(receta.getValoracionMedia());
-            recetasResponse.setComensales(receta.getComensales());
-
-
-            for (RecetasIngredientes ingrediente : receta.getIngredientes()) {
-                IngredientesResponse ingredientesResponse = new IngredientesResponse();
-                ingredientesResponse.setIdIngredientes(ingrediente.getIngredientes().getIdIngredientes());
-                ingredientesResponse.setNombre(ingrediente.getIngredientes().getNombre());
-                ingredientesResponse.setTipo(ingrediente.getIngredientes().getTipo());
-                ingredientesResponseList.add(ingredientesResponse);
-            }
-            recetasResponse.setIngredientesResponse(ingredientesResponseList);
-            recetasResponseLista.add(recetasResponse);
+        recetasResponseLista= recuperarReceta(recetasLista);
+       
+        }else if(ordenacion.equals("Recetas mejor valoradas")) {
+        	Set<Recetas> recetasLista = recetasRepository.findByValoradas();
+        	 recetasResponseLista= recuperarReceta(recetasLista);
+        	
+        	
+        }else if(ordenacion.equals("Recetas más recientes")) {
+        	Set<Recetas> recetasLista = recetasRepository.findByFechaAlta();
+        	 recetasResponseLista= recuperarReceta(recetasLista);
             
-            for (Pasos paso : receta.getPasos()) {
-                PasosResponse pasosResponse = new PasosResponse();
-                pasosResponse.setIdPasos(paso.getIdPasos());
-                pasosResponse.setTipo(paso.getTipo());
-                pasosResponse.setDescripcion(paso.getDescripcion());
-                pasosResponse.setFoto(paso.getFoto());
-                pasosResponseList.add(pasosResponse);
-            }
-            recetasResponse.setPasosResponse(pasosResponseList);
-            recetasResponseLista.add(recetasResponse);
-            
-        }
+        }    
 
         return recetasResponseLista;
     }
 
+    public List<RecetasResponse> recuperarReceta(Set<Recetas> recetasLista ) {
+    	
+    	
+    	 List<RecetasResponse> recetasResponseLista = new ArrayList();
+    	 
+    	 for (Recetas receta : recetasLista) {
+    		 
+             RecetasResponse recetasResponse = new RecetasResponse();
+             
+             List<IngredientesResponse> ingredientesResponseList = new ArrayList<>();
+             List<PasosResponse> pasosResponseList = new ArrayList<>();
+
+             recetasResponse.setIdRecetas(receta.getIdRecetas());
+             recetasResponse.setIdUsuarios(receta.getIdUsuarios());
+             recetasResponse.setDescripcion(receta.getDescripcion());
+             recetasResponse.setTiempo(receta.getTiempo());
+             recetasResponse.setFoto(receta.getFoto());
+             recetasResponse.setTitulo(receta.getTitulo());
+             recetasResponse.setCategoria(receta.getCategoria());
+             recetasResponse.setFechaAlta(receta.getFechaAlta().toLocalDateTime().toLocalDate());
+             recetasResponse.setValoracionMedia(receta.getValoracionMedia());
+             recetasResponse.setComensales(receta.getComensales());
+
+
+             for (RecetasIngredientes ingrediente : receta.getIngredientes()) {
+                 IngredientesResponse ingredientesResponse = new IngredientesResponse();
+                 ingredientesResponse.setIdIngredientes(ingrediente.getIngredientes().getIdIngredientes());
+                 ingredientesResponse.setNombre(ingrediente.getIngredientes().getNombre());
+                 ingredientesResponse.setTipo(ingrediente.getIngredientes().getTipo());
+                 ingredientesResponse.setCantidad(ingrediente.getCantidad());
+                 ingredientesResponseList.add(ingredientesResponse);
+             }
+             recetasResponse.setIngredientesResponse(ingredientesResponseList);
+      
+             for (Pasos paso : receta.getPasos()) {
+                 PasosResponse pasosResponse = new PasosResponse();
+                 pasosResponse.setIdPasos(paso.getIdPasos());
+                 pasosResponse.setTipo(paso.getTipo());
+                 pasosResponse.setDescripcion(paso.getDescripcion());
+                 pasosResponse.setFoto(paso.getFoto());
+                 pasosResponseList.add(pasosResponse);
+             }
+             
+             recetasResponse.setPasosResponse(pasosResponseList);
+             
+             recetasResponseLista.add(recetasResponse);
+             
+         }
+    	 return recetasResponseLista;
+    }
 }

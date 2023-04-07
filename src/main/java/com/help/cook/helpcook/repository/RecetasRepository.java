@@ -21,4 +21,11 @@ public interface RecetasRepository extends CrudRepository<Recetas, Integer>{
 			"AND (:idIngredientes is null or i.ingredientes.idIngredientes in (:idIngredientes)) " +
 			"AND (:idUsuario is null or r.idUsuarios = :idUsuario ))")
 	Set<Recetas> findAdvance (@Param("categoria") String categoria, @Param ("idIngredientes") List<Integer> idIngredientes, @Param("idUsuario") Integer idUsuario);
+
+	
+	@Query("SELECT r FROM Recetas r ORDER BY valoracionMedia")
+	Set<Recetas> findByValoradas();
+	
+	@Query("SELECT r FROM Recetas r ORDER BY fechaAlta DESC")
+	Set<Recetas> findByFechaAlta();
 }

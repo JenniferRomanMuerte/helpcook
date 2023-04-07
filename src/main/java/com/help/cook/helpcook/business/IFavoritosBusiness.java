@@ -22,6 +22,13 @@ public interface IFavoritosBusiness {
 
 	void eliminar(Integer id);
 
+	
+	/**
+	 * 
+	 * @param request
+	 * @param id
+	 * @return
+	 */
 	FavoritosResponse modificar(FavoritosRequest request, Integer id);
 	
 	List<FavoritosResponse> obtenerTodos(Integer IdUsuario);

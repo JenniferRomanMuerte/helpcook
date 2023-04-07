@@ -48,8 +48,8 @@ public class RecetasController {
 	}
 	
 	@GetMapping
-	public List<RecetasResponse> obtenerTodos(@RequestParam(required = false) String categoria,@RequestParam(required = false) List<Integer> idIngredientes, @RequestParam(required = false) Integer idUsuario ) {
-		return recetasBusiness.obtenerTodos(categoria,idIngredientes,idUsuario);
+	public List<RecetasResponse> obtenerTodos(@RequestParam(required = false) String categoria,@RequestParam(required = false) List<Integer> idIngredientes, @RequestParam(required = false) Integer idUsuario,@RequestParam(required = false) String ordenacion ) {
+		return recetasBusiness.obtenerTodos(categoria,idIngredientes,idUsuario,ordenacion);
 	}
 	
 	
