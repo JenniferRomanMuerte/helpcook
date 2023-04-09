@@ -17,7 +17,7 @@ import java.util.List;
 
 @Service
 /**
- * Usamos ésta clase para subir al contexto de Spring la información
+ * Clase con la lógica del Negocio
  * @author Jennifer
  * @version 1.0, 2022/11/05
  */

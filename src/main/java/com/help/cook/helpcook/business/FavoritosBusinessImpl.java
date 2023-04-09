@@ -14,7 +14,7 @@ import com.help.cook.helpcook.repository.domain.Favoritos;
 
 @Service
 /**
- * Usamos ésta clase para subir al contexto de Spring la información
+ * Clase con la lógica del Negocio
  * @author Jennifer
  * @version 1.0, 2022/11/05
  */
@@ -23,10 +23,8 @@ public class FavoritosBusinessImpl implements IFavoritosBusiness {
 	@Autowired
 	private FavoritosRepository favoritosRepository;
 
+	
 	@Override
-	/**
-	 * 
-	 */
 	public FavoritosResponse crear(FavoritosRequest request) {
 
 		Favoritos favoritos = new Favoritos();
@@ -53,16 +51,6 @@ public class FavoritosBusinessImpl implements IFavoritosBusiness {
 	
 	
 	@Override
-	/**
-	 * Método para recuperar los datos de un favorito por su id
-	 * 
-	 * @param respònse. Creamos el objeto favoritos que vamos a devolver
-	 * @param datoGuardado. Recuperamos el objeto favotito del repositorio y lo almacenamos,
-	 * Asignamos al favorito a devolver los valores del favorito guardado
-	 * 
-	 * @return. Devolvemos el favorito
-	 * 
-	 */
 	public FavoritosResponse obtener(Integer id) {
 
 		FavoritosResponse response = new FavoritosResponse(); // Creamos el objeto que devolveremos al front
@@ -77,11 +65,8 @@ public class FavoritosBusinessImpl implements IFavoritosBusiness {
 		return response;
 	}
 
+	
 	@Override
-	/**
-	 * Método para borrar un favorito
-	 * Borramos de la base de datos el favorito mediante su id
-	 */
 	public void eliminar(Integer id) {
 
 		favoritosRepository.deleteById(id);
@@ -89,17 +74,6 @@ public class FavoritosBusinessImpl implements IFavoritosBusiness {
 	}
 
 	@Override
-	/**
-	 * Método para modificar un favorito
-	 * 
-	 * @param response. Creamos el favorito que se va a devolver
-	 * @param datoGuardado. Recuperamos el favorito del repositorio mediante su id
-	 * Asignamos al favorito que hemos recuperado los nuevos valores dados por el usuario
-	 * @param datoModificado. Creamos un favorito con los datos ya modificados y guardados en el repositorio
-	 * Asignamos al favorito a devolver los nuevos datos
-	 * 
-	 * @return. Devolvemos el favorito ya modificado.
-	 */
 	public FavoritosResponse modificar(FavoritosRequest request, Integer id) {
 
 		FavoritosResponse response = new FavoritosResponse();
@@ -119,17 +93,9 @@ public class FavoritosBusinessImpl implements IFavoritosBusiness {
 
 		return response;
 	}
-	/**
-	 * Método para obtener todos los favoritos un usuario de la base de datos
-	 * 
-	 * @param favoritosResponseLista. Declaramos la lista de favoritos que vamos a devolver
-	 * @param favoritosLista. Declaramos una lista de favoritos que almacenará los favoritos que tenga un usuario. 
-	 * Recorremos la lista de favoritos recuperando todos los favoritos
-	 * @param favoritosResponse. Creamos el favorito para almacenar los valores del favorito del repositorio y lo añadimos a la lista que vamos a devolver
-	 * 
-	 * @return. Devolvemos la lista de los favoritos que hemos recuperado del repositorio
-	 * 
-	 */
+
+	@Override
+	
 	 public List <FavoritosResponse> obtenerTodos(Integer idUsuario) {
 		 
 		List<FavoritosResponse> favoritosResponseLista = new ArrayList<>(); //Creamos una lista que nos devolvera los favoritos a mostrar

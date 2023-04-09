@@ -7,6 +7,12 @@ import java.util.List;
 import lombok.Data;
 
 @Data
+/**
+ * Clase para la devolución del objeto Recetas
+ * @author Jennifer
+ * @version 1.0, 2022/11/05
+ *
+ */
 public class RecetasResponse {
 
     private Integer idRecetas;

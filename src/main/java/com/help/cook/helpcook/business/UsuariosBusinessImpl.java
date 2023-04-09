@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 /**
- * Usamos ésta clase para subir al contexto de Spring la información
+ * Clase con la lógica del Negocio
  * @author Jennifer
  * @version 1.0, 2022/11/05
  */
@@ -124,6 +124,44 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
 
         return response;
     }
+    
+    
+    
+    public UsuariosResponse validarUsuario(String email, String contrasenia) {
+    	
+    	UsuariosResponse response = new UsuariosResponse();
+    	
+    	 List<FavoritosResponse> favoritosResponseList = new ArrayList<>();
+         List<ValoracionesResponse> valoracionesResponseList = new ArrayList<>();
+    	
+    	Usuarios datoGuardado = usuariosRepository.findByEmailAndContrasenia(email,contrasenia);
+    	
+    	  response.setIdUsuarios(datoGuardado.getId());
+          response.setNick(datoGuardado.getNick());
+          response.setContrasenia(datoGuardado.getContrasenia());
+          response.setNombre(datoGuardado.getNombre());
+          response.setApellido(datoGuardado.getApellido());
+          response.setEmail(datoGuardado.getEmail());
+          response.setFoto(datoGuardado.getFoto());
+
+          for (Favoritos favoritos : datoGuardado.getFavoritos()) {
+              FavoritosResponse favoritosResponse = new FavoritosResponse();
+              favoritosResponse.setDescripcion(favoritos.getDescripcion());
+              favoritosResponseList.add(favoritosResponse);
+          }
+
+          response.setFavoritos(favoritosResponseList);
+
+          for(Valoraciones valoraciones: datoGuardado.getValoraciones()) {
+              ValoracionesResponse valoracionesResponse = new ValoracionesResponse();
+              valoracionesResponse.setValor(valoraciones.getValor());
+              valoracionesResponseList.add(valoracionesResponse);
+          }
+
+          response.setValoraciones(valoracionesResponseList);
+
+		return response;
+    }
 
     /**
 	 * Método para borrar un usuario
@@ -211,8 +249,6 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
 	
 		return usuariosResponseLista;
 	}
-
-
 	
 
 }

@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 /**
- * Clase para la devolución del objeto Favoritos
- * @author jenni
+ * Clase para la devolución del objeto Favorito
+ * @author Jennifer
  * @version 1.0, 2022/11/05
  *
  */

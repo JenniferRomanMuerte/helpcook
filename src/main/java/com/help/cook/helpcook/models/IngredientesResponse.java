@@ -13,7 +13,7 @@ import lombok.Data;
 @Data //Anotación para generar los getters & setters y constructor de la clase
 /**
  * Clase para la devolución del objeto Ingredientes
- * @author jenni
+ * @author Jennifer
  * @version 1.0, 2022/11/05
  */
 public class IngredientesResponse {

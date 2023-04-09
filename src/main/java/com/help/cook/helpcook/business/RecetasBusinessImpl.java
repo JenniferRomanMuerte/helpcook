@@ -24,7 +24,7 @@ import com.help.cook.helpcook.repository.domain.RecetasIngredientes;
 
 @Service
 /**
- * Usamos ésta clase para subir al contexto de Spring la información
+ * Clase con la lógica del Negocio
  * @author Jennifer
  * @version 1.0, 2022/11/05
  */
@@ -40,23 +40,6 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
     private PasosRepository pasosRepository;
 
     @Override
-    /**
-	 * 
-	 * Método para crear una Receta
-	 * 
-	 * @param recetas. Creamos una receta a la cúal le asignaremos los valores que manda el usuario
-	 * @param response. Creamos la receta que vamos a devolver
-	 * Se asignan los valores recibidos del front(del objeto Recetas request) a los atributos de la receta 
-	 * @param datoGuardado. Creamos un nuevo objeto recetas (datoGuardado) asignandole la receta que hemos creado y guardamos en el repositorio
-	 * 
-	 * 
-	 * Asignamos a la receta que vamos a devolver(response) los valores de la receta (datoGuardo)  
-	 * 
-	 * creamos Ingrediente intermedio y receta intermedio oparea poder relacionarlos con sus id y acceder a la cantidad de cada ingredciente deperndiendo de la recetq,
-	 * 
-	 * 
-	 * @return. Devuelve la receta que hemos creado con los datos dados por el usuario
-	 */
     public RecetasResponse crear(RecetasRequest request) {
         Recetas recetas = new Recetas();
         RecetasResponse response = new RecetasResponse();
@@ -128,22 +111,6 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
     }
 
     @Override
-    /**
-	 * Método para recuperar los datos de una receta por su id
-	 * 
-	 * @param response. Creamos el objeto recetas que vamos a devolver
-	 * @param ingredientesResponseList. Creamos una lista para almacenar los ingredientes que posee la receta
-	 * @param pasosResponseList. Creamos una lista para almacenar los pasos que posee la receta
-	 * @param datoGuardado. Recuperamos la receta del repositorio y la almacenamos
-	 * Asignamos al objeto recetas a devolver los valores de la receta guardada
-	 * @param ingredientesResponse. Recorremos la lista de ingredientes de la receta guardada y almacenamos los datos de cada ingrediente en el ingrediente a devolver,
-	 * los añadimos a su lista
-	 * @param pasosResponse.Recorremos la lista de pasos de la receta guardada y almacenamos los datos de cada paso en el paso a devolver,
-	 * los añadimos a su lista
-	 * Añadimos a la receta a devolver la lista de ingredientes y la lista de pasos
-	 * @return. Devolvemos la receta
-	 * 
-	 */
     public RecetasResponse obtener(Integer id) {
 
         RecetasResponse response = new RecetasResponse();
@@ -192,10 +159,7 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
 
     }
     
-    /**
-	 * Método para borrar una receta
-	 * Borramos de la base de datos la receta mediante su id
-	 */
+  
     public void eliminar(Integer id) {
         recetasRepository.deleteById(id);
     }

@@ -7,6 +7,12 @@ import com.help.cook.helpcook.repository.domain.Pasos;
 import lombok.Data;
 
 @Data
+/**
+ * Clase para la devolución del objeto Pasos
+ * @author Hugo
+ * @version 1.0, 2022/11/05
+ *
+ */
 public class PasosResponse {
 
 	private Integer idPasos;

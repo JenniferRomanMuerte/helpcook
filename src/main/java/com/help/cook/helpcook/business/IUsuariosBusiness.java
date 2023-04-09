@@ -27,6 +27,8 @@ public interface IUsuariosBusiness {
 	UsuariosResponse modificar(UsuariosRequest request, Integer id);
 	
 	List<UsuariosResponse> obtenerTodos();
+
+	UsuariosResponse validarUsuario(String email, String contrasenia);
 	
 
 

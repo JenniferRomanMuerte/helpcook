@@ -6,6 +6,11 @@ import lombok.Data;
 //REQUEST ES PARA LA ENTRADA DE DATOS
 
 @Data //Anotación para generar los getters & setters y constructor de la clase
+/**
+ * Objeto para recibir datos del front
+ * @author Jennifer
+ *@version 1.0, 2022/11/05
+ */
 public class IngredientesRequest {
 
 	private Integer idIngredientes;
