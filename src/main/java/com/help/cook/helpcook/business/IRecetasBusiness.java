@@ -14,22 +14,18 @@ import com.help.cook.helpcook.models.RecetasResponse;
  */
 public interface IRecetasBusiness {
 	
-	
 	/**
-	 * Método para crear una Receta,
-	 * Asignamos los valores a una nueva receta, la guardamos en el repositorio,
-	 * asignamos los valores al objeto a devolver
+	 * Método para crear una Receta
 	 * @param request. Recibimos la receta con los valores dados por el usuario.
-	 * @return.Devolvemos la Receta creada con los valores dados por el usuario
+	 * @return Devolvemos la Receta creada con los valores dados por el usuario
 	 */
 	RecetasResponse crear(RecetasRequest request);
 	
 	
 	/**
 	 * Método para recuperar los datos de una receta por su id,
-	 * recuperamos la receta del repositorio, asignamos los valores al objeto a devolver
 	 * @param id. Recibimos el id de la receta que se quiere obtener
-	 * @return
+	 * @return obtenemos la receta solicitada
 	 */
 	RecetasResponse obtener(Integer id);
 	
@@ -40,10 +36,26 @@ public interface IRecetasBusiness {
 	 */
 	void eliminar(Integer id);
 	
+	
+	/**
+	 * Método para modificar una receta
+	 * @param request. Recibimos la Receta con los nuevos valores
+	 * @param id. Recibimos el id de la receta que se va a modificar
+	 * @return Devolvemos la Receta con los nuevos valores
+	 */
 	RecetasResponse modificar(RecetasRequest request, Integer id);
 	
-	List<RecetasResponse> obtenerTodos(String categoria, List<Integer> idIngredientes, Integer idUsuario, String ordenacion);
 	
+	/**
+	 * Método para obtener todas las recetas de la base de datos,
+	 * dependiendo de los parámetros que se reciban se mostrarán unas recetas u otras
+	 * @param categoria. Recibimos la categoria de la Receta
+	 * @param idIngredientes. Recibimos una lista con los ingredientes
+	 * @param idUsuario. Recibimos el id del Usuario
+	 * @param ordenacion. Recibimos el párametro de busqueda
+	 * @return Devolvemos una lista con las recetas.
+	 */
+	List<RecetasResponse> obtenerTodos(String categoria, List<Integer> idIngredientes, Integer idUsuario, String ordenacion);
 	
 
 }

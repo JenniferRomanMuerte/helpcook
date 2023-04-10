@@ -16,19 +16,17 @@ public interface IPasosBusiness {
 
 	
 	/**
-	 * Método para crear un paso, recibimos los valores, lo guardamos en el repositorio,
-	 * asignamos los valores al objeto a devolver
+	 * Método para crear un paso
 	 * @param request. Se recibe el objeto del Front
-	 * @return. Devuelve el Paso creado
+	 * @return Devuelve el Paso creado
 	 */
 	PasosResponse crear(PasosRequest request);
 	
 	
 	/**
 	 * Método para recuperar los datos de un paso por su id,
-	 * recuperamos el objeto del repositorio, asignamos sus valores al objeto a devolver
 	 * @param id. Recibimos el id del paso que se quiere obtener
-	 * @return. Devolvemos el Paso solicitado
+	 * @return Devolvemos el Paso solicitado
 	 */
 	PasosResponse obtener(Integer id);
 	
@@ -40,21 +38,17 @@ public interface IPasosBusiness {
 	
 	
 	/**
-	 * Método para modificar los valores de un paso,
-	 * recuperamos el Paso a modificar, le asignamos los nuevos valores y lo guardamos en el repositorio,
-	 * asignamos al objeto a devolver los nuevos valores
+	 * Método para modificar los valores de un paso
 	 * @param request. Recimos el objeto con los nuevos valores
 	 * @param id. Recibimos el id del paso a modificar
-	 * @return. Devolvemos el Paso con los nuevos valores dados por el usuario
+	 * @return Devolvemos el Paso con los nuevos valores dados por el usuario
 	 */
 	PasosResponse modificar(PasosRequest request, Integer id);
 	
 	
 	/**
-	 * Método para obtener todos los pasos de la base de datos,
-	 * recuperamos todos los pasos guardados en el repositorio y los metemos en una lista,
-	 * asignamos los datos de los Pasos guardados a los Pasos a devolver, y los metemos en la lista que se devuelve
-	 * @return. Devolvemos una Lista con todos los Pasos
+	 * Método para obtener todos los pasos de la base de datos
+	 * @return Devolvemos una Lista con todos los Pasos
 	 */
 	List<PasosResponse> obtenerTodos();
 

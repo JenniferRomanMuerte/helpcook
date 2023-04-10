@@ -12,18 +12,24 @@ import com.help.cook.helpcook.models.FavoritosResponse;
 import com.help.cook.helpcook.repository.FavoritosRepository;
 import com.help.cook.helpcook.repository.domain.Favoritos;
 
-@Service
+
 /**
- * Clase con la lógica del Negocio
+ * Clase con la lógica del Negocio Favoritos
  * @author Jennifer
  * @version 1.0, 2022/11/05
+ * @see com.help.cook.helpcook.business
  */
+@Service
 public class FavoritosBusinessImpl implements IFavoritosBusiness {
 
 	@Autowired
 	private FavoritosRepository favoritosRepository;
 
-	
+	/**
+	 * Método con la lógica para crear un Favorito,
+	 * le asignamos a un nuevo Objeto Favorito los valores creados por el usuario, lo guardamos en el repositorio,
+	 * asignamos los valores guardados al objeto a devolver
+	 */
 	@Override
 	public FavoritosResponse crear(FavoritosRequest request) {
 
@@ -49,7 +55,11 @@ public class FavoritosBusinessImpl implements IFavoritosBusiness {
 	}
 
 	
-	
+	/**
+	 * Método con la lógica para recuperar un Favorito,
+	 * recuperamos del repositorio el favorito por su id,
+	 * asignamos al objeto a devolver los datos del Favorito que acabamos de recuperar
+	 */
 	@Override
 	public FavoritosResponse obtener(Integer id) {
 
@@ -64,15 +74,25 @@ public class FavoritosBusinessImpl implements IFavoritosBusiness {
 
 		return response;
 	}
-
 	
+
+	/**
+	 * Método con la lógica para eliminar un Favorito,
+	 * borramos de la base de datos el favorito mediante su id
+	 */
 	@Override
 	public void eliminar(Integer id) {
 
 		favoritosRepository.deleteById(id);
 
 	}
-
+	
+	
+/**
+ * Método con la lógica para modificar un Favorito,
+ * recuperamos el favorito que queremos modificar, le asignamos los nuevos valores, y lo guardamos en el repositorio
+ * asignamos al Favorito que vamos a devolver los nuevos valores
+ */
 	@Override
 	public FavoritosResponse modificar(FavoritosRequest request, Integer id) {
 
@@ -94,8 +114,12 @@ public class FavoritosBusinessImpl implements IFavoritosBusiness {
 		return response;
 	}
 
+	/**
+	 * Método con la lógica para obtener una lista de Favoritos,
+	 *  si el párametro que recibimos es nulo recibimos todos los Favoritos de la base de Datos,
+	 *  si se recibe el IdUsuario mostrará los favoritos de ese usuario.
+	 */
 	@Override
-	
 	 public List <FavoritosResponse> obtenerTodos(Integer idUsuario) {
 		 
 		List<FavoritosResponse> favoritosResponseLista = new ArrayList<>(); //Creamos una lista que nos devolvera los favoritos a mostrar

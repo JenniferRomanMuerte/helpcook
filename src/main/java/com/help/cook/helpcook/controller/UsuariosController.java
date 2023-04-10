@@ -24,71 +24,81 @@ import com.help.cook.helpcook.models.UsuariosResponse;
 
 
 
-@RestController
-@RequestMapping("usuarios")
+
 /**
  * Clase para la conexión con el Front 
  * @author Hugo
  *@version 1.0, 2022/11/05
  */
+@RestController
+@RequestMapping("usuarios")
 public class UsuariosController {
 	
-
+	/**
+	 * Injectamos la interface
+	 */
 	@Autowired
 	IUsuariosBusiness usuariosBusiness;
 	
 	
-	@PostMapping
+	
 	/**
 	 * Método de comunicacion con el Front para crear un usuario
 	 * @param request. El usuario nos manda los valores para crear el usuario
 	 * @return devolvemos el usuario creado con los datos introducidos por el usuario que nos devuelve el método business 
 	 */
+	@PostMapping
 	public UsuariosResponse crear(@RequestBody UsuariosRequest request) {
 		
 		return usuariosBusiness.crear(request);
 		
 	}
 	
-	@GetMapping("/{id}")
+
 	/**
 	 * Método de comunicacion con el Front para obtener un usuario
 	 * @param id. Recibimos el id del usuario que el usuario quiere visualizar
 	 * @return devolvemos el usuario seleccionado que nos devuelve el método business 
 	 */
+	@GetMapping("/{id}")
 	public UsuariosResponse obtener(@PathVariable Integer id) {
 		return usuariosBusiness.obtener(id);
 	}
 
+	
+	
+/**
+ * Método de comunicacion con el Front para el acceso del usuario
+ * @param email. Recibimos el email que debe tener
+ * @param contrasenia. Recibimos la contraseña que debe tener
+ * @return devolvemos el usuario que posea esos valores del métododo, Buisiness
+ */
 	@GetMapping("/{email}/{contrasenia}")
-	/**
-	 * Método de comunicacion con el Front para el acceso del usurio
-	 * @param id. Recibimos el id del usuario que el usuario quiere visualizar
-	 * @return devolvemos el usuario seleccionado que nos devuelve el método business 
-	 */
 	public UsuariosResponse validarUsuario(@PathVariable String email, @PathVariable String contrasenia) {
 		return usuariosBusiness.validarUsuario(email,contrasenia);
 	}
 
 	
-	@DeleteMapping("/{id}")
+
 	/**
 	 * Método de comunicacion con el Front  para borrar un usuario
 	 * @param id. Recibimos el id del usuario a borrar
 	 */
+	@DeleteMapping("/{id}")
 	public void eliminar(@PathVariable Integer id) {
 		usuariosBusiness.eliminar(id);
 		
 	}
 
 	
-	@PutMapping("/{id}")
+	
 	/**
 	 * Método de comunicacion con el Front para modificar un usuario
 	 * @param request. Recibimos los nuevos valores del objeto usuario
 	 * @param id. Recibimos el id del usuario que se quiere modificar
-	 * @return. Devolvemos el usuario modificado que nos devuelve el método business 
+	 * @return Devolvemos el usuario modificado que nos devuelve el método business 
 	 */
+	@PutMapping("/{id}")
 	public UsuariosResponse modificar(@RequestBody  UsuariosRequest request, @PathVariable Integer id) {
 		
 		return usuariosBusiness.modificar(request,id);
@@ -96,11 +106,12 @@ public class UsuariosController {
 	}
 	
 
-	@GetMapping
+	
 	/**
 	 * Método de comunicacion con el Front  para recuperar todos los usuarios 
-	 * @return. devolvemos una lista de usuarios que nos devuelve el método business 
+	 * @return devolvemos una lista de usuarios que nos devuelve el método business 
 	 */
+	@GetMapping
 	public List<UsuariosResponse> obtenerTodos(){
 		return usuariosBusiness.obtenerTodos();
 	}

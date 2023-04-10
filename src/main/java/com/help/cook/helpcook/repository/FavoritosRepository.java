@@ -15,6 +15,12 @@ import java.util.List;
  */
 public interface FavoritosRepository extends CrudRepository<Favoritos, Integer>{
 	
+	
+/**
+ * Declarada Lista para almacenar los Favoritos que posea un Usuario
+ * @param IdUsuarios. Id del Usuario
+ * @return Lista de los favoritos que posee un Usuario
+ */
 	@Query ("SELECT f FROM Favoritos f  LEFT JOIN f.usuarios u WHERE (:IdUsuarios is null or u.id = :IdUsuarios)")
 	List<Favoritos> findByUsuarios(@Param("IdUsuarios") Integer IdUsuarios);
 	

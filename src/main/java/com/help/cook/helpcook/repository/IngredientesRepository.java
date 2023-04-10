@@ -20,6 +20,12 @@ public interface  IngredientesRepository  extends CrudRepository<Ingredientes, I
 	
 	List<Ingredientes> findAll(); //Declaramos el método que usará Business
 
+
+	/**
+	 * Declarada lista para almacenar todos los ingredientes, o los ingredientes según su tipo
+	 * @param tipo. Le mandamos el parámetro para el filtro
+	 * @return devolvemos lista de ingredientes
+	 */
 	@Query("SELECT i FROM Ingredientes i WHERE (:tipo is null or i.tipo like %:tipo%)")
 	List<Ingredientes> findByTipo(@Param("tipo") String tipo);
 

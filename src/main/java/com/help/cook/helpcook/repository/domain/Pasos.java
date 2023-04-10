@@ -8,14 +8,15 @@ import lombok.Setter;
 
 
 
-@Getter
-@Setter
-@Entity
+
 /** 
  * Clase de la tabla Pasos de BBDD Helpcook
  * @author Hugo
  * @version 1.0, 2022/11/05 
  */
+@Getter
+@Setter
+@Entity
 public class Pasos {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

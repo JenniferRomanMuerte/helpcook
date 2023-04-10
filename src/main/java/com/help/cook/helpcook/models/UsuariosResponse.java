@@ -4,13 +4,14 @@ import lombok.Data;
 
 import java.util.List;
 
-@Data
+
 /**
- * Clase para la devolución del objeto Usuario
+ * Objeto para la devolución del objeto Usuario
  * @author Jennifer
  * @version 1.0, 2022/11/05
  *
  */
+@Data
 public class UsuariosResponse {
 
     private Integer idUsuarios;

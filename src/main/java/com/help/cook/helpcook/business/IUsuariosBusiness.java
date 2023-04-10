@@ -18,16 +18,48 @@ import com.help.cook.helpcook.repository.domain.Ingredientes;
  */
 public interface IUsuariosBusiness {
 	
+	/**
+	 * Método para crear un Usuario,
+	 * @param request. Le mandamos el Usuario con los datos introducidos por éste
+	 * @return Devolvemos el Usuario con los datos introducidos por éste
+	 */
 	UsuariosResponse crear(UsuariosRequest request);
-
+	
+	/**
+	 * Método para obtener un usuario,
+	 * @param id. Recibimos el id del usuario
+	 * @return Devolvemos el Usuario
+	 */
 	UsuariosResponse obtener(Integer id);
 	
+	/**
+	 * Método para borrar un usuario
+	 * @param id. Recibimos el id del usuario a borrar
+	 */
 	void eliminar(Integer id);
 	
+	
+	/**
+	 * Método para modificar un Usuario
+	 * @param request. Recibimos el Usuario con los nuevos valores
+	 * @param id. Recibimos el id del Usuario a modificar
+	 * @return Devolvemos el Usuario con los nuevos datos dados por el usuario
+	 */
 	UsuariosResponse modificar(UsuariosRequest request, Integer id);
 	
+	/**
+	 * Método para obtener todos los Usuarios de la base de datos,
+	 * @return Devolvemos una lista con todos los Usuarios
+	 */
 	List<UsuariosResponse> obtenerTodos();
 
+	
+	/**
+	 * Método para la validación (Login)
+	 * @param email. Recibimos el email del Usuario
+	 * @param contrasenia. Recibimos la contraseña del Usuario
+	 * @return Devolvemos el Usuario que posea los valores de los parámetros que le mandamos
+	 */
 	UsuariosResponse validarUsuario(String email, String contrasenia);
 	
 

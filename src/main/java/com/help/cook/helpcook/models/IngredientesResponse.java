@@ -10,12 +10,13 @@ import lombok.Data;
 //REQUEST ES PARA LA SALIDA DE DATOS
 
 
-@Data //Anotación para generar los getters & setters y constructor de la clase
+
 /**
- * Clase para la devolución del objeto Ingredientes
+ * Objeto para la devolución del objeto Ingredientes
  * @author Jennifer
  * @version 1.0, 2022/11/05
  */
+@Data //Anotación para generar los getters & setters y constructor de la clase
 public class IngredientesResponse {
 	
 	private Integer idIngredientes;

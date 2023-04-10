@@ -14,6 +14,11 @@ import java.util.List;
 public interface ValoracionesRepository extends CrudRepository<Valoraciones, Integer>{
 
     List<Valoraciones> findAll();
- 
+    
+    /**
+     * Declarada Lista que recuperará todas valoraciones que posea esa receta
+     * @param idReceta. Recibimos el id de la Receta 
+     * @return Devuelve todas las valoraciones que posee una receta
+     */
     List<Valoraciones> findByIdRecetas(Integer idReceta);
 }

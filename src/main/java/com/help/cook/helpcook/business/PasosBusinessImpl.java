@@ -12,17 +12,26 @@ import com.help.cook.helpcook.models.PasosResponse;
 import com.help.cook.helpcook.repository.PasosRepository;
 import com.help.cook.helpcook.repository.domain.Pasos;
 
-@Service
+
 /**
- * Clase con la lógica del Negocio
+ * Clase con la lógica del Negocio Pasos
  * @author Hugo
  * @version 1.0, 2022/11/05
+ * @see com.help.cook.helpcook.business
  */
+@Service
 public class PasosBusinessImpl implements IPasosBusiness{
+	
 	
 	@Autowired
 	private PasosRepository pasosRepository;
 	
+	/**
+	 * Método con la lógica para crear un Paso, 
+	 * guardamos en un nuevo Paso los valores que hemos recibido del objeto Pasos dado por el usuario,
+	 * lo guardamos en el repositorio,
+	 * asignamos los valores al objeto a devolver
+	 */
 	@Override
 	public PasosResponse crear(PasosRequest request) {
 		
@@ -47,6 +56,11 @@ public class PasosBusinessImpl implements IPasosBusiness{
 		return response;
 	}
 	
+	
+	/**
+	 * Método con la lógica para obtener un Paso,
+	 * recuperamos el objeto del repositorio, asignamos sus valores al objeto a devolver
+	 */
 	@Override
 	public PasosResponse obtener(Integer id) {
 		
@@ -64,6 +78,10 @@ public class PasosBusinessImpl implements IPasosBusiness{
 		
 	}
 	
+	/**
+	 * Método con la lógica para eliminar un Paso,
+	 * borramos del repositorio el Pasos mediante su id
+	 */
 	@Override
 	public void eliminar(Integer id) {
 		
@@ -71,6 +89,11 @@ public class PasosBusinessImpl implements IPasosBusiness{
 		
 	}
 	
+	/**
+	 * Método con la lógica para modificar un Paso,
+	 * recuperamos el Paso a modificar, le asignamos los nuevos valores y lo guardamos en el repositorio,
+	 * asignamos al objeto a devolver los nuevos valores
+	 */
 	@Override
 	public PasosResponse modificar(PasosRequest request, Integer id) {
 		
@@ -93,6 +116,11 @@ public class PasosBusinessImpl implements IPasosBusiness{
 		return response;
 	}
 	
+	/**
+	 * Método con la lógica para obtener una lista de los Pasos,
+	 * recuperamos todos los pasos guardados en el repositorio y los metemos en una lista,
+	 * asignamos los datos de los Pasos guardados a los Pasos a devolver, y los metemos en la lista que se devuelve
+	 */
 	@Override
 	public List<PasosResponse> obtenerTodos() {
 		

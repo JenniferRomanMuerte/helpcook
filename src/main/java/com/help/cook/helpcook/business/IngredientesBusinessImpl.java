@@ -12,18 +12,25 @@ import com.help.cook.helpcook.models.IngredientesResponse;
 import com.help.cook.helpcook.repository.IngredientesRepository;
 import com.help.cook.helpcook.repository.domain.Ingredientes;
 
-@Service //Sube al contexto de Spring la información
+
 
 /**
- * Clase con la lógica del Negocio
+ * Clase con la lógica del Negocio Ingredientes
  * @author Jennifer
  * @version 1.0, 2022/11/05
+ * @see com.help.cook.helpcook.business
  */
+@Service //Sube al contexto de Spring la información
 public class IngredientesBusinessImpl implements IIngredientesBusiness {
 
 	@Autowired ////Le indicamos que recupera la información del contexto de Spring de ésta Interface
 	private IngredientesRepository ingredientesRepository;
 
+	/**
+	 * Método con la lógica para crear un Ingrediente,
+	 * almacenamos los datos en un objeto Ingrediente y lo guardamos en el repositorio,
+	 * asignamos los datos en el objeto Ingrediente a devolver
+	 */
 	@Override
 	public IngredientesResponse crear(IngredientesRequest request) {
 
@@ -45,6 +52,11 @@ public class IngredientesBusinessImpl implements IIngredientesBusiness {
 		return response; //devolvemos el objeto de salida
 	}
 
+	/**
+	 * Método con la lógica para obtener un Ingrediente,
+	 * recuperamos el ingrediente del repositorio,
+	 *  asignamos los valores en el objeto a devolver 
+	 */
 	@Override
 	public IngredientesResponse obtener(Integer id) {
 
@@ -61,6 +73,10 @@ public class IngredientesBusinessImpl implements IIngredientesBusiness {
 		return response; //devolvemos el objeto de salida
 	}
 
+	/**
+	 * Método con la lógica para eliminar un Ingrediente,
+	 * borramos del repositorio el Ingrediente por su id
+	 */
 	@Override
 	public void eliminar(Integer id) {
 
@@ -68,6 +84,11 @@ public class IngredientesBusinessImpl implements IIngredientesBusiness {
 
 	}
 	
+	/**
+	 * Método con la lógica para modificar un Ingrediente,
+	  * recuperamos el Ingrediente a modificar del repositorio, le asignamos los nuevos valores,
+      * lo guardamos en el repòsitorio y asiganamos los nuevos valores al objeto Ingrediente a devolver
+	 */
 	@Override
 	public IngredientesResponse modificar(IngredientesRequest request, Integer id) {
 
@@ -91,6 +112,14 @@ public class IngredientesBusinessImpl implements IIngredientesBusiness {
 		return response; //devolvemos el objeto de salida
 	}
 
+	/**
+	 * Método con la lógica para obtener una lista de Ingredientes,
+	 * si el párametro tipo va vacio recuperamos en una lista todos los ingredientes,
+     * si recibimos el párametro recuperamos na lista sólo los Ingredientes de ese tipo,
+     * recorremos la lista que hemos recuperado yrecuperando los ingredientes y asiganando los valores de éstos al objeto a devolver,
+     * añadimos los objetos a devolver a la lista a devolver 
+	 *
+	 */
 	@Override
 	public List<IngredientesResponse> obtenerTodos(String tipo) {
 		

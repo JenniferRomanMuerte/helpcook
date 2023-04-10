@@ -10,14 +10,15 @@ import java.util.Set;
 
 
 
-@Getter
-@Setter
-@Entity
+
 /** 
  * Clase de la tabla Usuarios de BBDD Helpcook
  * @author Hugo
  * @version 1.0, 2022/11/05
  */
+@Getter
+@Setter
+@Entity
 public class Usuarios {
 
 	@Id

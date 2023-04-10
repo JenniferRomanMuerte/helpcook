@@ -10,13 +10,14 @@ import lombok.Data;
 
 
 
-@Data
-@Entity
+
 /** 
  * Clase de la tabla Recetas de BBDD Helpcook
  * @author Hugo
  * @version 1.0, 2022/11/05 
  */
+@Data
+@Entity
 public class Recetas {
 
 	@Id
@@ -42,12 +43,17 @@ public class Recetas {
 	private Integer comensales;
 
 	
-	
+	/**
+	 * Lista para almacenar los ingredientes que posee la receta a través de la tabla de relación RecetasIngredientes
+	 */
 	//Creamos el objeto para la relación con la tabla RecetasIngredientes
 	@OneToMany(mappedBy = "recetas") //Le indicamos que es una relación de 1 a muchos, y que coja el objeto recetas de la tabla RecetasIngredientes
 	Set<RecetasIngredientes> ingredientes;
 	
 	
+	/**
+	 * Lista para almacenar los pasos que posee la receta
+	 */
 	// Creamos la relación con la tabla Pasos
 	@OneToMany(mappedBy = "recetas")
 	Set<Pasos> pasos;

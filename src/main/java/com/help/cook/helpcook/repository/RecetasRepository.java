@@ -17,15 +17,33 @@ public interface RecetasRepository extends CrudRepository<Recetas, Integer>{
 	
 	List<Recetas> findAll();
 	
+	
+	/**
+	 * Declarada lista para almacenar las recetas que coincidan con los filtros que recibe
+	 * @param categoria. Le mandamos parámetro para filtrar por categoria
+	 * @param idIngredientes.  Le mandamos parámetro para filtrar por ingredientes
+	 * @param idUsuario.  Le mandamos parámetro para filtrar por Usuario que hizo la receta
+	 * @return Lista con las recetas según el filtro
+	 */
 	@Query("SELECT r FROM Recetas r LEFT JOIN r.ingredientes i  WHERE ((:categoria is null or r.categoria like %:categoria%) " +
 			"AND (:idIngredientes is null or i.ingredientes.idIngredientes in (:idIngredientes)) " +
 			"AND (:idUsuario is null or r.idUsuarios = :idUsuario ))")
 	Set<Recetas> findAdvance (@Param("categoria") String categoria, @Param ("idIngredientes") List<Integer> idIngredientes, @Param("idUsuario") Integer idUsuario);
 
 	
-	@Query("SELECT r FROM Recetas r ORDER BY valoracionMedia")
+	
+	/**
+	 * Declarada Lista para almacenar las recetas mejor valoradas
+	 * @return Devuelve una Lista de recetas ordenada por las que posean mayor valoraciónMedia
+	 */
+	@Query("SELECT r FROM Recetas r ORDER BY valoracionMedia ")
 	Set<Recetas> findByValoradas();
 	
+	
+	/**
+	 * Declarada Lista para almacenar las recetas más recientes
+	 * @return Devuelve una Lista de recetas ordenada por las últimas añadidas
+	 */
 	@Query("SELECT r FROM Recetas r ORDER BY fechaAlta DESC")
 	Set<Recetas> findByFechaAlta();
 }

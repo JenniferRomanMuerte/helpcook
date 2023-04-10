@@ -21,19 +21,16 @@ public interface IIngredientesBusiness {
 
 	/**
 	 * Método para crear un ingrediente,
-	 * almacenamos los datos en un objeto Ingrediente y lo guardamos en el repositorio,
-	 * asignamos los datos en el objeto Ingrediente a devolver
 	 * @param request. Recibimos el objeto Ingredientes con los datos introducidos por el usuario
-	 * @return. Devolvemos el Ingrediente creado
+	 * @return Devolvemos el Ingrediente creado
 	 */
 	IngredientesResponse crear(IngredientesRequest request);
 	
 	
     /**
-     * Método para recuperar los datos de un ingrediente por su id,
-     * recuperamos el ingrediente del repositorio y almacenamos los datos en el objeto a devolver
+     * Método para recuperar los datos de un ingrediente por su id
      * @param id. Recibimos el id del Ingrediente que se quiere recuperar
-     * @return. DFevolvemos el Ingrediente solicitado
+     * @return Devolvemos el Ingrediente solicitado
      */
 	IngredientesResponse obtener(Integer id);
 	
@@ -46,22 +43,18 @@ public interface IIngredientesBusiness {
 	
 	
      /**
-      * Método para modificar los valores de un ingrediente,
-      * recuperamos el Ingrediente a modificar del repositorio, le asignamos los nuevos valores,
-      * lo guardamos el objeto Ingrediente a devolver
+      * Método para modificar los valores de un ingrediente
       * @param request. Recibimos el objeto con los nuevos datos.
       * @param id. Recibimos el id del Ingrediente que se quiere modificar
-      * @return. Devolvemos el Ingrediente con los nuevos datos dados por el usuario
+      * @return Devolvemos el Ingrediente con los nuevos datos dados por el usuario
       */
 	IngredientesResponse modificar(IngredientesRequest request, Integer id);
 	
 	
-    /**
-     * Método para obtener todos los ingredientes de la base de datos,
-     * si el párametro tipo va vacio recuperamos todos los ingredientes,
-     * si recibimos el párametro recuperamos sólo los Ingredientes de ese tipo
+	/**
+	 * Método para obtener todos los ingredientes de la base de datos
      * @param tipo. Recibimos el tipo del ingrediente
-     * @return. Devolvemosla lista de los ingredientes que hemos recuperado del repositorio
-     */
+     * @return Devolvemosla lista de los ingredientes que hemos recuperado del repositorio
+	 */
     List<IngredientesResponse> obtenerTodos(String tipo);
 }

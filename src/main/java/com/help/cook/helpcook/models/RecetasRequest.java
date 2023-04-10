@@ -7,12 +7,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
-@Data
+
 /**
  * Objeto para recibir datos del front
  * @author Hugo
  *@version 1.0, 2022/11/05
  */
+@Data
 public class RecetasRequest {
 	
 	private Integer idRecetas;

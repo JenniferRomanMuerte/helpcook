@@ -6,13 +6,14 @@ import java.util.List;
 
 import lombok.Data;
 
-@Data
+
 /**
- * Clase para la devolución del objeto Recetas
+ * Objeto para la devolución del objeto Recetas
  * @author Jennifer
  * @version 1.0, 2022/11/05
  *
  */
+@Data
 public class RecetasResponse {
 
     private Integer idRecetas;

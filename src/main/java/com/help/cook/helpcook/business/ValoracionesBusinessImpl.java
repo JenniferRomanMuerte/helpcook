@@ -15,12 +15,14 @@ import com.help.cook.helpcook.repository.domain.Valoraciones;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+
 /**
- * Clase con la lógica del Negocio
+ * Clase con la lógica del Negocio Valoraciones
  * @author Jennifer
  * @version 1.0, 2022/11/05
+ * @ see com.help.cook.helpcook.business
  */
+@Service
 public class ValoracionesBusinessImpl implements IValoracionesBusiness {
 
     @Autowired
@@ -29,28 +31,14 @@ public class ValoracionesBusinessImpl implements IValoracionesBusiness {
     @Autowired
     private RecetasRepository recetasRepository;
 
-    @Override
+    
     /**
-	 * 
-	 * Método para crear una valoración
-	 * 
-	 * @param valoraciones. Creamos una valoración a la cúal le asignaremos los valores que manda el usuario
-	 * @param usuarios. Creamos un usuario para asignarle la valoración
-	 * @param response. Creamos la valoración que vamos a devolver
-	 * @param usuariosResponse. Creamos el usuario que vamos a devolver
-	 * Se asignan los valores recibidos del front(del objeto request) a los atributos de la valoración
-	 * Se asigna al usurio su id para poder identificarlo y se le agigna a la valoración ese Usuario
-	 * 
-	 * @param datoGuardado. Creamos un nuevo objeto valoraciones (datoGuardado) asignandole la valoración que hemos creado y guardado en el repositorio
-	 * 
-	 * Se llama a la función valoracionMedia para calcular la media con la nueva valoracion creada
-	 * 
-	 * Asignamos a la valoración que vamos a devolver(response) los valores de la valoración(datoGuardado) 
-	 * Asignamos al Usuario que se devuelve los valores que recuperamos de la valoracion
-	 * Asignamos a la valoracion el usuario 
-	 * 
-	 * @return. Devuelve la valoración que hemos creado con los datos dados por el usuario
-	 */
+     * Método con la lógica para crear una valoración,
+     * asignamos a una nueva Valoración los datos dados por el usuario, la guardamos en el repositorio,
+	 * llamamos a la función ValoraciónMedia para calcular la media con la nueva valoración,
+	 * asignamos los valores al objeto a devolver 
+     */
+    @Override
     public ValoracionesResponse crear(ValoracionesRequest request) {
 
         Valoraciones valoraciones = new Valoraciones();
@@ -83,20 +71,12 @@ public class ValoracionesBusinessImpl implements IValoracionesBusiness {
 
     }
 
-    @Override
     /**
-	 * Método para recuperar los datos de una valoración por su id
-	 * 
-	 * @param respònse. Creamos el objeto valoraciones que vamos a devolver
-	 * @param datoGuardado. Recuperamos el objeto valoraciones del repositorio y lo almacenamos
-	 * Asignamos al objeto valoraciones a devolver los valores de la valoración guardada
-	 * @param usuariosResponse. Creamos el Usuario que se va a devolver
-	 * Se le asignan los datos del Usuario que estaban guardados en la valoracion del repositorio
-	 * Se le asigana a la valoración que se devuelve el usuario
-	 * 
-	 * @return. Devolvemos la valoración
-	 * 
-	 */
+     * Método con la lógica para obtener una valoración,
+     * recuperamos la valoracióin del repositorio mediante su id,
+	 * asignamos al objeto a devolver los datos de la Valoración que hemos recuperado. 
+     */
+    @Override
     public ValoracionesResponse obtener(Integer id) {
 
         ValoracionesResponse response = new ValoracionesResponse();
@@ -118,40 +98,33 @@ public class ValoracionesBusinessImpl implements IValoracionesBusiness {
         return response;
     }
 
+    
+    
     /**
-	 * Método para borrar una valoración
-	 * Borramos de la base de datos la valoracion mediante su id
-	 * @param idReceta. Recuperamos la receta a la que pertenece la valoración
-	 * Llamamos a la función valoración media para calcular la nueva valoración pasandole la Receta
-	 */
+ 	* Método con la lógica para eliminar una valoración,
+ 	* recuperamos la receta a la que pertenece la valoración que se va a eliminar,
+	* borramos la valoración,
+	* llamamos a la función ValoraciónMedia para calcular la media de la receta después de haber borrado la valoración
+	*/
     public void eliminar(Integer id) {
     	
     	Integer idReceta = valoracionesRepository.findById(id).get().getIdRecetas();
     	
         valoracionesRepository.deleteById(id);
         
-        
-        valoracionMedia(idReceta);
-        
+        valoracionMedia(idReceta);   
         
     }
 
-    @Override
+    
+    
     /**
-	 * Método para modificar los valores de una valoración
-	 * 
-	 * @param response. Creamos la valoración que se va a devolver
-	 * @param datoGuardado. Recuperamos la valoración del repositorio mediante su id
-	 * Asignamos a la valoración que hemos recuperado los valores dados por el usuario
-	 * @param datoModificado. Creamos una valoración con los datos ya modificados y guardamos en el repositorio
-	 * Asignamos a la valoración a devolver los nuevos datos
-	 * @param usuariosResponse. Creamos el usuario que se va a devolver en la valoración
-	 * Llamamos a la función valoracionMedia para el calculo después de haberse modificado
-	 * Asignamos al Usuario a devolver los datos que se han guardado y asignamos éste usuario a la valoracióin a devolver
-	 * 
-	 * @return. Devolvemos la valoración ya modificada.
-	 */
-
+     * Método con la lógica para modificar una valoración,
+     * recuperamos la valoración, le asignamos los nuevos valores y la guardamos en el repositorio,
+	 * asignamos los nuevos valores al objeto a devolver,
+	 * llamamos a la función ValoraciónMedia para calcular la media de la receta después de haber modificado la valoración
+     */
+    @Override
     public ValoracionesResponse modificar(ValoracionesRequest request, Integer id) {
 
         ValoracionesResponse response = new ValoracionesResponse();
@@ -183,18 +156,12 @@ public class ValoracionesBusinessImpl implements IValoracionesBusiness {
         return response;
     }
     
-    /**
-	 * Método para obtener todas las valoraciones de la base de datos
-	 * 
-	 * @param valoracionesResponseLista. Declaramos la lista de valoraciones que vamos a devolver
-	 * @param valoracionesLista. Declaramos una lista de valoraciones que almacenará las valoraciones del repositorio, 
-	 * 
-	 * Recorremos la lista de valoraciones recuperando todas las valoraciones
-	 * @param valoracionesResponse. Creamos la valoracion a devolver para almacenar los valores de las valoraciones del repositorio y la añadimos a la lista que vamos a devolver
-	 * 
-	 * @return. Devolvemosla lista de los valoraciones que hemos recuperado del repositorio
-	 * 
-	 */
+/**
+ * Método con la lógica para obtener todas las valoraciónes,
+ * recuperamos la lista de valoraciones del repositorio,
+ * accdemos a cada una de las valoraciones y asignamos sus valores a la valoración a devolver,
+ * añadimos a la lista a devolver todas las valoraciones a devolver
+ */
 public List<ValoracionesResponse> obtenerTodos() {
 		
 		List<ValoracionesResponse> valoracionesResponseLista = new ArrayList<>();
@@ -218,16 +185,12 @@ public List<ValoracionesResponse> obtenerTodos() {
 	}
     
 
-    /**
-     * Calculo de la valoración media de una receta
-     * @param recetaGuardada. Recuperamos la receta del repositorio.
-     * @param valoracionesGuardadas. Creamos una lista para almacenar todas las valoraciones que posee una receta
-     * @param sumaMedia. Variable para almacenar el calculo final
-     * @param idRecetas. Dato por el que obtenemos la receta
-     * Recorremos la lista de las valoraciones guardadas, accedemos a su valor,las sumamos y las almacenamos en sumaMedia
-     * @param valorMedio. Calculamos la valoración media diviendo la suma de todas las valoraciones entre el número de valoraciones que existen
-     * Asignamos a recetaGuardada el nuevo valor y guardamos la receta con los nuevos datos
-     */
+   /**
+    * Método para calcular la valoración media de una receta,
+    * recuperamos la receta del repositorio, recuperamos en una lista todas las valoraciones de la receta,
+    * sumamos todas las valoraciones que posee la receta y calculamos la media.
+    * @param idRecetas. Recibimos el id de la receta donde realizar el calculo
+    */
     public void valoracionMedia(Integer idRecetas) {
     	
     	 //PARA CALCULAR MEDIA DE LA VALORACIÓN DE LA RECETA

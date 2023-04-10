@@ -12,15 +12,16 @@ import lombok.Setter;
 
 
 
-@Getter
-@Setter
-@Entity
+
 /** 
  * Clase de la tabla Valoraciones de BBDD Helpcook
  * @author Jennifer
  * @version 1.0, 2022/11/05
  * 
  */
+@Getter
+@Setter
+@Entity
 public class Valoraciones {
 	
 	@Id

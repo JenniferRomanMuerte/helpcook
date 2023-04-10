@@ -22,12 +22,14 @@ import com.help.cook.helpcook.repository.domain.Pasos;
 import com.help.cook.helpcook.repository.domain.Recetas;
 import com.help.cook.helpcook.repository.domain.RecetasIngredientes;
 
-@Service
+
 /**
- * Clase con la lógica del Negocio
+ * Clase con la lógica del Negocio Recetas
  * @author Jennifer
  * @version 1.0, 2022/11/05
+ * @see com.help.cook.helpcook.business
  */
+@Service
 public class RecetasBusinessImpl implements IRecetasBusiness {
 
     @Autowired
@@ -39,6 +41,18 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
     @Autowired
     private PasosRepository pasosRepository;
 
+    /**
+	 * Método con la lógica para crear una Receta,
+	 * Asignamos los valores a una nueva receta, la guardamos en el repositorio,
+	 * recorremos la lista de Ingredientes del objeto que nos llega del front, accedemos al id de los ingredientes 
+	 * y el id de la receta y los asignamos a un objeto intermedio para establecer su relación,
+	 * guardamos en el repositorio este objetoIntermedio,
+	 * recorremos la lista de pasos que nos llega del Front y almacenamos los Pasos,
+	 * le asignamos al objeto intermedio el id de la receta que recuperamos del repositorio para asignarle los pasos,
+	 * asignamos todos estos valores al Paso a devolver y lo guardamos en el repositorio,
+	 * asignamos al objeto Receta a devolver todos los valores obtenidos ya guardados en el repositorio
+	 * 
+	 */
     @Override
     public RecetasResponse crear(RecetasRequest request) {
         Recetas recetas = new Recetas();
@@ -110,6 +124,11 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
 
     }
 
+    /**
+	 * Método con la lógica para recuperar una Receta,
+	 * recuperamos la receta del repositorio mediante su id,
+	 * Asignamos los valores recuperados a la receta a devolver
+	 */
     @Override
     public RecetasResponse obtener(Integer id) {
 
@@ -160,22 +179,22 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
     }
     
   
+    /**
+	 * Método con la lógica para eliminar una Receta,
+	 * borramos del repositorio la receta mediante su id
+	 */
     public void eliminar(Integer id) {
         recetasRepository.deleteById(id);
     }
 
-    @Override
+    
     /**
-	 * Método para modificar una receta
-	 * 
-	 * @param response. Creamos la receta que se va a devolver
-	 * @param datoGuardado. Recuperamos la receta del repositorio mediante su id
-	 * Asignamos a la receta que hemos recuperado los valores dados por el usuario
-	 * @param datoModificado. Creamos una receta con los datos ya modificados y guardamos en el repositorio
-	 * Asignamos a la receta a devolver los nuevos datos
-	 * 
-	 * @return. Devolvemos la receta ya modificada.
-	 */
+     * Método con la lógica para modificar una receta,
+     * recuperamos la receta del repositorio mediante su id,
+     * le asignamos los nuevois valores y la guardamos en el repositorio,
+     * asignamos al objeto a devolver los nuevos valores
+     */
+    @Override
     public RecetasResponse modificar(RecetasRequest request, Integer id) {
 
         RecetasResponse response = new RecetasResponse();
@@ -206,25 +225,19 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
         return response;
     }
 
-    @Override
+    
     /**
-	 * Método para obtener todas las recetas de la base de datos
-	 * 
-	 * @param recetasResponseLista. Declaramos la lista de recetas que vamos a devolver
-	 * @param recetasLista. Declaramos una lista de recetas que almacenará las recetas del repositorio, 
-	 * pudiendo filtrar las recetas que nos devuelve dependiendo de los datos que mande el usuario, mostrando todas, sólo las que posean la categoria que mande el usuario,
-	 * las que contengan esos ingredientes o las que haya añadido un Usuario.
-	 * Recorremos la lista de recetas recuperando todas las recetas que necesitemos según los datos mandados
-	 * @param recetasResponse. Creamos la receta que vamos a devolver asignandole los valores que recuperamos de la receta guardada
-	 * 
-	 * @param ingredientesResponseList. Declaramos un lista de ingredientes para almacenar los ingredientes que posee la receta
-	 * @param pasosResponseList. Declaramos un lista de pasos para almacenar los pasos que posee la receta
-	 * 
-	 * Recorremos los ingredientes y los pasos de la receta los almacenamos en el objeto a devolver y lo añadimos a su respectiva lista añadiendola después a la receta a devolver
-	 * 
-	 * @return. Devolvemos la lista de las recetas que hemos recuperado del repositorio
+	 * Método con la lógica para recuperar una lista de recetas, según el filtro que se le envie:
+	 * Todas las recetas, según su categoria, según los ingredientes que posea, según el Usuario que la haya subido, 
+	 * según el parámetro de ordenación o más recientes o mejor valoradas.
+	 * si no se recibe ningún parámetro devolverá todas las recetas,
+	 * si se recibe la categoria mostrará sólo las recetas de esa categoria,
+	 * si se recibe una lista de ingredientes sólo mostrará las recetas que contengan esos ingredientes,
+	 * si se recibe el IdUsuario, mostrará las rfecetas que haya subido ese Usuario,
+	 * si se recibe el parámetro ordenación se mostrarán las recetas ordenadas según el parámetro recibido
 	 * 
 	 */
+    @Override
     public List<RecetasResponse> obtenerTodos(String categoria, List<Integer> idIngredientes, Integer idUsuario, String ordenacion) {
     	
     	 List<RecetasResponse> recetasResponseLista = new ArrayList();
@@ -246,7 +259,15 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
 
         return recetasResponseLista;
     }
-
+    
+    
+    /**
+     * Método almacenar las recetas que vamos a devolver,
+     * dependiendo de la lista que reciba del repositorio creará una lista a devolver dependiendo de los parámetros que se hayan envbiado como filtros,
+     * recorremos la lista recuperada, recuperando todas las recetas y su lista de ingredientes y pasos y asignando éstos valores a la Lista a devolver
+     * @param recetasLista. Le mandamos la lista que hemos recuperado del repositorio
+     * @return Lista a devolver con las recetas pertinentes
+     */
     public List<RecetasResponse> recuperarReceta(Set<Recetas> recetasLista ) {
     	
     	

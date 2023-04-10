@@ -17,6 +17,13 @@ public interface UsuariosRepository extends CrudRepository<Usuarios, Integer>{
 	
 	List<Usuarios> findAll();
 
+	
+	/**
+	 * Declarado el Usuario que almacenará el usuario que contenga los valores que recibe
+	 * @param email. Email que debe contener el usuario
+	 * @param contrasenia. Contraseña que debe tener el usuario
+	 * @return Devuelve el Usuario que posea esa contraseña y ese email
+	 */
 	@Query("SELECT u FROM Usuarios u WHERE u.email = :email AND u.contrasenia = :contrasenia")
 	Usuarios findByEmailAndContrasenia(@Param ("email")String email, @Param ("contrasenia")String contrasenia);
 
