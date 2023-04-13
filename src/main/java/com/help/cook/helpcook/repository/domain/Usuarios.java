@@ -6,6 +6,7 @@ import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Collection;
 import java.util.Set;
 
 
@@ -39,8 +40,6 @@ public class Usuarios {
 	private String foto;
 	
 	
-	
-	
 	//Creamos éstos 2 objetos para la relación entre tablas
 	
 	@OneToMany(mappedBy="usuarios") // Le indicamos que es una relación de 1 a muchos, y que coja el objeto usuarios de la tabla valoraciones
@@ -49,5 +48,6 @@ public class Usuarios {
 	
 	@OneToMany(mappedBy = "usuarios") // Le indicamos que es una relación de 1 a muchos, y que coja el objeto usuarios de la tabla favoritos
 	private  Set<Favoritos> favoritos;
+
 
 }

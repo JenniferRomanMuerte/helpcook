@@ -20,7 +20,6 @@ import java.util.List;
  * Clase con la lógica del Negocio Valoraciones
  * @author Jennifer
  * @version 1.0, 2022/11/05
- * @ see com.help.cook.helpcook.business
  */
 @Service
 public class ValoracionesBusinessImpl implements IValoracionesBusiness {
@@ -46,10 +45,11 @@ public class ValoracionesBusinessImpl implements IValoracionesBusiness {
 
         ValoracionesResponse response = new ValoracionesResponse();
         UsuariosResponse usuariosResponse = new UsuariosResponse();
+        
         valoraciones.setIdRecetas(request.getIdRecetas());
         valoraciones.setValor(request.getValor());
 
-        usuarios.setId(request.getIdUsuarios());
+        usuarios.setId(request.getIdUsuarios());   
         valoraciones.setUsuarios(usuarios);
         
         Valoraciones datoGuardado = valoracionesRepository.save(valoraciones);

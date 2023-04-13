@@ -26,6 +26,8 @@ public interface UsuariosRepository extends CrudRepository<Usuarios, Integer>{
 	 */
 	@Query("SELECT u FROM Usuarios u WHERE u.email = :email AND u.contrasenia = :contrasenia")
 	Usuarios findByEmailAndContrasenia(@Param ("email")String email, @Param ("contrasenia")String contrasenia);
+	
+	
 
 	
 }

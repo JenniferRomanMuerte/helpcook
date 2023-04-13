@@ -73,7 +73,7 @@ public class UsuariosController {
  * @param contrasenia. Recibimos la contraseña que debe tener
  * @return devolvemos el usuario que posea esos valores del métododo, Buisiness
  */
-	@GetMapping("/{email}/{contrasenia}")
+	@GetMapping("/{email}")
 	public UsuariosResponse validarUsuario(@PathVariable String email, @PathVariable String contrasenia) {
 		return usuariosBusiness.validarUsuario(email,contrasenia);
 	}

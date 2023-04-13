@@ -36,7 +36,7 @@ public interface RecetasRepository extends CrudRepository<Recetas, Integer>{
 	 * Declarada Lista para almacenar las recetas mejor valoradas
 	 * @return Devuelve una Lista de recetas ordenada por las que posean mayor valoraciónMedia
 	 */
-	@Query("SELECT r FROM Recetas r ORDER BY valoracionMedia ")
+	@Query("SELECT r FROM Recetas r ORDER BY valoracionMedia DESC")
 	Set<Recetas> findByValoradas();
 	
 	

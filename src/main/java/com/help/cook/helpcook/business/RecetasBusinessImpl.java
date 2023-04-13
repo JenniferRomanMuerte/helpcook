@@ -294,6 +294,7 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
 
              for (RecetasIngredientes ingrediente : receta.getIngredientes()) {
                  IngredientesResponse ingredientesResponse = new IngredientesResponse();
+                 
                  ingredientesResponse.setIdIngredientes(ingrediente.getIngredientes().getIdIngredientes());
                  ingredientesResponse.setNombre(ingrediente.getIngredientes().getNombre());
                  ingredientesResponse.setTipo(ingrediente.getIngredientes().getTipo());
@@ -304,14 +305,16 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
       
              for (Pasos paso : receta.getPasos()) {
                  PasosResponse pasosResponse = new PasosResponse();
+                 
                  pasosResponse.setIdPasos(paso.getIdPasos());
+                 pasosResponse.setIdRecetas(paso.getRecetas().getIdRecetas());
                  pasosResponse.setTipo(paso.getTipo());
                  pasosResponse.setDescripcion(paso.getDescripcion());
                  pasosResponse.setFoto(paso.getFoto());
                  pasosResponseList.add(pasosResponse);
              }
              
-             recetasResponse.setPasosResponse(pasosResponseList);
+   
              
              recetasResponseLista.add(recetasResponse);
              
