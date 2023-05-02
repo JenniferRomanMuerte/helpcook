@@ -119,7 +119,7 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
          List<ValoracionesResponse> valoracionesResponseList = new ArrayList<>();
     	
     	Usuarios datoGuardado = usuariosRepository.findByEmailAndContrasenia(email,contrasenia);
-    	
+    	System.out.println(datoGuardado);
     	  response.setIdUsuarios(datoGuardado.getId());
           response.setNick(datoGuardado.getNick());
           response.setContrasenia(datoGuardado.getContrasenia());
