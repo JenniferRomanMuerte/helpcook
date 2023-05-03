@@ -262,6 +262,24 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
     
     
     /**
+     * Método para obtener las recetas mediante los favoritos
+     * Le mandamos una lista con los id de las Recetas que tiene un usuario cómo favoritos
+     * llamamos al repositorio para obtener la lista de las recetas de los favoritos,
+     * y llamamos al método recuperarReceta para almacenarlas en la lista que vamos a devolver 
+     */
+    public List<RecetasResponse> obtenerFavoritos (List<Integer> idRecetas){
+    	
+    	List<RecetasResponse> recetasResponseLista = new ArrayList();
+    	
+    	Set<Recetas> recetasLista = recetasRepository.findByFavoritos(idRecetas);
+    	
+    	recetasResponseLista = recuperarReceta(recetasLista);
+    	
+    	return recetasResponseLista;
+    	
+    }
+    
+    /**
      * Método almacenar las recetas que vamos a devolver,
      * dependiendo de la lista que reciba del repositorio creará una lista a devolver dependiendo de los parámetros que se hayan envbiado como filtros,
      * recorremos la lista recuperada, recuperando todas las recetas y su lista de ingredientes y pasos y asignando éstos valores a la Lista a devolver
@@ -321,4 +339,7 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
          }
     	 return recetasResponseLista;
     }
+    
+    
+    
 }

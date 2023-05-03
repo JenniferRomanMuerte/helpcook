@@ -1,7 +1,10 @@
 package com.help.cook.helpcook.business;
 
 
+import java.io.IOException;
 import java.util.List;
+
+
 
 import com.help.cook.helpcook.models.IngredientesResponse;
 import com.help.cook.helpcook.models.UsuariosRequest;
@@ -20,8 +23,10 @@ public interface IUsuariosBusiness {
 	
 	/**
 	 * Método para crear un Usuario,
+	 * @param foto 
 	 * @param request. Le mandamos el Usuario con los datos introducidos por éste
 	 * @return Devolvemos el Usuario con los datos introducidos por éste
+	 * @throws IOException 
 	 */
 	UsuariosResponse crear(UsuariosRequest request);
 	
@@ -61,6 +66,8 @@ public interface IUsuariosBusiness {
 	 * @return Devolvemos el Usuario que posea los valores de los parámetros que le mandamos
 	 */
 	UsuariosResponse validarUsuario(String email, String contrasenia);
+
+
 	
 
 

@@ -57,5 +57,13 @@ public interface IRecetasBusiness {
 	 */
 	List<RecetasResponse> obtenerTodos(String categoria, List<Integer> idIngredientes, Integer idUsuario, String ordenacion);
 	
+	
+	/**
+	 * Método para obtener las Recetas que un Usuario tiene como favoritos
+	 * @param listaFavoritos
+	 * @return Lista de Recetas de los favoritos
+	 */
+	List<RecetasResponse> obtenerFavoritos( List<Integer> idRecetas);
+	
 
 }

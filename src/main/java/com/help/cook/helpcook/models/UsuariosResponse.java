@@ -5,6 +5,8 @@ import lombok.Data;
 import java.util.List;
 
 
+
+
 /**
  * Objeto para la devolución del objeto Usuario
  * @author Jennifer
@@ -27,7 +29,7 @@ public class UsuariosResponse {
     private String email;
 
     private String foto;
-
+    
     private List<FavoritosResponse> favoritos;
 
     private List<ValoracionesResponse> valoraciones;

@@ -82,7 +82,7 @@ public class RecetasController {
 	
 	
 	/**
-	 * 
+	 * Método para ontener una lista de Recetas según los parametros que necesitemos
 	 * @param categoria. Recibimos la categoria de recetas que se quieren obtener o vacio
 	 * @param idIngredientes. Recibimos los id de los ingredientes 
 	 * @param idUsuario. Recibimos el Id del Usuario para mostrar las recetas que ha subido
@@ -95,4 +95,13 @@ public class RecetasController {
 	}
 	
 	
+	/**
+	 * Método para obtener una lista de Recetas de Favoritos de un Usuario
+	 * @param listaFavoritos
+	 * @return devolvemos una lista de las Recetas que un Usuario tiene como favoritos
+	 */
+	@GetMapping("/recetasFavoritos")
+	public List<RecetasResponse> obtenerFavoritos(@RequestParam(required = false) List<Integer> idRecetas) {
+		return recetasBusiness.obtenerFavoritos(idRecetas);
+	}
 }

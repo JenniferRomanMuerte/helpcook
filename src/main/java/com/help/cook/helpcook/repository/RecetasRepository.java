@@ -15,6 +15,9 @@ import com.help.cook.helpcook.repository.domain.Recetas;
  */
 public interface RecetasRepository extends CrudRepository<Recetas, Integer>{
 	
+	
+	
+	
 	List<Recetas> findAll();
 	
 	
@@ -46,4 +49,13 @@ public interface RecetasRepository extends CrudRepository<Recetas, Integer>{
 	 */
 	@Query("SELECT r FROM Recetas r ORDER BY fechaAlta")
 	Set<Recetas> findByFechaAlta();
+	
+	
+	/**
+	 * Declarada Lista para almacenar las Recetas de los favoritos que posee un Usuario
+	 * @param idRecetas. Le mandamos la lista de los id de las recetas que queremos obtener
+	 * @return Lista de recetas
+	 */
+	@Query("SELECT r FROM Recetas r WHERE ID_Recetas in :idRecetas")
+	Set<Recetas> findByFavoritos(@Param("idRecetas") List<Integer> idRecetas);
 }

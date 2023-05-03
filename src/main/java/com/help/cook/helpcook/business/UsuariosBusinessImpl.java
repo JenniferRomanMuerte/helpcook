@@ -3,14 +3,24 @@ package com.help.cook.helpcook.business;
 import com.help.cook.helpcook.models.*;
 import com.help.cook.helpcook.repository.domain.Favoritos;
 import com.help.cook.helpcook.repository.domain.Valoraciones;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
 
 import com.help.cook.helpcook.repository.UsuariosRepository;
 import com.help.cook.helpcook.repository.domain.Usuarios;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 
 
 /**
@@ -26,27 +36,28 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
     private UsuariosRepository usuariosRepository;
 
 
+
     /**
 	 * Método con la lógica para crear un Usuario,
 	 * asignamos los valores introducidos por el usuario a un usuario nuevo, lo guardamos en el repositorio,
 	 * asignamos los valores al objeto a devolver
 	 */
     @Override
-    public UsuariosResponse crear(UsuariosRequest request) {
+    public UsuariosResponse crear(UsuariosRequest request){
 
         Usuarios usuarios = new Usuarios();
 
         UsuariosResponse response = new UsuariosResponse();
 
-
+        
+        
         usuarios.setNick(request.getNick());
         usuarios.setContrasenia(request.getContrasenia());
         usuarios.setNombre(request.getNombre());
         usuarios.setApellido(request.getApellido());
         usuarios.setEmail(request.getEmail());
         usuarios.setFoto(request.getFoto());
-
-
+        
         Usuarios datoGuardado = usuariosRepository.save(usuarios);
 
         response.setIdUsuarios(datoGuardado.getId());
@@ -56,12 +67,14 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
         response.setApellido(datoGuardado.getApellido());
         response.setEmail(datoGuardado.getEmail());
         response.setFoto(datoGuardado.getFoto());
+      
 
         return response;
     }
 
 
-    /**
+
+	/**
   	 * Método con la lógica para obtener un Usuario,
   	 * recuperamos del repositorio el Usuario mediante su id,
 	 * asignamos al objeto a devolver los datos guardados en el repositorio
@@ -87,6 +100,8 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
 
         for (Favoritos favoritos : datoGuardado.getFavoritos()) {
             FavoritosResponse favoritosResponse = new FavoritosResponse();
+            favoritosResponse.setIdFavoritos(favoritos.getIdFavoritos());
+            favoritosResponse.setIdRecetas(favoritos.getIdRecetas());
             favoritosResponse.setDescripcion(favoritos.getDescripcion());
             favoritosResponseList.add(favoritosResponse);
         }
@@ -130,6 +145,8 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
 
           for (Favoritos favoritos : datoGuardado.getFavoritos()) {
               FavoritosResponse favoritosResponse = new FavoritosResponse();
+              favoritosResponse.setIdFavoritos(favoritos.getIdFavoritos());
+              favoritosResponse.setIdRecetas(favoritos.getIdRecetas());
               favoritosResponse.setDescripcion(favoritos.getDescripcion());
               favoritosResponseList.add(favoritosResponse);
           }
