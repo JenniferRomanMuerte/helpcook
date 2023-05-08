@@ -79,7 +79,7 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
             RecetasIngredientes recetasIngredientes = new RecetasIngredientes(); //Creamos el objeto que guardaremos en repositorio con los datos obtenidos de los objetos intermedios
 
 
-            ingredienteIntermedio.setIdIngredientes(recetasIngredientesRequest.getId()); //Asignamos el id del ingredinete que llega del front al objeto ingrediente intermedio
+            ingredienteIntermedio.setIdIngredientes(recetasIngredientesRequest.getIdIngredientes()); //Asignamos el id del ingredinete que llega del front al objeto ingrediente intermedio
             recetasIntermedio.setIdRecetas(datoGuardado.getIdRecetas()); //Asignamos el id de la receta que acabamos de crear al objeto de receta intermedio
 
             recetasIngredientes.setIngredientes(ingredienteIntermedio); //Asignamos al objeto ue vamos a guardar los valores que acabamos de conseguir
