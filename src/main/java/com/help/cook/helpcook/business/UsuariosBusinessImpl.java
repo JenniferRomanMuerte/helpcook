@@ -49,7 +49,11 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
 
         UsuariosResponse response = new UsuariosResponse();
 
-        
+     // Validar si el email ya existe
+        if (usuariosRepository.existsByEmail(request.getEmail())) {
+            response.setExito(false);
+            return response;
+        }
         
         usuarios.setNick(request.getNick());
         usuarios.setContrasenia(request.getContrasenia());
@@ -67,6 +71,7 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
         response.setApellido(datoGuardado.getApellido());
         response.setEmail(datoGuardado.getEmail());
         response.setFoto(datoGuardado.getFoto());
+        response.setExito(true);
       
 
         return response;

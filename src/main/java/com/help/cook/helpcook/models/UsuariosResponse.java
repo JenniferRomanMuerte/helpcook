@@ -32,6 +32,7 @@ public class UsuariosResponse {
     
     private List<FavoritosResponse> favoritos;
 
+    private boolean exito;
 
 
 }
