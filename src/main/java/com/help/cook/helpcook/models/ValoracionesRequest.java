@@ -15,7 +15,7 @@ public class ValoracionesRequest {
 	
 	private Integer idRecetas;
 	
-	private Integer idUsuarios;
+
 	
 	private Integer valor;
 

@@ -41,16 +41,15 @@ public class ValoracionesBusinessImpl implements IValoracionesBusiness {
     public ValoracionesResponse crear(ValoracionesRequest request) {
 
         Valoraciones valoraciones = new Valoraciones();
-        Usuarios usuarios = new Usuarios();
+       
 
         ValoracionesResponse response = new ValoracionesResponse();
-        UsuariosResponse usuariosResponse = new UsuariosResponse();
+      
         
         valoraciones.setIdRecetas(request.getIdRecetas());
         valoraciones.setValor(request.getValor());
 
-        usuarios.setId(request.getIdUsuarios());   
-        valoraciones.setUsuarios(usuarios);
+          
         
         Valoraciones datoGuardado = valoracionesRepository.save(valoraciones);
 
@@ -61,11 +60,8 @@ public class ValoracionesBusinessImpl implements IValoracionesBusiness {
         response.setIdRecetas(datoGuardado.getIdRecetas());
         response.setValor(datoGuardado.getValor());
 
-        usuariosResponse.setApellido(valoraciones.getUsuarios().getApellido());
-        usuariosResponse.setNombre(valoraciones.getUsuarios().getNombre());
-        usuariosResponse.setNick(valoraciones.getUsuarios().getNick());
 
-        response.setUsuario(usuariosResponse);
+      
 
         return response;
 
@@ -87,13 +83,10 @@ public class ValoracionesBusinessImpl implements IValoracionesBusiness {
         response.setIdRecetas(datoGuardado.getIdRecetas());
         response.setValor(datoGuardado.getValor());
 
-        UsuariosResponse usuariosResponse = new UsuariosResponse();
+    
 
-        usuariosResponse.setApellido(datoGuardado.getUsuarios().getApellido());
-        usuariosResponse.setNombre(datoGuardado.getUsuarios().getNombre());
-        usuariosResponse.setNick(datoGuardado.getUsuarios().getNick());
 
-        response.setUsuario(usuariosResponse);
+
 
         return response;
     }
@@ -132,7 +125,6 @@ public class ValoracionesBusinessImpl implements IValoracionesBusiness {
         Valoraciones datoGuardado = valoracionesRepository.findById(id).get();
 
         datoGuardado.setIdRecetas(request.getIdRecetas());
-        datoGuardado.getUsuarios().setId(request.getIdUsuarios());
         datoGuardado.setValor(request.getValor());
 
         Valoraciones datoModificado = valoracionesRepository.save(datoGuardado);
@@ -143,15 +135,13 @@ public class ValoracionesBusinessImpl implements IValoracionesBusiness {
         response.setIdRecetas(datoModificado.getIdRecetas());
         response.setValor(datoModificado.getValor());
 
-        UsuariosResponse usuariosResponse = new UsuariosResponse();
+     
                
         valoracionMedia(datoGuardado.getIdRecetas());
            
-        usuariosResponse.setApellido(datoGuardado.getUsuarios().getApellido());
-        usuariosResponse.setNombre(datoGuardado.getUsuarios().getNombre());
-        usuariosResponse.setNick(datoGuardado.getUsuarios().getNick());
 
-        response.setUsuario(usuariosResponse);
+
+ 
 
         return response;
     }

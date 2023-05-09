@@ -86,7 +86,7 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
         
         List<FavoritosResponse> favoritosResponseList = new ArrayList<>();
         
-        List<ValoracionesResponse> valoracionesResponseList = new ArrayList<>();
+      
 
         Usuarios datoGuardado = usuariosRepository.findById(id).get();
         
@@ -108,13 +108,7 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
 
         response.setFavoritos(favoritosResponseList);
 
-        for(Valoraciones valoraciones: datoGuardado.getValoraciones()) {
-            ValoracionesResponse valoracionesResponse = new ValoracionesResponse();
-            valoracionesResponse.setValor(valoraciones.getValor());
-            valoracionesResponseList.add(valoracionesResponse);
-        }
-
-        response.setValoraciones(valoracionesResponseList);
+   
 
 
         return response;
@@ -131,7 +125,7 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
     	UsuariosResponse response = new UsuariosResponse();
     	
     	 List<FavoritosResponse> favoritosResponseList = new ArrayList<>();
-         List<ValoracionesResponse> valoracionesResponseList = new ArrayList<>();
+    
     	
     	Usuarios datoGuardado = usuariosRepository.findByEmailAndContrasenia(email,contrasenia);
     	System.out.println(datoGuardado);
@@ -153,13 +147,9 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
 
           response.setFavoritos(favoritosResponseList);
 
-          for(Valoraciones valoraciones: datoGuardado.getValoraciones()) {
-              ValoracionesResponse valoracionesResponse = new ValoracionesResponse();
-              valoracionesResponse.setValor(valoraciones.getValor());
-              valoracionesResponseList.add(valoracionesResponse);
-          }
+      
 
-          response.setValoraciones(valoracionesResponseList);
+       
 
 		return response;
     }

@@ -35,11 +35,6 @@ public class Valoraciones {
 	
 	
 	
-	
-	//Declaramos el objeto Usuarios para la relación entre las tablas
-	@ManyToOne //Le indicamos que es una relación de muchos a uno
-	@JoinColumn(name="ID_Usuarios") //Le indicamos que use la columna Id para la relación
-	private Usuarios usuarios;
 
 	
 

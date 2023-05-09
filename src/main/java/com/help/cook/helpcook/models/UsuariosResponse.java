@@ -32,7 +32,6 @@ public class UsuariosResponse {
     
     private List<FavoritosResponse> favoritos;
 
-    private List<ValoracionesResponse> valoraciones;
 
 
 }
