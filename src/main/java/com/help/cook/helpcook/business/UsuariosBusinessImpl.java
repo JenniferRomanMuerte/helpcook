@@ -53,7 +53,9 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
         if (usuariosRepository.existsByEmail(request.getEmail())) {
             response.setExito(false);
             return response;
-        }
+        }else {
+        	
+        
         
         usuarios.setNick(request.getNick());
         usuarios.setContrasenia(request.getContrasenia());
@@ -75,6 +77,7 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
       
 
         return response;
+        }
     }
 
 
@@ -177,10 +180,18 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
   	 */
     public UsuariosResponse modificar(UsuariosRequest request, Integer id) {
 
+    	
+    	
+    	
         UsuariosResponse response = new UsuariosResponse();
+        
+        List<FavoritosResponse> favoritosResponseList = new ArrayList<>();
 
         Usuarios usuario = usuariosRepository.findById(id).get();
 
+       
+        
+        
         usuario.setNick(request.getNick());
         usuario.setContrasenia(request.getContrasenia());
         usuario.setNombre(request.getNombre());
@@ -188,8 +199,21 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
         usuario.setEmail(request.getEmail());
         usuario.setFoto(request.getFoto());
 
-        Usuarios datoModificado = usuariosRepository.save(usuario);
+        
+        for (Favoritos favoritos : usuario.getFavoritos()) {
+            FavoritosResponse favoritosResponse = new FavoritosResponse();
+            favoritosResponse.setIdFavoritos(favoritos.getIdFavoritos());
+            favoritosResponse.setIdRecetas(favoritos.getIdRecetas());
+            favoritosResponse.setIdUsuarios(usuario.getId());
+            favoritosResponse.setDescripcion(favoritos.getDescripcion());
+            favoritosResponseList.add(favoritosResponse);
+        }
 
+       
+        
+        Usuarios datoModificado = usuariosRepository.save(usuario);
+        
+  
         response.setIdUsuarios(datoModificado.getId());
         response.setNick(datoModificado.getNick());
         response.setContrasenia(datoModificado.getContrasenia());
@@ -197,7 +221,10 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
         response.setApellido(datoModificado.getApellido());
         response.setEmail(datoModificado.getEmail());
         response.setFoto(datoModificado.getFoto());
+        response.setExito(true);
+        response.setFavoritos(favoritosResponseList);
 
+        
         return response;
     }
 	
