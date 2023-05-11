@@ -47,7 +47,7 @@ public interface RecetasRepository extends CrudRepository<Recetas, Integer>{
 	 * Declarada Lista para almacenar las recetas más recientes
 	 * @return Devuelve una Lista de recetas ordenada por las últimas añadidas
 	 */
-	@Query("SELECT r FROM Recetas r ORDER BY fechaAlta")
+	@Query("SELECT r FROM Recetas r ORDER BY fechaAlta DESC")
 	Set<Recetas> findByFechaAlta();
 	
 	

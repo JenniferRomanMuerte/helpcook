@@ -36,6 +36,7 @@ public class FavoritosBusinessImpl implements IFavoritosBusiness {
 		Favoritos favoritos = new Favoritos();
 
 		FavoritosResponse response = new FavoritosResponse();
+		
 		Usuarios usuarios = new Usuarios();
 
 		favoritos.setIdRecetas(request.getIdRecetas());

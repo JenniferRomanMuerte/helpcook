@@ -29,6 +29,7 @@ public class Pasos {
 	
 	private String foto;
 	
+
 	
 	
 	@ManyToOne

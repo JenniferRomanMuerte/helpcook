@@ -38,7 +38,6 @@ public class PasosBusinessImpl implements IPasosBusiness{
 		Pasos pasos = new Pasos();
 		PasosResponse response = new PasosResponse();
 		Recetas recetas = new Recetas();
-
 		pasos.setTipo(request.getTipo());
 		pasos.setDescripcion(request.getDescripcion());
 		pasos.setFoto(request.getFoto());

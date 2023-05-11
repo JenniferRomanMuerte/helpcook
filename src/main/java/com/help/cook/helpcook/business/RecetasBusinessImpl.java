@@ -103,6 +103,8 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
             recetaPaso.setDescripcion(pasosRequest.getDescripcion());
             recetaPaso.setFoto(pasosRequest.getFoto());
 
+            
+            System.out.println("Número del paso que nos llega :" + pasosRequest.getTipo());
             pasosRepository.save(recetaPaso);//Lo guardamos en el repositorio
 
         }
