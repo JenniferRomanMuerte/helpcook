@@ -1,7 +1,7 @@
 package com.help.cook.helpcook.models;
 
 import java.sql.Time;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import lombok.Data;
@@ -30,7 +30,7 @@ public class RecetasResponse {
 
     private String categoria;
 
-    private LocalDate fechaAlta;
+    private LocalDateTime fechaAlta;
 
     private Float valoracionMedia;
 

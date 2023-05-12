@@ -1,6 +1,7 @@
 package com.help.cook.helpcook.models;
 
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -30,8 +31,8 @@ public class RecetasRequest {
 	
 	private String categoria;
 
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private LocalDate fechaAlta;
+	@DateTimeFormat(pattern = "dd/MM/yyyy'T'HH:mm:ss")
+	private LocalDateTime fechaAlta;
 	
 	private Float valoracionMedia;
 	
