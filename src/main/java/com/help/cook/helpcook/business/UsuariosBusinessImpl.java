@@ -181,8 +181,6 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
     public UsuariosResponse modificar(UsuariosRequest request, Integer id) {
 
     	
-    	
-    	
         UsuariosResponse response = new UsuariosResponse();
         
         List<FavoritosResponse> favoritosResponseList = new ArrayList<>();
@@ -190,8 +188,6 @@ public class UsuariosBusinessImpl implements IUsuariosBusiness {
         Usuarios usuario = usuariosRepository.findById(id).get();
 
        
-        
-        
         usuario.setNick(request.getNick());
         usuario.setContrasenia(request.getContrasenia());
         usuario.setNombre(request.getNombre());
