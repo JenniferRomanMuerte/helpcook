@@ -240,9 +240,11 @@ public class RecetasBusinessImpl implements IRecetasBusiness {
     @Override
     public List<RecetasResponse> obtenerTodos(String categoria, List<Integer> idIngredientes, Integer idUsuario, String ordenacion) {
     	
+    	
+    	
     	 List<RecetasResponse> recetasResponseLista = new ArrayList();
     	 
-        if(ordenacion==null){
+        if(ordenacion==null){	
         Set<Recetas> recetasLista = recetasRepository.findAdvance(categoria, idIngredientes, idUsuario);
         recetasResponseLista= recuperarReceta(recetasLista);
        

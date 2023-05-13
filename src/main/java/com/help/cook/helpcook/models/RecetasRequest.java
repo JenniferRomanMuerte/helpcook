@@ -40,6 +40,7 @@ public class RecetasRequest {
 
 	private List<RecetasIngredientesRequest> ingredientes;
 	
+	
 	private List<RecetasPasosRequest> pasos;
 
 }

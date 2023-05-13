@@ -8,6 +8,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import com.help.cook.helpcook.repository.domain.Recetas;
+
+
 /**
  * Generada Interfaz de la tabla Recetas para acceder a la base datos
  * @author Hugo
@@ -29,7 +31,7 @@ public interface RecetasRepository extends CrudRepository<Recetas, Integer>{
 	 * @return Lista con las recetas según el filtro
 	 */
 	@Query("SELECT r FROM Recetas r LEFT JOIN r.ingredientes i  WHERE ((:categoria is null or r.categoria like %:categoria%) " +
-			"AND (:idIngredientes is null or i.ingredientes.idIngredientes in (:idIngredientes)) " +
+			"AND (coalesce(:idIngredientes) is null or i.ingredientes.idIngredientes in (:idIngredientes)) " +
 			"AND (:idUsuario is null or r.idUsuarios = :idUsuario ))")
 	Set<Recetas> findAdvance (@Param("categoria") String categoria, @Param ("idIngredientes") List<Integer> idIngredientes, @Param("idUsuario") Integer idUsuario);
 
